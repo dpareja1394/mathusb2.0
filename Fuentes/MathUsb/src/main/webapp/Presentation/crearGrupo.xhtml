@@ -29,37 +29,38 @@
 					<input id="confirmBackToLogin" type="button" value="Sign in"
 						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
 				</p:dialog>
-
-
-				<h:form id="formDialog">
+							
+				<h:form id="formDialog" style="width:100% !important;">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
-					<p:panel id="panelNuevoGrupo" header="Grupo">
-						<h:panelGrid columns="2" id="panelGrid">
-
-
-							<h:outputText id="msgDescripcionGrupo" value="Nombre del grupo" />
-							<p:inputText id="txtDescripcionGrupoCrear" style="width:700px"
+					
+					<p:panel id="panelNuevoGrupo" header="GRUPO" styleClass="panelGrupo">
+						<p:panelGrid columns="2" id="panelGrid" >
+							<h:outputText id="msgDescripcionGrupo"
+								value="Nombre del grupo:" />
+							<p:inputText id="txtDescripcionGrupoCrear" style="width:100%;font-weight:100!important;"
 								binding="#{grupoView.txtDescripcionGrupoCrear}" />
 							<h:outputText id="msgIdAsignatura"
 								value="Seleccione una asignatura: " />
-							<p:selectOneMenu id="somAsignaturas"
-								value="#{grupoView.somAsignaturasString}" style="width: 700px">
+							<h:selectOneMenu id="somAsignaturas" styleClass="selectpicker"
+								value="#{grupoView.somAsignaturasString}" >
 								<f:selectItem itemLabel="Seleccione una asignatura"
-									itemValue="0" />
+									itemValue="0"/>
 								<f:selectItems value="#{grupoView.lasAsignaturas}" />
-							</p:selectOneMenu>
-
-						</h:panelGrid>
+							</h:selectOneMenu>
+						</p:panelGrid>
 					</p:panel>
-					<p:panel id="panelBotones">
+					
+					<p:panel id="panelBotones" style="border:none;background:transparent !important;">
 						<div align="center">
 							<p:commandButton id="btnGuardarNuevoGrupo"
+								style="padding:3px 1px;"
 								binding="#{grupoView.btnGuardarNuevoGrupo}"
 								value="Guardar curso" action="#{grupoView.guardarNuevoGrupo()}"
 								icon="ui-icon-disk" update="panelNuevoGrupo,msg,panelBotones" />
 							<p:commandButton id="btnLimpiarPantallaNuevoGrupo"
+								style="background:rgb(169, 191, 194);margin-left:6px;padding:3px 1px;"
 								binding="#{grupoView.btnLimpiarPantallaNuevoGrupo}"
 								value="Limpiar pantalla"
 								action="#{grupoView.limpiarPantallaCrearGrupo()}"

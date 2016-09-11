@@ -10,87 +10,138 @@
 	<link REL="SHORTCUT ICON"
 		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png" />
 	<link rel="stylesheet" type="text/css"
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" />
+		
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css" />
+    	
+	<!-- Custom CSS -->		
 	<link rel="stylesheet" type="text/css"
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />	
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />			
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/nav.css" />
 </h:head>
 
 <h:body>
 	
-			<f:view>
-				<p:ajaxStatus onstart="PF('statusDialog').show()"
-					onsuccess="PF('statusDialog').hide()" />
-				<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
-					draggable="false" closable="false">
-					<p:graphicImage
-						value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
-				</p:dialog>
+	<f:view>
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+		<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
+			draggable="false" closable="false">
+			<p:graphicImage
+				value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
+		</p:dialog>
 
-				<!-- Expired session -->
-				<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();"
-					timeout="#{session.maxInactiveInterval * 1000}" />
-				<p:dialog modal="true" widgetVar="sessionTimeOutDialog"
-					header="Expired session" draggable="false" closable="false">
-					<h:outputText value="The session is finished" />
-					<input id="confirmBackToLogin" type="button" value="Sign in"
-						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
-				</p:dialog>
+		<!-- Expired session -->
+		<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();"
+			timeout="#{session.maxInactiveInterval * 1000}" />
+		<p:dialog modal="true" widgetVar="sessionTimeOutDialog"
+			header="Expired session" draggable="false" closable="false">
+			<h:outputText value="The session is finished" />
+			<input id="confirmBackToLogin" type="button" value="Sign in"
+				onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
+		</p:dialog>
 
-				<div class="wrapper">
-				<h:form id="formDialog" class="form-signin" >
-					<p:messages id="msg" autoUpdate="true" showDetail="false" closable="true" />
-					<p:growl id="men" autoUpdate="true" showDetail="false"/>
-					<div align="center">
-					<h1 class="form-signin-heading" align="center">Registro de Docentes</h1>
-					<p:panel id="panelRegistroDocente" style="border: none;">
-						<h:panelGrid columns="2" id="panelGrid">
-							<h:outputText id="lblNombreDocente" value="Nombres:" />
-							<p:inputText id="txtNombreDocente" 
-								binding="#{usuarioView.txtNombreDocente}" />
-							
-							<h:outputText id="lblApellidoDocente" value="Apellidos:" />
-							<p:inputText id="txtApellidoDocente"
-								binding="#{usuarioView.txtApellidoDocente}" />
-								
-							<h:outputText id="lblCodigoDocente" value="Código:" />
-							<p:inputText id="txtCodigoDocente"
-								binding="#{usuarioView.txtCodigoDocente}" />	
-							
-							<h:outputText id="lblEmailDocente" value="Correo electrónico:" />
-							<p:inputText id="txtEmailDocente"
-								binding="#{usuarioView.txtEmailDocente}" />
-							
-							<h:outputText id="lblPasswordDocente" value="Contraseña:" />
-							<p:password id="pswPasswordDocente"
-								binding="#{usuarioView.pswPasswordDocente}" />
-							
-							<h:outputText id="lblPasswordDocenteConfirma" value="Confirmar contraseña:" />
-							<p:password id="pswPasswordDocenteConfirma"
-								binding="#{usuarioView.pswPasswordDocenteConfirma}" />
-							
-						</h:panelGrid>
-					</p:panel>
+		<div class="wrapper">
+			<h1 align="center">Math USB</h1>
+			<hr></hr>
+			<h:form id="formDialog" class="form-signin">
+				<p:messages id="msg" autoUpdate="true" showDetail="false" closable="true" />
+				<p:growl id="men" autoUpdate="true" showDetail="false"/>
+				
+				<div class="container" align="center" style="width:100%;">
+					<h2 align="center">Registro de Docentes</h2>
 					
-					</div>
+					<p:panel id="panelRegistroDocente" style="border:none;background:white;">					
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							<p:inputText id="txtNombreDocente" styleClass="form-control" 
+								binding="#{usuarioView.txtNombreDocente}" placeholder="Ingresa tu nombre"/>
+						</div>					
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+							<p:inputText id="txtApellidoDocente" styleClass="form-control"
+								binding="#{usuarioView.txtApellidoDocente}" placeholder="Ingresa tu apellido"/>
+						</div>												
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-code fa" aria-hidden="true"></i></span>
+							<p:inputText id="txtCodigoDocente" styleClass="form-control"
+									binding="#{usuarioView.txtCodigoDocente}" placeholder="Ingresa tu código"/>	
+						</div>					
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+							<p:inputText id="txtEmailDocente" styleClass="form-control"
+									binding="#{usuarioView.txtEmailDocente}" placeholder="Ingresa tu correo"/>
+						</div>								
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+							<p:password id="pswPasswordDocente" styleClass="form-control"
+									binding="#{usuarioView.pswPasswordDocente}" placeholder="Ingresa tu contraseña"/>
+						</div>				
+						<div class="input-group">
+							<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+							<p:password id="pswPasswordDocenteConfirma" styleClass="form-control"
+									binding="#{usuarioView.pswPasswordDocenteConfirma}" placeholder="Confirma tu contraseña"/>
+						</div>					
+					</p:panel>		
+									
 					<div align="center">
-					<p:panel id="panelBotones" style="border: none;">
-						<div align="center">
-							<p:commandButton id="btnRegistrarDocente" binding="#{usuarioView.btnRegistrarDocente}"
-								value="Registrar Docente"
-								icon="ui-icon-check"
-								action="#{usuarioView.registrarNuevoDocente()}"
-								update="panelRegistroDocente,msg,panelBotones" />
-							<p:commandButton id="btnLimpiarPantallaRegistroDocente" binding="#{usuarioView.btnLimpiarPantallaRegistroDocente}" 
-								value="Limpiar Pantalla"
-								icon="ui-icon-trash"
-								action="#{usuarioView.limpiarPantallaRegistrarDocente()}"
-								update="panelRegistroDocente,msg,panelBotones" />
-						</div>
-					</p:panel>
+						<p:panel id="panelBotones" style="border:none;margin:0px;padding:0px;">					
+							<div align="center">
+								<p:commandButton id="btnRegistrarDocente" binding="#{usuarioView.btnRegistrarDocente}"
+									value="Registrar"
+									icon="ui-icon-check"
+									style="padding:3px 1px;font-weight:400;"
+									action="#{usuarioView.registrarNuevoDocente()}"
+									update="panelRegistroDocente,msg" />
+								<p:commandButton id="btnLimpiarPantallaRegistroDocente" binding="#{usuarioView.btnLimpiarPantallaRegistroDocente}" 
+									value="Limpiar"
+									style="background:#f05f40;font-family:'Futura Bk BT';text-shadow:none;color:white;margin-left:6px;padding:3px 1px;"
+									icon="ui-icon-trash"
+									action="#{usuarioView.limpiarPantallaRegistrarDocente()}"
+									update="panelRegistroDocente,msg" />
+							</div>
+						</p:panel>
 					</div>
-				</h:form>
 				</div>
-			</f:view>
+			</h:form>
+		</div>
 		
+		<div class="material-button-anim">
+            <ul class="list-inline" id="options">
+                <li class="option">
+                	<a href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/login.xhtml">
+                    <button class="material-button option1" type="button">
+                        <span class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                    </button>
+                    </a>
+                </li>
+                <li class="option">
+                	<a href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/MainPage.xhtml">
+                    <button class="material-button option2" type="button">
+                        <span class="fa fa-home" aria-hidden="true"></span>
+                    </button>
+                    </a>
+                </li>                    
+            </ul>
+            <button class="material-button material-button-toggle" type="button">
+                <span class="fa fa-bars" aria-hidden="true"></span>
+            </button>
+        </div>
+		 
+	</f:view>
+	<!-- jQuery -->
+    <script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/jquery.js"></script>
+   	<script>
+	   	$(document).ready(function () {
+	   	    $('.material-button-toggle').click(function () {
+	   	        $(this).toggleClass('open');
+	   	        $('.option').toggleClass('scale-on');
+	   	    });
+	   	});
+   	</script>
 </h:body>
 </html>

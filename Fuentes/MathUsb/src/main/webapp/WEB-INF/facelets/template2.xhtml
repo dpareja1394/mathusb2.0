@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	 <h:head>
+     	<title>.::MathUSB::.</title>
+        <link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+        		
+    	<!-- Bootstrap Core CSS -->
+    	<link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" />
+
+	    <!-- Custom Fonts -->
+	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+	    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+	    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css" />
+	
+	    <!-- Plugin CSS -->
+	    <link rel="stylesheet" type="text/css"
+				href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/animate.min.css" />
+	
+	    <!-- Custom CSS -->
+	    <link rel="stylesheet" type="text/css"
+				href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/creative.css" />			
+						
+     </h:head>
+	
+	<h:body>
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+	<p:dialog modal="true" widgetVar="statusDialog" header="Cargando"
+		draggable="false" closable="false" resizable="false">
+		<p:graphicImage
+			value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
+	</p:dialog>
+	
+		<div id="container">
+				<ui:insert name="header">
+					 <ui:include src="/WEB-INF/facelets/header2.jspx" />
+					 <ui:include src="/WEB-INF/facelets/menu.jspx" />
+				</ui:insert>
+			
+					<ui:insert name="body"/>
+			
+				<ui:insert name="footer">
+					 <ui:include src="/WEB-INF/facelets/footer2.jspx" />
+				</ui:insert>
+				
+				<ui:insert name="dock">
+					<p:dock position="bottom">
+			    		<p:menuitem value="Home" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+			    		<p:menuitem value="Music" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+					</p:dock>
+				</ui:insert>
+				
+				<ui:insert name="stack">
+					<p:stack icon="http://i.imgur.com/f0XULsh.png" expanded="true">
+		    			<p:menuitem value="Home" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+		    			<p:menuitem value="Music" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+		   				<p:menuitem value="Video" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+					    <p:menuitem value="Email" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+					    <p:menuitem value="Portfolio" icon="http://i.imgur.com/ebW3P9E.png" url="#"/>
+					</p:stack>
+				</ui:insert>
+		</div>
+		
+	<script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/part-template.js"></script>
+	</h:body>
+</html>

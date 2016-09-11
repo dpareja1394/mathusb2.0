@@ -85,19 +85,20 @@
 
 					</p:panel>
 
-					<p:panel id="panelResponder" header="Respuesta"
-						style="height:600px">
+					<p:panel id="panelResponder" header="Respuesta" >
 						<h:outputLabel value="Título respuesta: " />
-						<p:inputText id="txtTituloRespuestaForo" style="width:75%"
+						<p:inputText id="txtTituloRespuestaForo"
+							style="width:54%"
 							binding="#{preguntaForoView.txtTituloRespuestaForo}" />
 						<p:commandButton id="btnPreguntar"
 							action="#{preguntaForoView.responderPregunta()}"
+							style="background:#428bca;font-family:'Futura Bk BT';text-shadow:none;color:white;padding:3px 1px;"
 							onclick="doGet()" value="Responder Pregunta" icon="ui-icon-check"
 							update="panelResponder, panelVerPregunta, txtContenidoRespuesta, panelRespuestasPreguntaForo, respuestasPreguntaForo, @([id$=editorRespuestaContainer])" />
 						<div style="height: 480px;" id="editorRespuestaContainer"></div>
 						<p:inputText id="txtContenidoRespuesta"
 							binding="#{preguntaForoView.txtContenidoRespuesta}"
-							style="width: 1000px" />
+							style="width:100%" />
 						<script
 							src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
 						<script type="text/javascript">

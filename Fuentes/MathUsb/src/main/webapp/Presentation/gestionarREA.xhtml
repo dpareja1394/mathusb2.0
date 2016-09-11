@@ -31,17 +31,14 @@
 				</p:dialog>
 
 
-				<h:form id="formDialog">
+				<h:form id="formDialog" style="min-width:800px;padding:0em 2em;">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
 					<p:fieldset legend="Nueva herramienta" toggleable="true"
-						collapsed="true" toggleSpeed="500">
+						collapsed="true" toggleSpeed="500" style="margin-bottom:2em;">
 						<p:panel id="panelNuevaHerramientaREA" header="Nueva Herramienta">
-
 							<h:panelGrid columns="2" id="panelGrid">
-
-
 								<h:outputLabel value="Título o Descripción de Herramienta: " />
 								<p:inputTextarea id="txtTituloHerramienta" maxlength="2500"
 									autoResize="false" style="width:700px; height:70px"
@@ -64,15 +61,17 @@
 
 							</h:panelGrid>
 						</p:panel>
-						<p:panel id="panelBotones">
+						<p:panel id="panelBotones" style="border:none;">
 							<div align="center">
 								<p:commandButton id="btnGuardarNuevaHerramienta"
+									style="font-family:'Futura Bk BT';padding:3px 1px;"
 									binding="#{herramientaView.btnGuardarNuevaHerramienta}"
 									value="Guardar nueva Herramienta"
 									action="#{herramientaView.guardarNuevaHerramienta()}"
 									icon="ui-icon-disk"
 									update="panelNuevaHerramientaREA,msg,panelBotones,panelMisHerramientas" />
 								<p:commandButton id="btnLimpiarPantallaNuevaHerramienta"
+									style="background:#428bca;font-family:'Futura Bk BT';text-shadow:none;color:white;margin-left:6px;padding:3px 1px;"
 									binding="#{herramientaView.btnLimpiarPantallaNuevaHerramienta}"
 									value="Limpiar pantalla"
 									action="#{herramientaView.limpiarPantalla()}"

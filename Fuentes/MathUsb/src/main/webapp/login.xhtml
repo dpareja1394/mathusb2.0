@@ -13,9 +13,23 @@
 		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png" />
 	<link rel="stylesheet" type="text/css"
 		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" />
+		
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css" />
+    	
+	<!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css"
+			href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/creative.css" />		
 	<link rel="stylesheet" type="text/css"
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />			
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/anim.css" />
+	
+		
 </h:head>
+
 <h:body>
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
@@ -24,46 +38,69 @@
 		<p:graphicImage
 			value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
 	</p:dialog>
+	
 	<div class="wrapper">
-	<h:form id="loginForm" class="form-signin">
-		<p:growl id="msgLogin" autoUpdate="true" showDetail="false" />
-		<div class="container" align="center" style="width : 100%;">
-				<p:graphicImage value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/login.png" width="282" height="282" />
-				<p:inputText id="usernameField" name="j_username" style="margin-bottom: -1px;border-bottom-left-radius: 0;border-bottom-right-radius: 0;"
-					value="#{loginView.userId}" placeholder="Usuario"
-					styleClass="form-control" />
-				<p:password id="passwordField" name="j_password" style="margin-bottom: 20px;border-top-left-radius: 0;border-top-right-radius: 0;"
-					value="#{loginView.password}" placeholder="Clave"
-					styleClass="form-control" feedback="false" />
+		<div class="logo" align="center">
+			<img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logo-blanco.png" alt="" />
+		</div>
+		<h:form id="loginForm" class="form-signin">
+			<p:growl id="msgLogin" autoUpdate="true" showDetail="false" />
+			
+			<div class="container" align="center" style="width:100%;">
+				<h1>Math USB</h1>						
+				<div class="input-group" style="margin-bottom:4px;">
+					<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+					<p:inputText id="usernameField" name="j_username" style="border-bottom-left-radius: 0;"
+						value="#{loginView.userId}" placeholder="Usuario"
+						styleClass="form-control" />
+				</div>		
+				<div class="input-group" style="margin-bottom:25px;">
+					<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+					<p:password id="passwordField" name="j_password" style="border-top-left-radius: 0;"
+						value="#{loginView.password}" placeholder="Contraseña"
+						styleClass="form-control" feedback="false" />									
+				</div>				
 				<div align="center">
-				<h5 class="form-signin-heading">
-					<h:outputText rendered="${param.authfailed eq 'true'}"
-						value="Usuario o Clave incorrectos" style="color: red;"/>
-					<h:outputText rendered="${param.loggedout eq 'true'}"
-						value="Sesion Finalizada Exitosamente" style="color: green;"/>
-					<h:outputText rendered="${param.exceededAllowed eq 'true'}"
-						value="Tiempo de inactividad Excedido" style="color: green;"/>
-					<h:outputText rendered="${param.usrCrtdSflly eq 'true'}"
-						value="Usuario creado exitosamente.¡Gracias por registrarse!." style="color: green;"/>
-				</h5>
-				</div>
+					<h:panelGroup id="msgInfo" layout="block">
+						<h5 class="form-signin-heading">
+							<h:outputText rendered="${param.authfailed eq 'true'}"
+								value="Usuario o Clave incorrectos" style="color: red;"/>
+							<h:outputText rendered="${param.loggedout eq 'true'}"
+								value="Sesion Finalizada Exitosamente" style="color: green;"/>
+							<h:outputText rendered="${param.exceededAllowed eq 'true'}"
+								value="Tiempo de inactividad Excedido" style="color: green;"/>
+							<h:outputText rendered="${param.usrCrtdSflly eq 'true'}"
+								value="Usuario creado exitosamente.¡Gracias por registrarse!." style="color: green;"/>
+						</h5>
+					</h:panelGroup>
+				</div>			
 				<p:commandButton value="Iniciar Sesión"
 					styleClass="btn btn-lg btn-primary btn-block"
-					action="#{loginView.login}" update="@([id$=msgLogin])" />
+					style="text-shadow:none;"
+					action="#{loginView.login}" update="msgLogin,msgInfo" />
 				<br></br>
-			<p:link
-				href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/registrarDocente.xhtml"
-				value="Eres docente, registrate" />
-			<br></br>
-			<p:link
-				href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/registrarEstudiante.xhtml"
-				value="Eres estudiante, registrate" />
-
-
-			
-
-		</div>
-	</h:form>
+				<p:link
+					styleClass="register"
+					href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/registrarDocente.xhtml"
+					value="Eres docente, registrate" />
+				<br></br>
+				<p:link
+					styleClass="register"
+					href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/registrarEstudiante.xhtml"
+					value="Eres estudiante, registrate" />	
+			</div>
+		</h:form>
 	</div>
+		
+	
+	<div class="div-img" style="position:fixed;bottom:0; right:0;margin-bottom:14px;margin-right:34px;width:80px;heigth:80px;" >
+		<a style="text-decoration:none;" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/MainPage.xhtml">
+		    <img class="img" src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/home.png" title="Home" alt="Inicio" />  
+			<span class="text" style="color:white; font-size: 16px;">Inicio</span> 
+		</a>
+	 </div>
+	 
+	<footer style="color:white;margin-top:30px;text-align:center;font-weight:300;font-family:'Open Sans'"><i>"No hay conocimiento sin creatividad"</i></footer>
+	
 </h:body>
 </html>

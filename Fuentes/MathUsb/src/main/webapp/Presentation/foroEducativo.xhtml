@@ -33,22 +33,22 @@
 				<h:form id="formDialog">
 					<p:messages id="msg" />
 					<p:growl id="men" />
-					<p:panel id="panelPreguntas" header="Foro Educativo">
-						<h:panelGrid columns="2" id="panelGrid">
-							<h:outputLabel value="Título pregunta: " />
+					<p:panel id="panelPreguntas" header="Foro Educativo" style="width:100%;">
+						<h:panelGrid columns="2" id="panelGrid" style="width:100%;">
+							<h:outputLabel value="Título pregunta:" style="margin-top:4px;" />
 							<p:inputText id="txtTituloPreguntaForo" maxlength="2500"
-								autoResize="false" style="width:800px"
+								autoResize="false" style="width:100%;"
 								binding="#{comentarioView.txtTituloPreguntaForo}" />
 
 						</h:panelGrid>
 					</p:panel>
 					<p:panel id="panelEditorPreguntas"
 						header="Contenido de la Pregunta">
-						<div style="width: 1000px; height: 300px"
+						<div style="width: 100%; height: 300px"
 							id="editorPreguntaContainer" align="center"></div>
 						<p:inputText id="txtContenidoPregunta"
 							binding="#{comentarioView.txtContenidoPregunta}"
-							style="width: 1000px" />
+							style="width: 100%" />						
 						<!-- <script src="http://www.wiris.net/demo/editor/editor"></script> -->
 						<script
 							src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
@@ -74,12 +74,12 @@
 								//window.onload();
 							}
 						</script>
-
 					</p:panel>
 
-					<p:panel id="panelBotones">
+					<p:panel id="panelBotones" style="border:none;">
 						<div align="center">
 							<p:commandButton id="btnPreguntar"
+								style="background:#428bca;font-family:'Futura Bk BT';text-shadow:none;color:white;padding:3px 1px;"
 								action="#{comentarioView.preguntar()}" onclick="doGet()"
 								value="Preguntar" icon="ui-icon-help"
 								update="panelPreguntas, txtContenidoPregunta, panelEditorPreguntas" />

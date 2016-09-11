@@ -31,23 +31,23 @@
 				</p:dialog>
 
 
-				<h:form id="formDialog">
+				<h:form id="formDialog" style="padding:0em 2.5em;">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
 
-					<p:panel id="panelLosGruposDocente"
-						header="Estos son tus grupos asignados" style="width:955px">
+					<p:panel id="panelLosGruposDocente" style="margin-bottom:1.5em;"
+						header="TUS GRUPOS ASIGNADOS">
 						<p:dataTable id="tablaGruposDocentes"
 							emptyMessage="Actualmente no eres docente en un grupo"
 							value="#{grupoView.losGruposDelDocente}" var="grupo">
 							<p:column headerText="Asignatura"
-								style="width:200px;text-align: center">
+								style="width:300px;text-align: center">
 								<p:outputLabel value="#{grupo.nombreAsignatura}" />
 							</p:column>
 
 							<p:column headerText="Nombre del curso"
-								style="width:600px;text-align: center">
+								style="text-align: center">
 								<p:outputLabel value="#{grupo.descripcionGrupo}" />
 							</p:column>
 
@@ -71,7 +71,7 @@
 					</p:panel>
 
 					<p:panel id="panelListaEstudiantesDelGrupo"
-						header="Estudiantes matriculados" style="width:955px">
+						header="ESTUDIANTES MATRICULADOS">
 						<p:outputLabel value="#{grupoView.detalleGrupo}" />
 						<p:dataTable id="tablaListaEstudiantesDelGrupo"
 							emptyMessage="No hay estudiantes"
@@ -82,17 +82,17 @@
 							</p:column>
 
 							<p:column headerText="Apellidos"
-								style="width:200px;text-align: center">
+								style="text-align: center">
 								<p:outputLabel value="#{estudiante.apellidoUsuario}" />
 							</p:column>
 
 							<p:column headerText="Nombres"
-								style="width:200px;text-align: center">
+								style="text-align: center">
 								<p:outputLabel value="#{estudiante.nombreUsuario}" />
 							</p:column>
 
 							<p:column headerText="Correo Electronico"
-								style="width:300px;text-align: center">
+								style="text-align: center">
 								<p:outputLabel value="#{estudiante.emailUsuario}" />
 							</p:column>
 

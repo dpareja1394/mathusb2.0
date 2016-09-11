@@ -10,87 +10,135 @@
 	<link REL="SHORTCUT ICON"
 		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png" />
 	<link rel="stylesheet" type="text/css"
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/bootstrap.min.css" />	
+	<!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css" />   	
+	<!-- Custom CSS -->		
 	<link rel="stylesheet" type="text/css"
-		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />		
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/stylelogin.css" />			
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/anim.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/nav.css" />		
 </h:head>
 
 <h:body>
 	
-			<f:view>
-				<p:ajaxStatus onstart="PF('statusDialog').show()"
-					onsuccess="PF('statusDialog').hide()" />
-				<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
-					draggable="false" closable="false">
-					<p:graphicImage
-						value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
-				</p:dialog>
+	<f:view>
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+		<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
+			draggable="false" closable="false">
+			<p:graphicImage
+				value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
+		</p:dialog>
 
-				<!-- Expired session -->
-				<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();"
-					timeout="#{session.maxInactiveInterval * 1000}" />
-				<p:dialog modal="true" widgetVar="sessionTimeOutDialog"
-					header="Expired session" draggable="false" closable="false">
-					<h:outputText value="The session is finished" />
-					<input id="confirmBackToLogin" type="button" value="Sign in"
-						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
-				</p:dialog>
+		<!-- Expired session -->
+		<p:idleMonitor onactive="PF('sessionTimeOutDialog').show();"
+			timeout="#{session.maxInactiveInterval * 1000}" />
+		<p:dialog modal="true" widgetVar="sessionTimeOutDialog"
+			header="Expired session" draggable="false" closable="false">
+			<h:outputText value="The session is finished" />
+			<input id="confirmBackToLogin" type="button" value="Sign in"
+				onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
+		</p:dialog>
 
-				<div class="wrapper">
-				<h:form id="formDialog" class="form-signin" >
-					<p:messages id="msg" autoUpdate="true" showDetail="false" closable="true" />
-					<p:growl id="men" autoUpdate="true" showDetail="false"/>
-					<div align="center">
-					<h1 class="form-signin-heading" align="center">Registro de Estudiantes</h1>
-					<p:panel id="panelRegistroEstudiante" style="border: none;">
-						<h:panelGrid columns="2" id="panelGrid">
-							<h:outputText id="lblNombreEstudiante" value="Nombres:" />
-							<p:inputText id="txtNombreEstudiante" 
-								binding="#{usuarioView.txtNombreEstudiante}" />
-							
-							<h:outputText id="lblApellidoEstudiante" value="Apellidos:" />
-							<p:inputText id="txtApellidoEstudiante"
-								binding="#{usuarioView.txtApellidoEstudiante}" />
-								
-							<h:outputText id="lblCodigoEstudiante" value="Código:" />
-							<p:inputText id="txtCodigoEstudiante"
-								binding="#{usuarioView.txtCodigoEstudiante}" />	
-							
-							<h:outputText id="lblEmailEstudiante" value="Correo electrónico:" />
-							<p:inputText id="txtEmailEstudiante"
-								binding="#{usuarioView.txtEmailEstudiante}" />
-							
-							<h:outputText id="lblPasswordEstudiante" value="Contraseña:" />
-							<p:password id="pswPasswordEstudiante"
-								binding="#{usuarioView.pswPasswordEstudiante}" />
-							
-							<h:outputText id="lblPasswordEstudianteConfirma" value="Confirmar contraseña:" />
-							<p:password id="pswPasswordEstudianteConfirma"
-								binding="#{usuarioView.pswPasswordEstudianteConfirma}" />
-							
-						</h:panelGrid>
-					</p:panel>
-					
-					</div>
-					<div align="center">
-					<p:panel id="panelBotones" style="border: none;">
-						<div align="center">
-							<p:commandButton id="btnRegistrarEstudiante" binding="#{usuarioView.btnRegistrarEstudiante}"
-								value="Registrar Estudiante"
-								icon="ui-icon-check"
-								action="#{usuarioView.registrarNuevoEstudiante()}"
-								update="panelRegistroEstudiante,msg,panelBotones" />
-							<p:commandButton id="btnLimpiarPantallaRegistroEstudiante" binding="#{usuarioView.btnLimpiarPantallaRegistroEstudiante}" 
-								value="Limpiar Pantalla"
-								icon="ui-icon-trash"
-								action="#{usuarioView.limpiarPantallaRegistrarEstudiante()}"
-								update="panelRegistroEstudiante,msg,panelBotones" />
-						</div>
-					</p:panel>
-					</div>
-				</h:form>
+		<div class="wrapper">
+			<h1 align="center">Math USB</h1>
+			<hr></hr>
+			<h:form id="formDialog" class="form-signin" >
+			<p:messages id="msg" autoUpdate="true" showDetail="false" closable="true" />
+			<p:growl id="men" autoUpdate="true" showDetail="false"/>			
+			<div align="center">
+				<h2 align="center">Registro de Estudiantes</h2>
+				<p:panel id="panelRegistroEstudiante" style="border:none;">								
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<p:inputText id="txtNombreEstudiante" styleClass="form-control"
+						binding="#{usuarioView.txtNombreEstudiante}" placeholder="Ingresa tu nombre"/>
+					</div>		
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+						<p:inputText id="txtApellidoEstudiante" styleClass="form-control"
+						binding="#{usuarioView.txtApellidoEstudiante}" placeholder="Ingresa tu apellido"/>
+					</div>											
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-code fa" aria-hidden="true"></i></span>
+						<p:inputText id="txtCodigoEstudiante" styleClass="form-control"
+						binding="#{usuarioView.txtCodigoEstudiante}" placeholder="Ingresa tu código"/>	
+					</div>			
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+						<p:inputText id="txtEmailEstudiante" styleClass="form-control"
+						binding="#{usuarioView.txtEmailEstudiante}" placeholder="Ingresa tu correo"/>
+					</div>							
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+						<p:password id="pswPasswordEstudiante" styleClass="form-control"
+						binding="#{usuarioView.pswPasswordEstudiante}" placeholder="Ingresa tu contraseña"/>
+					</div>				
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+						<p:password id="pswPasswordEstudianteConfirma" styleClass="form-control"
+							binding="#{usuarioView.pswPasswordEstudianteConfirma}" placeholder="Confirma tu contraseña"/>
+					</div>							
+				</p:panel>	
+			</div>
+			<div align="center">
+			<p:panel id="panelBotones" style="width:360px;border:none;margin:0px;padding:0px 0px;">
+				<div align="center">
+					<p:commandButton id="btnRegistrarEstudiante" binding="#{usuarioView.btnRegistrarEstudiante}"
+						value="Registrar"
+						style="padding:3px 1px;font-weight:400;"
+						icon="ui-icon-check"
+						action="#{usuarioView.registrarNuevoEstudiante()}"
+						update="panelRegistroEstudiante,msg,panelBotones" />
+					<p:commandButton id="btnLimpiarPantallaRegistroEstudiante" binding="#{usuarioView.btnLimpiarPantallaRegistroEstudiante}" 
+						value="Limpiar"
+						style="background:#f05f40;font-family:'Futura Bk BT';text-shadow:none;color:white;margin-left:6px;padding:3px 1px;"
+						icon="ui-icon-trash"
+						action="#{usuarioView.limpiarPantallaRegistrarEstudiante()}"
+						update="panelRegistroEstudiante,msg,panelBotones" />
 				</div>
-			</f:view>
+			</p:panel>
+			</div>		
+		</h:form>
+		</div>
 		
+		<div class="material-button-anim">
+            <ul class="list-inline" id="options">
+                <li class="option">
+                	<a href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/login.xhtml">
+                    <button class="material-button option1" type="button">
+                        <span  class="fa fa-arrow-circle-left" aria-hidden="true"></span>
+                    </button>
+                    </a>
+                </li>
+                <li class="option">
+                	<a href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/MainPage.xhtml">
+                    <button class="material-button option2" type="button">
+                        <span class="fa fa-home" aria-hidden="true"></span>
+                    </button>
+                    </a>
+                </li>                    
+            </ul>
+            <button class="material-button material-button-toggle" type="button">
+                <span class="fa fa-bars" aria-hidden="true"></span>
+            </button>
+        </div>
+		
+	</f:view>
+	<!-- jQuery -->
+    <script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/jquery.js"></script>
+   	<script>
+	   	$(document).ready(function () {
+	   	    $('.material-button-toggle').click(function () {
+	   	        $(this).toggleClass('open');
+	   	        $('.option').toggleClass('scale-on');
+	   	    });
+	   	});
+   	</script>
 </h:body>
 </html>

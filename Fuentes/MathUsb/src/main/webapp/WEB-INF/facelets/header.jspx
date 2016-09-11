@@ -10,12 +10,36 @@
 		<body>
 			<f:view>
 				<ui:composition>
+					<style>
+						div .jumbotron{
+							background-repeat: no-repeat;
+    						background-image: linear-gradient(rgb(190, 185, 190), rgb(169, 191, 194));    						
+						    background-position: center;
+						    -webkit-background-size: cover;
+						    -moz-background-size: cover;
+						    background-size: cover;
+							text-align: center;
+						}
+						.jumbotron .container img{
+							width:100px;
+							height:100px;
+						}
+						.jumbotron .container h1{
+							padding-top:5px;
+							margin-top:5px;					
+						}
+						.jumbotron .container p{
+							font-size:18px;	
+							font-style: italic;				
+						}
+					</style>
 					<!-- Beging header -->
 						<div class="jumbotron">
-					      <div class="container">
-					        <h1>MathUSB</h1>
-					        <p>Para hablar de los aspectos pedagogicos de la plataforma MathUSB, debemos entender el tipo de aprendizaje que se busca con este proyecto.Se busca con el proyecto, privilegiar el aprendizaje colaborativo, permitiendo una comunicacion directa docente a estudiantes y entre estudiantes.</p>
-					        <h2>Hola #{usuarioView.nombreUsuarioString}</h2>
+					      <div class="container">	 
+		                	<img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logo-azul-md.png" />  		               
+		                	<h1>MathUSB</h1>		              				      
+				        	<p>El proyecto busca privilegiar el aprendizaje colaborativo, permitiendo una comunicacion directa docente a estudiantes y entre estudiantes.</p>
+				        	<h2>&#161;Hola, #{usuarioView.nombreUsuarioString}!</h2>
 					      </div>
     					</div>
 					<!-- end header -->

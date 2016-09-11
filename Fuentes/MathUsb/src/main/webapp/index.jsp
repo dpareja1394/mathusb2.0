@@ -12,6 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>.::Powered by Zathuracode  2015::.</title>
 </head>
 <body>
-	<jsp:forward page="login.xhtml"/>
+	<jsp:forward page="MainPage.xhtml"/>
 </body>
 </html>

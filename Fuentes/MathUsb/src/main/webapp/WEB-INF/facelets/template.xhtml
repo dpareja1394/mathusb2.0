@@ -3,9 +3,17 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	 <h:head>
-                <title>.::MathUSB::.</title>
-                <link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
-                <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+        <title>.::MathUSB::.</title>
+        <link REL="SHORTCUT ICON" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png"/>
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/css/particle.css" />
+        
+        <!-- Custom Fonts -->
+    	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css' />
+    	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css' />
+    	<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" type="text/css" />
+   		
      </h:head>
 	
 	<h:body>
@@ -16,17 +24,28 @@
 		<p:graphicImage
 			value="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/ajaxloadingbar.gif" />
 	</p:dialog>
-		<div id="container" style="width: 100%;">
-				<ui:insert name="header">
-					 <ui:include src="/WEB-INF/facelets/header.jspx" />
-					 <ui:include src="/WEB-INF/facelets/menu.jspx" />
-				</ui:insert>
-			
-					<ui:insert name="body"/>
-			
-				<ui:insert name="footer">
-					 <ui:include src="/WEB-INF/facelets/footer.jspx" />
-				</ui:insert>
+	
+	<div id="container" class="wrapper">
+		<div id="header-zone">
+		<ui:insert name="header">			 
+			 <ui:include src="/WEB-INF/facelets/menu.jspx" />
+			 <ui:include src="/WEB-INF/facelets/header.jspx" />					 
+		</ui:insert>
 		</div>
+		
+		<div id="content">
+			<ui:insert name="body"/>
+		</div>
+		<div id="particles"></div>
+		
+		<div id="footer-zone">
+			<ui:insert name="footer">
+				<ui:include src="/WEB-INF/facelets/footer.jspx" />
+			</ui:insert>
+		</div>
+	
+	</div>
+	    	
+	<script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/part-template.js"></script>
 	</h:body>
 </html>

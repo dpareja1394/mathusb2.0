@@ -80,11 +80,11 @@
 						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
 				</p:dialog>
 
-				<h:form id="formDialog" enctype="multipart/form-data">
+				<h:form id="formDialog" enctype="multipart/form-data" style="padding:0em 2em;">
 					<p:messages id="msg" />
 					<p:growl id="men" />
 					<p:panel id="panelMisEvaluacionesDocente"
-						header="Estos son tus Documentos guardados" style="width:99%">
+						header="Estos son tus Documentos guardados">
 						<p:dataTable id="tablaEvaluacionesDocente"
 							emptyMessage="Actualmente no hay documentos"
 							value="#{evaluacionView.lasEvaluacionesDelDocente}"
