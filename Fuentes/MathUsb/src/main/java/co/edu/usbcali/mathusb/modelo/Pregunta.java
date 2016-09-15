@@ -11,27 +11,49 @@ import java.util.Set;
 public class Pregunta  implements java.io.Serializable {
 
 
-     private Long pregId;
-     private Tema tema;
-     private String descripcionPregunta;
+	 private Long pregId;
+	 private Tema tema;
+	 private String descripcionPregunta;
+	 private String descripcionRespuestaCorrecta;
+	 private String descripcionRespuesta1;
+	 private String descripcionRespuesta2;
+	 private String descripcionRespuesta3;
+     private String tipoRespuesta;
      private Set<EvaPregRes> evaPregReses = new HashSet<EvaPregRes>(0);
-
-    public Pregunta() {
-    }
-
-	
-    public Pregunta(Long pregId, String descripcionPregunta) {
-        this.pregId = pregId;
-        this.descripcionPregunta = descripcionPregunta;
-    }
-    public Pregunta(Long pregId, Tema tema, String descripcionPregunta, Set<EvaPregRes> evaPregReses) {
-       this.pregId = pregId;
-       this.tema = tema;
-       this.descripcionPregunta = descripcionPregunta;
-       this.evaPregReses = evaPregReses;
-    }
+     
+   public Pregunta(){} 
    
-    public Long getPregId() {
+    public Pregunta(Tema tema, String descripcionPregunta, String descripcionRespuestaCorrecta,
+			String descripcionRespuesta1, String descripcionRespuesta2, String descripcionRespuesta3,
+			String tipoRespuesta) {
+		this.tema = tema;
+		this.descripcionPregunta = descripcionPregunta;
+		this.descripcionRespuestaCorrecta = descripcionRespuestaCorrecta;
+		this.descripcionRespuesta1 = descripcionRespuesta1;
+		this.descripcionRespuesta2 = descripcionRespuesta2;
+		this.descripcionRespuesta3 = descripcionRespuesta3;
+		this.tipoRespuesta = tipoRespuesta;
+	}
+
+    
+    
+	public Set<EvaPregRes> getEvaPregReses() {
+		return evaPregReses;
+	}
+
+	public void setEvaPregReses(Set<EvaPregRes> evaPregReses) {
+		this.evaPregReses = evaPregReses;
+	}
+
+	public String getTipoRespuesta() {
+		return tipoRespuesta;
+	}
+
+	public void setTipoRespuesta(String tipoRespuesta) {
+		this.tipoRespuesta = tipoRespuesta;
+	}
+
+	public Long getPregId() {
         return this.pregId;
     }
     
@@ -52,17 +74,47 @@ public class Pregunta  implements java.io.Serializable {
     public void setDescripcionPregunta(String descripcionPregunta) {
         this.descripcionPregunta = descripcionPregunta;
     }
-    public Set<EvaPregRes> getEvaPregReses() {
-        return this.evaPregReses;
-    }
+
+
+	public String getDescripcionRespuestaCorrecta() {
+		return descripcionRespuestaCorrecta;
+	}
+
+
+	public void setDescripcionRespuestaCorrecta(String descripcionRespuestaCorrecta) {
+		this.descripcionRespuestaCorrecta = descripcionRespuestaCorrecta;
+	}
+
+
+	public String getDescripcionRespuesta1() {
+		return descripcionRespuesta1;
+	}
+
+
+	public void setDescripcionRespuesta1(String descripcionRespuesta1) {
+		this.descripcionRespuesta1 = descripcionRespuesta1;
+	}
+
+
+	public String getDescripcionRespuesta2() {
+		return descripcionRespuesta2;
+	}
+
+
+	public void setDescripcionRespuesta2(String descripcionRespuesta2) {
+		this.descripcionRespuesta2 = descripcionRespuesta2;
+	}
+
+
+	public String getDescripcionRespuesta3() {
+		return descripcionRespuesta3;
+	}
+
+
+	public void setDescripcionRespuesta3(String descripcionRespuesta3) {
+		this.descripcionRespuesta3 = descripcionRespuesta3;
+	}
     
-    public void setEvaPregReses(Set<EvaPregRes> evaPregReses) {
-        this.evaPregReses = evaPregReses;
-    }
-
-
-
-
 }
 
 

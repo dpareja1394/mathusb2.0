@@ -1,6 +1,7 @@
 package co.edu.usbcali.mathusb.presentation.backingBeans;
 
 import co.edu.usbcali.mathusb.exceptions.*;
+
 import co.edu.usbcali.mathusb.modelo.*;
 import co.edu.usbcali.mathusb.modelo.dto.ComentarioDTO;
 import co.edu.usbcali.mathusb.modelo.dto.EvaluacionDTO;
@@ -10,10 +11,10 @@ import co.edu.usbcali.mathusb.modelo.dto.TemaDTO;
 import co.edu.usbcali.mathusb.presentation.businessDelegate.*;
 import co.edu.usbcali.mathusb.utilities.*;
 
+import org.jfree.util.Log;
 import org.primefaces.component.calendar.*;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.inputtext.InputText;
-
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
@@ -32,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -43,403 +45,421 @@ import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
-
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura
- * www.zathuracode.org
+ *         www.zathuracode.org
  *
  */
 @ManagedBean
 @ViewScoped
 public class PreguntaView implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private static final Logger log = LoggerFactory.getLogger(PreguntaView.class);
-    private InputText txtDescripcionPregunta;
-    private InputText txtTemaId_Tema;
-    private InputText txtPregId;
-    private CommandButton btnSave;
-    private CommandButton btnModify;
-    private CommandButton btnDelete;
-    private CommandButton btnClear;
-    private List<PreguntaDTO> data;
-    private PreguntaDTO selectedPregunta;
-    private Pregunta entity;
-    private boolean showDialog;
-    
-    private InputText txtPalabraClave;
-    
-    @ManagedProperty(value = "#{BusinessDelegatorView}")
-    private IBusinessDelegatorView businessDelegatorView;
 
-    private String somTemasString;
+	private static final long serialVersionUID = 1L;
+	private static final Logger log = LoggerFactory.getLogger(PreguntaView.class);
+	private InputText txtDescripcionPregunta;
+	private InputText txtTemaId_Tema;
+	private InputText txtPregId;
+	private CommandButton btnSave;
+	private CommandButton btnModify;
+	private CommandButton btnDelete;
+	private CommandButton btnClear;
+	private List<PreguntaDTO> data;
+	private PreguntaDTO selectedPregunta;
+	private Pregunta entity;
+	private boolean showDialog;
+	private InputText txtPregunta, txtRespuestaCorrecta, txtRespuesta1, txtRespuesta2, txtRespuesta3;
+	private String puta = "perra";
+	private InputText txtPalabraClave;
+	@ManagedProperty(value = "#{BusinessDelegatorView}")
+	private IBusinessDelegatorView businessDelegatorView;
+
+	private String somTemasString;
+	private String somTipoRespuestaString;
 	private List<SelectItem> losTemas;
-    
-	private InputText txtContenidoPreguntaEvaluacion;
-	private String temaDeLaPregunta;
+	private List<Tab> losTabs;
+	private List<Tab> respuestaUnica;
+	private List<Tab> respuestaMultiple;
 	
+	
+	@PostConstruct
+	public void init() {
+		losTabs = new ArrayList<>();
+		respuestaUnica = new ArrayList<>();
+		respuestaMultiple = new ArrayList<>();
+		respuestaUnica.add(new Tab("Pregunta", "panelPregunta"));
+		respuestaUnica.add(new Tab("Respuesta", "panelRespuesta"));
+		respuestaMultiple.add(new Tab("Pregunta", "panelPregunta"));
+		respuestaMultiple.add(new Tab("Respuesta valida", "panelRespuesta"));
+		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta1"));
+		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta2"));
+		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta3"));
+		
+	}
+
+	public List<Tab> getLosTabs() {
+		return losTabs;
+	}
+
+	public void onTipoRespuestaChange() {
+		if (somTipoRespuestaString.equals("0")) {
+			losTabs = new ArrayList<>();
+		} else if (somTipoRespuestaString.equals("1")) {
+			losTabs = respuestaUnica;
+		} else {
+			losTabs = respuestaMultiple;
+		}
+	}
+
+	private String temaDeLaPregunta;
+
 	private List<PreguntaDTO> lasPreguntasDadoTema;
 	private List<TemaDTO> temasRepositorioPreguntas;
-	
+
 	private String palabraClave = "";
-	
-    public PreguntaView() {
-        super();
-    }
-
-    public void rowEventListener(RowEditEvent e) {
-        try {
-            PreguntaDTO preguntaDTO = (PreguntaDTO) e.getObject();
-
-            if (txtDescripcionPregunta == null) {
-                txtDescripcionPregunta = new InputText();
-            }
-
-            txtDescripcionPregunta.setValue(preguntaDTO.getDescripcionPregunta());
-
-            if (txtTemaId_Tema == null) {
-                txtTemaId_Tema = new InputText();
-            }
-
-            txtTemaId_Tema.setValue(preguntaDTO.getTemaId_Tema());
-
-            if (txtPregId == null) {
-                txtPregId = new InputText();
-            }
-
-            txtPregId.setValue(preguntaDTO.getPregId());
-
-            Long pregId = FacesUtils.checkLong(txtPregId);
-            entity = businessDelegatorView.getPregunta(pregId);
-
-            action_modify();
-        } catch (Exception ex) {
-        }
-    }
-
-    public String action_new() {
-        action_clear();
-        selectedPregunta = null;
-        setShowDialog(true);
-
-        return "";
-    }
-
-    public String action_clear() {
-        entity = null;
-        selectedPregunta = null;
-
-        if (txtDescripcionPregunta != null) {
-            txtDescripcionPregunta.setValue(null);
-            txtDescripcionPregunta.setDisabled(true);
-        }
-
-        if (txtTemaId_Tema != null) {
-            txtTemaId_Tema.setValue(null);
-            txtTemaId_Tema.setDisabled(true);
-        }
-
-        if (txtPregId != null) {
-            txtPregId.setValue(null);
-            txtPregId.setDisabled(false);
-        }
-
-        if (btnSave != null) {
-            btnSave.setDisabled(true);
-        }
-
-        if (btnDelete != null) {
-            btnDelete.setDisabled(true);
-        }
-
-        return "";
-    }
-
-    public void listener_txtId() {
-        try {
-            Long pregId = FacesUtils.checkLong(txtPregId);
-            entity = (pregId != null)
-                ? businessDelegatorView.getPregunta(pregId) : null;
-        } catch (Exception e) {
-            entity = null;
-        }
-
-        if (entity == null) {
-            txtDescripcionPregunta.setDisabled(false);
-            txtTemaId_Tema.setDisabled(false);
-            txtPregId.setDisabled(false);
-            btnSave.setDisabled(false);
-        } else {
-            txtDescripcionPregunta.setValue(entity.getDescripcionPregunta());
-            txtDescripcionPregunta.setDisabled(false);
-            txtTemaId_Tema.setValue(entity.getTema().getTemaId());
-            txtTemaId_Tema.setDisabled(false);
-            txtPregId.setValue(entity.getPregId());
-            txtPregId.setDisabled(true);
-            btnSave.setDisabled(false);
-
-            if (btnDelete != null) {
-                btnDelete.setDisabled(false);
-            }
-        }
-    }
-
-    public String action_edit(ActionEvent evt) {
-        selectedPregunta = (PreguntaDTO) (evt.getComponent().getAttributes()
-                                             .get("selectedPregunta"));
-        txtDescripcionPregunta.setValue(selectedPregunta.getDescripcionPregunta());
-        txtDescripcionPregunta.setDisabled(false);
-        txtTemaId_Tema.setValue(selectedPregunta.getTemaId_Tema());
-        txtTemaId_Tema.setDisabled(false);
-        txtPregId.setValue(selectedPregunta.getPregId());
-        txtPregId.setDisabled(true);
-        btnSave.setDisabled(false);
-        setShowDialog(true);
-
-        return "";
-    }
-
-    public String action_save() {
-        try {
-            if ((selectedPregunta == null) && (entity == null)) {
-                action_create();
-            } else {
-                action_modify();
-            }
-
-            data = null;
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage(e.getMessage());
-        }
-
-        return "";
-    }
-
-    public String action_create() {
-        try {
-            entity = new Pregunta();
-
-            Long pregId = FacesUtils.checkLong(txtPregId);
-
-            entity.setDescripcionPregunta(FacesUtils.checkString(
-                    txtDescripcionPregunta));
-            entity.setPregId(pregId);
-            entity.setTema((FacesUtils.checkLong(txtTemaId_Tema) != null)
-                ? businessDelegatorView.getTema(FacesUtils.checkLong(
-                        txtTemaId_Tema)) : null);
-            businessDelegatorView.savePregunta(entity);
-            FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYSAVED);
-            action_clear();
-        } catch (Exception e) {
-            entity = null;
-            FacesUtils.addErrorMessage(e.getMessage());
-        }
-
-        return "";
-    }
-
-    public String action_modify() {
-        try {
-            if (entity == null) {
-                Long pregId = new Long(selectedPregunta.getPregId());
-                entity = businessDelegatorView.getPregunta(pregId);
-            }
-
-            entity.setDescripcionPregunta(FacesUtils.checkString(
-                    txtDescripcionPregunta));
-            entity.setTema((FacesUtils.checkLong(txtTemaId_Tema) != null)
-                ? businessDelegatorView.getTema(FacesUtils.checkLong(
-                        txtTemaId_Tema)) : null);
-            businessDelegatorView.updatePregunta(entity);
-            FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
-        } catch (Exception e) {
-            data = null;
-            FacesUtils.addErrorMessage(e.getMessage());
-        }
-
-        return "";
-    }
-
-    public String action_delete_datatable(ActionEvent evt) {
-        try {
-            selectedPregunta = (PreguntaDTO) (evt.getComponent().getAttributes()
-                                                 .get("selectedPregunta"));
-
-            Long pregId = new Long(selectedPregunta.getPregId());
-            entity = businessDelegatorView.getPregunta(pregId);
-            action_delete();
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage(e.getMessage());
-        }
-
-        return "";
-    }
-
-    public String action_delete_master() {
-        try {
-            Long pregId = FacesUtils.checkLong(txtPregId);
-            entity = businessDelegatorView.getPregunta(pregId);
-            action_delete();
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage(e.getMessage());
-        }
-
-        return "";
-    }
-
-    public void action_delete() throws Exception {
-        try {
-            businessDelegatorView.deletePregunta(entity);
-            FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
-            action_clear();
-            data = null;
-        } catch (Exception e) {
-            throw e;
-        }
-    }
-
-    public String action_closeDialog() {
-        setShowDialog(false);
-        action_clear();
-
-        return "";
-    }
-
-    public String actionDeleteDataTableEditable(ActionEvent evt) {
-        try {
-            selectedPregunta = (PreguntaDTO) (evt.getComponent().getAttributes()
-                                                 .get("selectedPregunta"));
-
-            Long pregId = new Long(selectedPregunta.getPregId());
-            entity = businessDelegatorView.getPregunta(pregId);
-            businessDelegatorView.deletePregunta(entity);
-            data.remove(selectedPregunta);
-            FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
-            action_clear();
-        } catch (Exception e) {
-            FacesUtils.addErrorMessage(e.getMessage());
-        }
-
-        return "";
-    }
-
-    public String action_modifyWitDTO(String descripcionPregunta, Long pregId,
-        Long temaId_Tema) throws Exception {
-        try {
-            entity.setDescripcionPregunta(FacesUtils.checkString(
-                    descripcionPregunta));
-            businessDelegatorView.updatePregunta(entity);
-            FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
-        } catch (Exception e) {
-            //renderManager.getOnDemandRenderer("PreguntaView").requestRender();
-            FacesUtils.addErrorMessage(e.getMessage());
-            throw e;
-        }
-
-        return "";
-    }
-
-    public InputText getTxtDescripcionPregunta() {
-        return txtDescripcionPregunta;
-    }
-
-    public void setTxtDescripcionPregunta(InputText txtDescripcionPregunta) {
-        this.txtDescripcionPregunta = txtDescripcionPregunta;
-    }
-
-    public InputText getTxtTemaId_Tema() {
-        return txtTemaId_Tema;
-    }
-
-    public void setTxtTemaId_Tema(InputText txtTemaId_Tema) {
-        this.txtTemaId_Tema = txtTemaId_Tema;
-    }
-
-    public InputText getTxtPregId() {
-        return txtPregId;
-    }
-
-    public void setTxtPregId(InputText txtPregId) {
-        this.txtPregId = txtPregId;
-    }
-
-    public List<PreguntaDTO> getData() {
-        try {
-            if (data == null) {
-                data = businessDelegatorView.getDataPregunta();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return data;
-    }
-
-    public void setData(List<PreguntaDTO> preguntaDTO) {
-        this.data = preguntaDTO;
-    }
-
-    public PreguntaDTO getSelectedPregunta() {
-        return selectedPregunta;
-    }
-
-    public void setSelectedPregunta(PreguntaDTO pregunta) {
-        this.selectedPregunta = pregunta;
-    }
-
-    public CommandButton getBtnSave() {
-        return btnSave;
-    }
-
-    public void setBtnSave(CommandButton btnSave) {
-        this.btnSave = btnSave;
-    }
-
-    public CommandButton getBtnModify() {
-        return btnModify;
-    }
-
-    public void setBtnModify(CommandButton btnModify) {
-        this.btnModify = btnModify;
-    }
-
-    public CommandButton getBtnDelete() {
-        return btnDelete;
-    }
-
-    public void setBtnDelete(CommandButton btnDelete) {
-        this.btnDelete = btnDelete;
-    }
-
-    public CommandButton getBtnClear() {
-        return btnClear;
-    }
-
-    public void setBtnClear(CommandButton btnClear) {
-        this.btnClear = btnClear;
-    }
-
-    public TimeZone getTimeZone() {
-        return java.util.TimeZone.getDefault();
-    }
-
-    public IBusinessDelegatorView getBusinessDelegatorView() {
-        return businessDelegatorView;
-    }
-
-    public void setBusinessDelegatorView(
-        IBusinessDelegatorView businessDelegatorView) {
-        this.businessDelegatorView = businessDelegatorView;
-    }
-
-    public boolean isShowDialog() {
-        return showDialog;
-    }
-
-    public void setShowDialog(boolean showDialog) {
-        this.showDialog = showDialog;
-    }
+
+	public PreguntaView() {
+		super();
+	}
+
+	public void rowEventListener(RowEditEvent e) {
+		try {
+			PreguntaDTO preguntaDTO = (PreguntaDTO) e.getObject();
+
+			if (txtDescripcionPregunta == null) {
+				txtDescripcionPregunta = new InputText();
+			}
+
+			txtDescripcionPregunta.setValue(preguntaDTO.getDescripcionPregunta());
+
+			if (txtTemaId_Tema == null) {
+				txtTemaId_Tema = new InputText();
+			}
+
+			txtTemaId_Tema.setValue(preguntaDTO.getTemaId_Tema());
+
+			if (txtPregId == null) {
+				txtPregId = new InputText();
+			}
+
+			txtPregId.setValue(preguntaDTO.getPregId());
+
+			Long pregId = FacesUtils.checkLong(txtPregId);
+			entity = businessDelegatorView.getPregunta(pregId);
+
+			action_modify();
+		} catch (Exception ex) {
+		}
+	}
+
+	public String action_new() {
+		action_clear();
+		selectedPregunta = null;
+		setShowDialog(true);
+
+		return "";
+	}
+
+	public String action_clear() {
+		entity = null;
+		selectedPregunta = null;
+
+		if (txtDescripcionPregunta != null) {
+			txtDescripcionPregunta.setValue(null);
+			txtDescripcionPregunta.setDisabled(true);
+		}
+
+		if (txtTemaId_Tema != null) {
+			txtTemaId_Tema.setValue(null);
+			txtTemaId_Tema.setDisabled(true);
+		}
+
+		if (txtPregId != null) {
+			txtPregId.setValue(null);
+			txtPregId.setDisabled(false);
+		}
+
+		if (btnSave != null) {
+			btnSave.setDisabled(true);
+		}
+
+		if (btnDelete != null) {
+			btnDelete.setDisabled(true);
+		}
+
+		return "";
+	}
+
+	public void listener_txtId() {
+		try {
+			Long pregId = FacesUtils.checkLong(txtPregId);
+			entity = (pregId != null) ? businessDelegatorView.getPregunta(pregId) : null;
+		} catch (Exception e) {
+			entity = null;
+		}
+
+		if (entity == null) {
+			txtDescripcionPregunta.setDisabled(false);
+			txtTemaId_Tema.setDisabled(false);
+			txtPregId.setDisabled(false);
+			btnSave.setDisabled(false);
+		} else {
+			txtDescripcionPregunta.setValue(entity.getDescripcionPregunta());
+			txtDescripcionPregunta.setDisabled(false);
+			txtTemaId_Tema.setValue(entity.getTema().getTemaId());
+			txtTemaId_Tema.setDisabled(false);
+			txtPregId.setValue(entity.getPregId());
+			txtPregId.setDisabled(true);
+			btnSave.setDisabled(false);
+
+			if (btnDelete != null) {
+				btnDelete.setDisabled(false);
+			}
+		}
+	}
+
+	public String action_edit(ActionEvent evt) {
+		selectedPregunta = (PreguntaDTO) (evt.getComponent().getAttributes().get("selectedPregunta"));
+		txtDescripcionPregunta.setValue(selectedPregunta.getDescripcionPregunta());
+		txtDescripcionPregunta.setDisabled(false);
+		txtTemaId_Tema.setValue(selectedPregunta.getTemaId_Tema());
+		txtTemaId_Tema.setDisabled(false);
+		txtPregId.setValue(selectedPregunta.getPregId());
+		txtPregId.setDisabled(true);
+		btnSave.setDisabled(false);
+		setShowDialog(true);
+
+		return "";
+	}
+
+	public String action_save() {
+		try {
+			if ((selectedPregunta == null) && (entity == null)) {
+				action_create();
+			} else {
+				action_modify();
+			}
+
+			data = null;
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage(e.getMessage());
+		}
+
+		return "";
+	}
+
+	public String action_create() {
+		try {
+			entity = new Pregunta();
+
+			Long pregId = FacesUtils.checkLong(txtPregId);
+
+			entity.setDescripcionPregunta(FacesUtils.checkString(txtDescripcionPregunta));
+			entity.setPregId(pregId);
+			entity.setTema((FacesUtils.checkLong(txtTemaId_Tema) != null)
+					? businessDelegatorView.getTema(FacesUtils.checkLong(txtTemaId_Tema)) : null);
+			businessDelegatorView.savePregunta(entity);
+			FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYSAVED);
+			action_clear();
+		} catch (Exception e) {
+			entity = null;
+			FacesUtils.addErrorMessage(e.getMessage());
+		}
+
+		return "";
+	}
+
+	public String action_modify() {
+		try {
+			if (entity == null) {
+				Long pregId = new Long(selectedPregunta.getPregId());
+				entity = businessDelegatorView.getPregunta(pregId);
+			}
+
+			entity.setDescripcionPregunta(FacesUtils.checkString(txtDescripcionPregunta));
+			entity.setTema((FacesUtils.checkLong(txtTemaId_Tema) != null)
+					? businessDelegatorView.getTema(FacesUtils.checkLong(txtTemaId_Tema)) : null);
+			businessDelegatorView.updatePregunta(entity);
+			FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
+		} catch (Exception e) {
+			data = null;
+			FacesUtils.addErrorMessage(e.getMessage());
+		}
+
+		return "";
+	}
+
+	public String action_delete_datatable(ActionEvent evt) {
+		try {
+			selectedPregunta = (PreguntaDTO) (evt.getComponent().getAttributes().get("selectedPregunta"));
+
+			Long pregId = new Long(selectedPregunta.getPregId());
+			entity = businessDelegatorView.getPregunta(pregId);
+			action_delete();
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage(e.getMessage());
+		}
+
+		return "";
+	}
+
+	public String action_delete_master() {
+		try {
+			Long pregId = FacesUtils.checkLong(txtPregId);
+			entity = businessDelegatorView.getPregunta(pregId);
+			action_delete();
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage(e.getMessage());
+		}
+
+		return "";
+	}
+
+	public void action_delete() throws Exception {
+		try {
+			businessDelegatorView.deletePregunta(entity);
+			FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
+			action_clear();
+			data = null;
+		} catch (Exception e) {
+			throw e;
+		}
+	}
+
+	public String action_closeDialog() {
+		setShowDialog(false);
+		action_clear();
+
+		return "";
+	}
+
+	public String actionDeleteDataTableEditable(ActionEvent evt) {
+		try {
+			selectedPregunta = (PreguntaDTO) (evt.getComponent().getAttributes().get("selectedPregunta"));
+
+			Long pregId = new Long(selectedPregunta.getPregId());
+			entity = businessDelegatorView.getPregunta(pregId);
+			businessDelegatorView.deletePregunta(entity);
+			data.remove(selectedPregunta);
+			FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYDELETED);
+			action_clear();
+		} catch (Exception e) {
+			FacesUtils.addErrorMessage(e.getMessage());
+		}
+
+		return "";
+	}
+
+	public String action_modifyWitDTO(String descripcionPregunta, Long pregId, Long temaId_Tema) throws Exception {
+		try {
+			entity.setDescripcionPregunta(FacesUtils.checkString(descripcionPregunta));
+			businessDelegatorView.updatePregunta(entity);
+			FacesUtils.addInfoMessage(ZMessManager.ENTITY_SUCCESFULLYMODIFIED);
+		} catch (Exception e) {
+			// renderManager.getOnDemandRenderer("PreguntaView").requestRender();
+			FacesUtils.addErrorMessage(e.getMessage());
+			throw e;
+		}
+
+		return "";
+	}
+
+	public InputText getTxtTemaId_Tema() {
+		return txtTemaId_Tema;
+	}
+
+	public void setTxtTemaId_Tema(InputText txtTemaId_Tema) {
+		this.txtTemaId_Tema = txtTemaId_Tema;
+	}
+
+	public InputText getTxtPregId() {
+		return txtPregId;
+	}
+
+	public void setTxtPregId(InputText txtPregId) {
+		this.txtPregId = txtPregId;
+	}
+
+	public List<PreguntaDTO> getData() {
+		try {
+			if (data == null) {
+				data = businessDelegatorView.getDataPregunta();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return data;
+	}
+
+	public void setData(List<PreguntaDTO> preguntaDTO) {
+		this.data = preguntaDTO;
+	}
+
+	public PreguntaDTO getSelectedPregunta() {
+		return selectedPregunta;
+	}
+
+	public void setSelectedPregunta(PreguntaDTO pregunta) {
+		this.selectedPregunta = pregunta;
+	}
+
+	public CommandButton getBtnSave() {
+		return btnSave;
+	}
+
+	public void setBtnSave(CommandButton btnSave) {
+		this.btnSave = btnSave;
+	}
+
+	public CommandButton getBtnModify() {
+		return btnModify;
+	}
+
+	public void setBtnModify(CommandButton btnModify) {
+		this.btnModify = btnModify;
+	}
+
+	public CommandButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	public void setBtnDelete(CommandButton btnDelete) {
+		this.btnDelete = btnDelete;
+	}
+
+	public CommandButton getBtnClear() {
+		return btnClear;
+	}
+
+	public void setBtnClear(CommandButton btnClear) {
+		this.btnClear = btnClear;
+	}
+
+	public TimeZone getTimeZone() {
+		return java.util.TimeZone.getDefault();
+	}
+
+	public IBusinessDelegatorView getBusinessDelegatorView() {
+		return businessDelegatorView;
+	}
+
+	public void setBusinessDelegatorView(IBusinessDelegatorView businessDelegatorView) {
+		this.businessDelegatorView = businessDelegatorView;
+	}
+
+	public boolean isShowDialog() {
+		return showDialog;
+	}
+
+	public void setShowDialog(boolean showDialog) {
+		this.showDialog = showDialog;
+	}
 
 	public String getSomTemasString() {
+		return somTipoRespuestaString;
+	}
+
+	public String getSomTipoRespuestaString() {
 		return somTemasString;
 	}
 
@@ -448,9 +468,8 @@ public class PreguntaView implements Serializable {
 			if (losTemas == null) {
 				losTemas = new ArrayList<SelectItem>();
 				List<TemaDTO> losTemasDTO = businessDelegatorView.getDataTema();
-				for (TemaDTO temaDTO: losTemasDTO) {
-					SelectItem selectItem = new SelectItem(temaDTO.getTemaId(),
-							temaDTO.getTituloTema());
+				for (TemaDTO temaDTO : losTemasDTO) {
+					SelectItem selectItem = new SelectItem(temaDTO.getTemaId(), temaDTO.getTituloTema());
 					losTemas.add(selectItem);
 				}
 			}
@@ -465,18 +484,14 @@ public class PreguntaView implements Serializable {
 		this.somTemasString = somTemasString;
 	}
 
+	public void setSomTipoRespuestaString(String somTipoRespuestaString) {
+		this.somTipoRespuestaString = somTipoRespuestaString;
+	}
+
 	public void setLosTemas(List<SelectItem> losTemas) {
 		this.losTemas = losTemas;
 	}
 
-	public InputText getTxtContenidoPreguntaEvaluacion() {
-		return txtContenidoPreguntaEvaluacion;
-	}
-
-	public void setTxtContenidoPreguntaEvaluacion(InputText txtContenidoPreguntaEvaluacion) {
-		this.txtContenidoPreguntaEvaluacion = txtContenidoPreguntaEvaluacion;
-	}
-	
 	public String getTemaDeLaPregunta() {
 		try {
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -491,8 +506,8 @@ public class PreguntaView implements Serializable {
 	public void setTemaDeLaPregunta(String temaDeLaPregunta) {
 		this.temaDeLaPregunta = temaDeLaPregunta;
 	}
-	
-	/*Metodos*/	
+
+	/* Metodos */
 
 	public List<PreguntaDTO> getLasPreguntasDadoTema() {
 		return lasPreguntasDadoTema;
@@ -501,7 +516,7 @@ public class PreguntaView implements Serializable {
 	public void setLasPreguntasDadoTema(List<PreguntaDTO> lasPreguntasDadoTema) {
 		this.lasPreguntasDadoTema = lasPreguntasDadoTema;
 	}
-	
+
 	public InputText getTxtPalabraClave() {
 		return txtPalabraClave;
 	}
@@ -509,12 +524,12 @@ public class PreguntaView implements Serializable {
 	public void setTxtPalabraClave(InputText txtPalabraClave) {
 		this.txtPalabraClave = txtPalabraClave;
 	}
-	
+
 	public List<TemaDTO> getTemasRepositorioPreguntas() {
 		try {
 			temasRepositorioPreguntas = new ArrayList<>();
 			temasRepositorioPreguntas = businessDelegatorView.obtenerTemaDadoPalabraClave(palabraClave);
-		
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -526,87 +541,140 @@ public class PreguntaView implements Serializable {
 		this.temasRepositorioPreguntas = temasRepositorioPreguntas;
 	}
 
-	public void registrarPregunta(){
+	public void registrarPregunta() {
+		
+		log.info("Entro lok");
+		log.info(FacesUtils.checkString(txtPregunta));
+		log.info(puta);
+		log.info("Salio lok");
 		try {
-			log.info("Entró a registrar pregunta");
+			log.info("EntrÃ³ a registrar pregunta");
 			Pregunta pregunta = new Pregunta();
 			EvaPregRes evaPregRes = new EvaPregRes();
-			pregunta.setPregId(null);
-			pregunta.setDescripcionPregunta(FacesUtils.checkString(txtContenidoPreguntaEvaluacion));
+			pregunta.setPregId(null);		
+			pregunta.setTipoRespuesta(somTipoRespuestaString);
+			pregunta.setDescripcionRespuestaCorrecta(FacesUtils.checkString(txtRespuestaCorrecta));
+			pregunta.setDescripcionPregunta(FacesUtils.checkString(txtPregunta));
+			pregunta.setDescripcionRespuesta1(FacesUtils.checkString(txtRespuesta1));
+			pregunta.setDescripcionRespuesta2(FacesUtils.checkString(txtRespuesta2));
+			pregunta.setDescripcionRespuesta3(FacesUtils.checkString(txtRespuesta3));
+			pregunta.setTipoRespuesta(somTipoRespuestaString);
 			pregunta.setTema(businessDelegatorView.getTema(Long.parseLong(somTemasString)));
 			log.info("Pregunta creada");
-			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-
-			EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session.getAttribute("evaluacionMostrar");
-			Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
 			businessDelegatorView.savePregunta(pregunta);
 			log.info("Pregunta guardada en bd");
+			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session.getAttribute("evaluacionMostrar");
+			Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
 			evaPregRes.setEvprId(null);
 			evaPregRes.setEvaluacion(evaluacion);
 			evaPregRes.setPregunta(pregunta);
 			evaPregRes.setIndicePregunta(new Long(0));
 			businessDelegatorView.saveEvaPregRes(evaPregRes);
-			txtContenidoPreguntaEvaluacion.setValue("Se ha guardado la pregunta en la evaluación satisfactoriamente");
+			
 			log.info("Pregunta guardada");
 			FacesUtils.resetManagedBean("evaluacionView");
+			
 		} catch (Exception e) {
-			txtContenidoPreguntaEvaluacion.setValue(e.getMessage());
+			//txts.setValue(e.getMessage());
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
+		
 	}
-	
-	public void ponerEnSessionPreguntaDocumento(ActionEvent evt){
+
+	public void ponerEnSessionPreguntaDocumento(ActionEvent evt) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		PreguntaDTO preguntaDTO = (PreguntaDTO) (evt.getComponent().getAttributes().get("preguntaDocMostrar"));
-		
+
 		session.setAttribute("preguntaDocMostrar", preguntaDTO);
 	}
-	
-	public void registrarPreguntaTema(){
+
+	public void registrarPreguntaTema() {
+		/*
 		try {
-			log.info("Entró a registrar pregunta");
+			log.info("EntrÃ³ a registrar pregunta");
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			TemaDTO elTema = (TemaDTO) session.getAttribute("preguntaTema");
-			
+
 			Pregunta pregunta = new Pregunta();
 			pregunta.setPregId(null);
-			pregunta.setDescripcionPregunta(FacesUtils.checkString(txtContenidoPreguntaEvaluacion));
+			pregunta.setDescripcionPregunta(FacesUtils.checkString(txts));
 			pregunta.setTema(businessDelegatorView.getTema(elTema.getTemaId()));
 			log.info("Pregunta creada");
 			businessDelegatorView.savePregunta(pregunta);
 			log.info("Pregunta guardada en bd");
-			txtContenidoPreguntaEvaluacion.setValue("Se ha asociado la pregunta al tema satisfactoriamente");
+			txts.setValue("Se ha asociado la pregunta al tema satisfactoriamente");
 			log.info("Pregunta guardada");
 		} catch (Exception e) {
-			txtContenidoPreguntaEvaluacion.setValue(e.getMessage());
+			txts.setValue(e.getMessage());
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
+		*/
 	}
-	
-	public void ponerEnSessionTema(ActionEvent evt)
-	{
+
+	public InputText getTxtPregunta() {
+		return txtPregunta;
+	}
+
+	public void setTxtPregunta(InputText txtPregunta) {
+		this.txtPregunta = txtPregunta;
+	}	
+
+	public InputText getTxtRespuestaCorrecta() {
+		return txtRespuestaCorrecta;
+	}
+
+	public void setTxtRespuestaCorrecta(InputText txtRespuestaCorrecta) {
+		this.txtRespuestaCorrecta = txtRespuestaCorrecta;
+	}
+
+	public InputText getTxtRespuesta1() {
+		return txtRespuesta1;
+	}
+
+	public void setTxtRespuesta1(InputText txtRespuesta1) {
+		this.txtRespuesta1 = txtRespuesta1;
+	}
+
+	public InputText getTxtRespuesta2() {
+		return txtRespuesta2;
+	}
+
+	public void setTxtRespuesta2(InputText txtRespuesta2) {
+		this.txtRespuesta2 = txtRespuesta2;
+	}
+
+	public InputText getTxtRespuesta3() {
+		return txtRespuesta3;
+	}
+
+	public void setTxtRespuesta3(InputText txtRespuesta3) {
+		this.txtRespuesta3 = txtRespuesta3;
+	}
+
+	public void ponerEnSessionTema(ActionEvent evt) {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		TemaDTO temaDTO = (TemaDTO) (evt.getComponent().getAttributes().get("preguntaTema"));
-		
+
 		session.setAttribute("preguntaTema", temaDTO);
 	}
-	
-	public void mostrarListaDePreguntasDadoTema (ActionEvent evt) {
+
+	public void mostrarListaDePreguntasDadoTema(ActionEvent evt) {
 		TemaDTO temaDTO = (TemaDTO) (evt.getComponent().getAttributes().get("temaPreguntas"));
 		try {
 			Long idTema = temaDTO.getTemaId();
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute("temaPreguntaEval", temaDTO);
 			lasPreguntasDadoTema = businessDelegatorView.consultarPreguntasDadoIdTema(idTema);
-			
+
 		} catch (Exception e) {
 			FacesUtils.addErrorMessage(e.getMessage());
 		}
 	}
-	
-	public void agregarPreguntaEvaluacionDesdeRepositorio(ActionEvent evt){
+
+	public void agregarPreguntaEvaluacionDesdeRepositorio(ActionEvent evt) {
 		try {
 			PreguntaDTO preguntaDTO = (PreguntaDTO) (evt.getComponent().getAttributes().get("preguntaDocAgregar"));
 			Pregunta pregunta = businessDelegatorView.getPregunta(preguntaDTO.getPregId());
@@ -631,8 +699,8 @@ public class PreguntaView implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
-	public void obtenerTemasPorPalabraClave(){
+
+	public void obtenerTemasPorPalabraClave() {
 		try {
 			palabraClave = txtPalabraClave.getValue().toString().toUpperCase();
 			temasRepositorioPreguntas = null;
@@ -640,6 +708,14 @@ public class PreguntaView implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public String getPuta() {
+		return puta;
+	}
+
+	public void setPuta(String puta) {
+		this.puta = puta;
 	}
 
 	
