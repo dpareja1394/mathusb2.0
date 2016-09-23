@@ -11,7 +11,31 @@
 <h:body>
 	<ui:composition template="/WEB-INF/facelets/template.xhtml">
 		<ui:define name="body">
-
+<script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
+<script>
+	var editor = [];
+	window.onload = function() {
+		editor[0] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+		editor[1] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+		editor[2] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+		editor[3] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+		editor[4] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+	}
+		function addOn(){
+			var x = document.getElementsByClassName('ui-tabs-panel');
+			for(var i=0;i!=x.length;i++){
+				editor[i].insertInto(x[i]);
+			}
+		}
+		function doGet() {
+			document.getElementById('formDialog:txtPregunta').value = editor[0].getMathML();
+			document.getElementById('formDialog:txtRespuestaCorrecta').value = editor[1].getMathML();
+			document.getElementById('formDialog:txtRespuesta1').value = editor[2].getMathML();
+			document.getElementById('formDialog:txtRespuesta2').value = editor[3].getMathML();
+			document.getElementById('formDialog:txtRespuesta3').value = editor[4].getMathML();
+			//window.onload();
+		}
+	</script>
 			<f:view>
 
 				<p:ajaxStatus onstart="PF('statusDialog').show()"
@@ -41,8 +65,33 @@
 							<p:outputLabel id="temaString"
 								value="#{preguntaView.temaDeLaPregunta}" />
 						</h:panelGrid>
+						<h:panelGrid columns="2" id="panelRespuesta">
+							<h:outputLabel value="Tipo de respuesta: " />
+							<p:selectOneMenu id="somTipoRespuestaString" style="width:300px"
+								value="#{preguntaView.somTipoRespuestaString}">
+								<f:selectItem itemLabel="Seleccione el tipo de respuesta"
+									itemValue="0" />
+								<f:selectItem itemLabel="Respuesta única" itemValue="1" />
+								<f:selectItem itemLabel="Respuesta multiple con única solución"
+									itemValue="2" />
+								<p:ajax listener="#{preguntaView.onTipoRespuestaChange}"
+									update="tabs" oncomplete="addOn()"/>
+							</p:selectOneMenu>
+						</h:panelGrid>
 
 					</p:panel>
+					
+					<p:tabView id="tabs" value="#{preguntaView.losTabs}" var="tab">
+						<p:tab title="#{tab.titulo}">
+							<p:panel name="editor"></p:panel>
+						</p:tab>
+					</p:tabView>
+					<p:inputText id="txtPregunta" binding="#{preguntaView.txtPregunta}" style="display: none;" />
+					<p:inputText id="txtRespuestaCorrecta" binding="#{preguntaView.txtRespuestaCorrecta}" style="display: none;"/>
+					<p:inputText id="txtRespuesta1" binding="#{preguntaView.txtRespuesta1}" style="display: none;"/>
+					<p:inputText id="txtRespuesta2" binding="#{preguntaView.txtRespuesta2}" style="display: none;"/>
+					<p:inputText id="txtRespuesta3" binding="#{preguntaView.txtRespuesta3}" style="display: none;"/>
+					
 					<p:panel id="panelBotones">
 						<div>
 						<h:panelGrid columns="1">
@@ -50,51 +99,10 @@
 							<p:commandButton value="Agregar Pregunta" icon="ui-icon-plus"
 								action="#{preguntaView.registrarPreguntaTema()}"
 								onclick="doGet()" oncomplete="window.close()"
-								update="txtContenidoPreguntaEvaluacion, @([id$=panelPreguntasEvaluacion]), @([id$=dtPreguntasEvaluacion]), @([id$=men]), @([id$=msg])" />
-							</h:panelGrid>	
+								/>
+							</h:panelGrid>
 						</div>
 					</p:panel>
-
-
-					<p:panel id="panelEditorPreguntas"
-						header="Contenido de la Pregunta" style="height: 280px">
-						<div style="width: 650px; height: 100px"
-							id="editorPreguntaContainer" align="center">
-						</div>
-						<p:inputText id="txtContenidoPreguntaEvaluacion"
-								binding="#{preguntaView.txtContenidoPreguntaEvaluacion}"
-								placeholder="Seleccione un tema, y escriba abajo en el editor de texto matemático"
-								style="width: 600px" />
-
-						<!-- <script src="http://www.wiris.net/demo/editor/editor"></script> -->
-						<script
-							src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
-						<script type="text/javascript">
-							var editor;
-							var exp = '<math xmlns="http://www.w3.org/1998/Math/MathML"><msubsup><mo>&#x0222B;</mo><mn>1</mn><mn>3</mn></msubsup><mn>3</mn><mi>x</mi><mo>d</mo><mi>x</mi></math>';
-							window.onload = function() {
-								editor = com.wiris.jsEditor.JsEditor
-										.newInstance({
-											'language' : 'es'
-										});
-								editor
-										.insertInto(document
-												.getElementById('editorPreguntaContainer'));
-							}
-							function doSet(valorMatematico) {
-								editor.setMathML(valorMatematico);
-							}
-							function doGet() {
-								document
-										.getElementById('formDialog:txtContenidoPreguntaEvaluacion').value = editor
-										.getMathML();
-								//window.onload();
-							}
-						</script>
-
-					</p:panel>
-
-
 
 
 				</h:form>
@@ -105,5 +113,8 @@
 		</ui:define>
 	</ui:composition>
 
+
+
 </h:body>
+
 </html>

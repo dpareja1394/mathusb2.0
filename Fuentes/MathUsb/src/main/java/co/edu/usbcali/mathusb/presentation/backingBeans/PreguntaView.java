@@ -591,7 +591,7 @@ public class PreguntaView implements Serializable {
 	}
 
 	public void registrarPreguntaTema() {
-		/*
+		
 		try {
 			log.info("EntrÃ³ a registrar pregunta");
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -599,19 +599,22 @@ public class PreguntaView implements Serializable {
 
 			Pregunta pregunta = new Pregunta();
 			pregunta.setPregId(null);
-			pregunta.setDescripcionPregunta(FacesUtils.checkString(txts));
 			pregunta.setTema(businessDelegatorView.getTema(elTema.getTemaId()));
+			pregunta.setTipoRespuesta(somTipoRespuestaString);
+			pregunta.setDescripcionRespuestaCorrecta(FacesUtils.checkString(txtRespuestaCorrecta));
+			pregunta.setDescripcionPregunta(FacesUtils.checkString(txtPregunta));
+			pregunta.setDescripcionRespuesta1(FacesUtils.checkString(txtRespuesta1));
+			pregunta.setDescripcionRespuesta2(FacesUtils.checkString(txtRespuesta2));
+			pregunta.setDescripcionRespuesta3(FacesUtils.checkString(txtRespuesta3));
+			pregunta.setTipoRespuesta(somTipoRespuestaString);
 			log.info("Pregunta creada");
 			businessDelegatorView.savePregunta(pregunta);
 			log.info("Pregunta guardada en bd");
-			txts.setValue("Se ha asociado la pregunta al tema satisfactoriamente");
 			log.info("Pregunta guardada");
 		} catch (Exception e) {
-			txts.setValue(e.getMessage());
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
-		*/
 	}
 
 	public InputText getTxtPregunta() {
