@@ -59,15 +59,15 @@
 				<h:form id="formDialog">
 					<p:messages id="msg" />
 					<p:growl id="men" />
-					<p:panel id="agregarPreguntaEvaluacion" header="Agregar pregunta">
+					<p:panel id="agregarPreguntaEvaluacion" header="AGREGAR PREGUNTA">
 						<h:panelGrid columns="2" id="panelGrid">
 							<h:outputLabel value="Tema: " />
 							<p:outputLabel id="temaString"
 								value="#{preguntaView.temaDeLaPregunta}" />
 						</h:panelGrid>
-						<h:panelGrid columns="2" id="panelRespuesta">
+						<h:panelGrid columns="2" id="panelRespuesta" style="width:100%">
 							<h:outputLabel value="Tipo de respuesta: " />
-							<p:selectOneMenu id="somTipoRespuestaString" style="width:300px"
+							<h:selectOneMenu id="somTipoRespuestaString" class="selectpicker"
 								value="#{preguntaView.somTipoRespuestaString}">
 								<f:selectItem itemLabel="Seleccione el tipo de respuesta"
 									itemValue="0" />
@@ -76,7 +76,7 @@
 									itemValue="2" />
 								<p:ajax listener="#{preguntaView.onTipoRespuestaChange}"
 									update="tabs" oncomplete="addOn()"/>
-							</p:selectOneMenu>
+							</h:selectOneMenu>
 						</h:panelGrid>
 
 					</p:panel>
@@ -103,7 +103,6 @@
 							</h:panelGrid>
 						</div>
 					</p:panel>
-
 
 				</h:form>
 

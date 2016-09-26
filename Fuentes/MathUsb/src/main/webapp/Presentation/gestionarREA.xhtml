@@ -31,47 +31,45 @@
 				</p:dialog>
 
 
-				<h:form id="formDialog" style="min-width:800px;padding:0em 2em;">
+				<h:form id="formDialog" class="formDialog">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
 					<p:fieldset legend="Nueva herramienta" toggleable="true"
 						collapsed="true" toggleSpeed="500" style="margin-bottom:2em;">
-						<p:panel id="panelNuevaHerramientaREA" header="Nueva Herramienta">
-							<h:panelGrid columns="2" id="panelGrid">
+						<p:panel id="panelNuevaHerramientaREA" header="NUEVA HERRAMIENTA">
+							<h:panelGrid columns="2" id="panelGrid" style="width:100%">
 								<h:outputLabel value="Título o Descripción de Herramienta: " />
 								<p:inputTextarea id="txtTituloHerramienta" maxlength="2500"
-									autoResize="false" style="width:700px; height:70px"
+									autoResize="false" style="width:100%; height:70px"
 									binding="#{herramientaView.txtTituloHerramienta}" />
 
-								<h:outputLabel value="URL de ubicación de la Herramienta: " />
+								<h:outputLabel value="URL de ubicación de la Herramienta:" for="txtURL" />
 								<p:inputTextarea id="txtURL" maxlength="2500" autoResize="false"
-									style="width:700px; height:70px"
+									style="width:100%; height:70px"
 									binding="#{herramientaView.txtURL}" />
 
-								<h:outputLabel value="Tipo de Herramienta: " />
-								<p:selectOneMenu id="somTipoHerramienta" style="width:450px"
+								<h:outputLabel value="Tipo de Herramienta:" for="somTipoHerramienta" />
+								<h:selectOneMenu id="somTipoHerramienta" styleClass="selectpicker"
 									value="#{herramientaView.somTiposDeHerramientas}">
 									<f:selectItem itemLabel="Seleccione el Tipo de Herramienta"
 										itemValue="0" />
 									<f:selectItems
 										value="#{herramientaView.losTiposDeHerramientas}" />
-								</p:selectOneMenu>
-
-
+								</h:selectOneMenu>
 							</h:panelGrid>
 						</p:panel>
 						<p:panel id="panelBotones" style="border:none;">
 							<div align="center">
 								<p:commandButton id="btnGuardarNuevaHerramienta"
-									style="font-family:'Futura Bk BT';padding:3px 1px;"
+									style="padding:3px 1px;"
 									binding="#{herramientaView.btnGuardarNuevaHerramienta}"
 									value="Guardar nueva Herramienta"
 									action="#{herramientaView.guardarNuevaHerramienta()}"
 									icon="ui-icon-disk"
 									update="panelNuevaHerramientaREA,msg,panelBotones,panelMisHerramientas" />
 								<p:commandButton id="btnLimpiarPantallaNuevaHerramienta"
-									style="background:#428bca;font-family:'Futura Bk BT';text-shadow:none;color:white;margin-left:6px;padding:3px 1px;"
+									style="background:rgb(169, 191, 194);margin-left:6px;padding:3px 1px;"
 									binding="#{herramientaView.btnLimpiarPantallaNuevaHerramienta}"
 									value="Limpiar pantalla"
 									action="#{herramientaView.limpiarPantalla()}"
@@ -84,34 +82,34 @@
 					<p:fieldset legend="Mis herramientas" toggleable="true"
 						collapsed="true" toggleSpeed="500">
 						<p:panel id="panelMisHerramientas"
-							header="Estas son las herramientas que has publicado a los estudiantes">
+							header="MIS HERRAMIENTAS PUBLICADAS A LOS ESTUDIANTES">
 							<p:dataTable id="tablasMisHerramientas"
 								emptyMessage="Actualmente no has creado herramientas"
 								value="#{herramientaView.herramientasDelUsuario}"
 								var="herramienta">
 								<p:column headerText="Fecha publicación"
-									style="width:150px;text-align: center">
+									style="width:24%;text-align: center">
 									<p:outputLabel value="#{herramienta.fechaPublicacionString}" />
 								</p:column>
 
 								<p:column headerText="Descripcion Herramienta"
-									style="width:300px;text-align: center">
+									style="width:44%;text-align: center">
 									<p:outputLabel value="#{herramienta.descripcionHerramienta}" />
 								</p:column>
 
 								<p:column headerText="Estado"
-									style="width:70px;text-align: center">
+									style="width:10%;text-align: center">
 									<p:outputLabel value="#{herramienta.estadoRegistro}" />
 								</p:column>
 
 								<p:column headerText="Link"
-									style="width:70px;text-align: center">
+									style="width:10%;text-align: center">
 									<p:link value="Abrir enlace" target="_blank"
 										href="#{herramienta.valorHerramienta}" />
 								</p:column>
 
 								<p:column headerText="Modificar ó Inactivar"
-									style="width:40px;text-align: center">
+									style="width:12%;text-align: center">
 									<p:commandButton id="btnModificarHerramienta"
 										actionListener="#{herramientaView.abrirDialogoMofificarHerramienta}"
 										title="Modificar Herramienta" icon="ui-icon-pencil"

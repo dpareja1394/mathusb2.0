@@ -26,16 +26,13 @@
 				    display: none !important;
 				}		
 				.ui-menu.ui-menubar .ui-menu-parent .ui-menu-child {		
-					/*background: #ffffff;*/
 					width: 300px;
 				}
 				.ui-menubar .ui-menuitem{
 					margin-top: 4px !important;
 					padding: 2px;
-					font-family: 'Open Sans','Helvetica Nueu','Futura Bk BT' !important;
-					/*text-transform: uppercase !important;*/
-				}	
-				
+					font-family: 'Raleway','Open Sans','Helvetica Nueu','Futura Bk BT' !important;
+				}					
 			</style>
 			<h:form>		
 				<div>    
@@ -43,7 +40,7 @@
 						autoDisplay="true">
 						<f:facet name="options">
 							<p:menuitem value="New" url="#" icon="fa fa-plus" />
-				          <p:commandButton value="Logout" style="color:#004276;bottom:2px;font-weight:bold;"       	
+				          <p:commandButton value="Logout" style="color:#444;bottom:2px;font-weight:bold;"       	
 				          	icon="ui-icon-extlink" action="#{menuView.action_exit()}" />       
 				      	</f:facet>				    
 	        		</p:menubar>

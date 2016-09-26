@@ -42,7 +42,7 @@
 							emptyMessage="Actualmente no eres docente en un grupo"
 							value="#{grupoView.losGruposDelDocente}" var="grupo">
 							<p:column headerText="Asignatura"
-								style="width:300px;text-align: center">
+								class="column-asig" >
 								<p:outputLabel value="#{grupo.nombreAsignatura}" />
 							</p:column>
 
@@ -52,6 +52,7 @@
 							</p:column>
 
 							<p:column headerText="Acciones">
+								<div align="center">
 								<p:commandButton id="btnVerListaEstudiantes"
 									actionListener="#{grupoView.mostrarListaDeEstudiantes}"
 									title="Ver lista de Estudiantes" icon="ui-icon-circle-zoomin"
@@ -64,6 +65,7 @@
 									update=":dialogModificarGrupo">
 									<f:attribute name="grupoModifica" value="#{grupo}" />
 								</p:commandButton>
+								</div>
 							</p:column>
 
 						</p:dataTable>
@@ -77,7 +79,7 @@
 							emptyMessage="No hay estudiantes"
 							value="#{grupoView.losEstudiantesDelGrupo}" var="estudiante">
 							<p:column headerText="Codigo"
-								style="width:70px;text-align: center">
+								style="width:75px;text-align: center">
 								<p:outputLabel value="#{estudiante.codigoUsuario}" />
 							</p:column>
 

@@ -38,8 +38,7 @@
 
 					<p:fieldset legend="Agregar tema" style="margin-bottom:2em;" toggleable="true" collapsed="true" toggleSpeed="500">
 						<p:panel id="panelNuevoTema" header="AGREGAR TEMA">
-							<p:panelGrid columns="2" id="panelGrid" styleClass="panelGrupo">
-
+							<h:panelGrid columns="2" id="panelGrid" styleClass="panelGrupo" style="width:100%;">
 								<h:outputText id="lblTituloTema" value="Título del tema:" style="font-weight:bold;" />
 								<p:inputText id="txtTituloTema" style="width:100%;"
 									binding="#{temaView.txtTituloTema}" />
@@ -54,7 +53,7 @@
 									placeholder="Las palabras claves deben ir separadas por comas ','"
 									binding="#{temaView.txtPalabrasClave}" />
 
-							</p:panelGrid>
+							</h:panelGrid>
 						</p:panel>
 
 						<p:panel id="panelBotones" style="border:none;">
@@ -81,17 +80,17 @@
 							emptyMessage="Actualmente no hay temas" value="#{temaView.data}"
 							var="tema">
 							<p:column headerText="Título tema"
-								style="width:200px;text-align: center">
+								style="width:20%;text-align: center">
 								<p:outputLabel value="#{tema.tituloTema}" />
 							</p:column>
 
 							<p:column headerText="Descripción"
-								style="width:400px;text-align: center">
+								style="width:40%;text-align: center">
 								<p:outputLabel value="#{tema.descripcionTema}" />
 							</p:column>
 
 							<p:column headerText="Palabras Clave"
-								style="width:355px;text-align: center">
+								style="width:35%;text-align: center">
 								<p:outputLabel value="#{tema.palabrasClave}" />
 							</p:column>
 

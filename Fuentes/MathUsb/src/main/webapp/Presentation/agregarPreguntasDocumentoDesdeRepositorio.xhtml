@@ -36,9 +36,8 @@
 					<p:messages id="msg" />
 					<p:growl id="men" />
 
-					<p:layout style="min-height:400px;width:1000px">
-					
-						<p:layoutUnit position="west"   minSize="400">
+					<p:layout style="min-width:1000px;min-height:400px;">					
+						<p:layoutUnit position="west" minSize="400">
 							<h:panelGrid columns="3" id="panelGrid">
 								<h:outputLabel value="Palabra clave: " />
 								<p:inputText binding="#{preguntaView.txtPalabraClave}" />
@@ -60,13 +59,11 @@
 										update="@([id$=dtPreguntasTema])">
 										<f:attribute name="temaPreguntas" value="#{tema}" />
 									</p:commandButton>
-
 								</p:column>
-
 							</p:dataTable>
 						</p:layoutUnit>
 
-						<p:layoutUnit position="center">
+						<p:layoutUnit position="center" >
 							<p:dataTable id="dtPreguntasTema"
 							emptyMessage="Actualmente no hay preguntas"
 							value="#{preguntaView.lasPreguntasDadoTema}"
@@ -101,11 +98,8 @@
 						</p:dataTable>
 						</p:layoutUnit>
 					</p:layout>
-
-
-
+					
 				</h:form>
-
 			</f:view>
 		</ui:define>
 	</ui:composition>

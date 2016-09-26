@@ -80,72 +80,69 @@
 						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
 				</p:dialog>
 
-				<h:form id="formDialog" style="padding:0em 2em;min-width:800px;">
+				<h:form id="formDialog" class="formDialog">
 					<p:messages id="msg" />
 					<p:growl id="men" />
 					<p:fieldset legend="Crear nuevo documento" style="margin-bottom:2em;" toggleable="true"
 						collapsed="true" toggleSpeed="500">
-						<p:panel id="panelEvaluacion" header="Documento">
-							<h:panelGrid columns="2" id="panelGrid">
-								<h:outputLabel value="Asunto: " />
+						<p:panel id="panelEvaluacion" header="DOCUMENTO">
+							<h:panelGrid columns="2" id="panelGrid" cellspacing="2" style="width:100%">
+								<h:outputLabel value="Asunto:" for="txtAsunto" />
 								<p:inputTextarea id="txtAsunto" maxlength="2500"
 									placeholder="Título y descripción (opcional) para el documento"
-									autoResize="false" style="width:100%; height:100px"
+									autoResize="false" style="width:100%;height:100px"
 									binding="#{evaluacionView.txtAsunto}" />
 
-								<h:outputLabel value="Fecha de Inicio de Publicación: "
-									for="fechaInicio" style="margin:0.6em 0em;"/>
+								<h:outputLabel value="Fecha de Inicio de Publicación:" for="fechaInicio" />
 
-								<p:calendar id="fechaInicio"
+								<p:calendar id="fechaInicio" styleClass="pcalendar"
 									binding="#{evaluacionView.dateFechaInicioEvaluacion}"
-									placeholder="Fecha de Inicio de Publicación " size="32"
+									placeholder="Fecha de Inicio de Publicación" 
 									locale="es" navigator="true" pattern="yyyy-MM-dd" mask="true"
 									converterMessage="Fecha incorrecta">
 									<f:converter converterId="timestampConverter" />
 								</p:calendar>
 
-								<h:outputLabel value="Fecha de Finalizacion de Publicación: "
-									for="fechaFin" style="margin:0.6em 0em;"/>
+								<h:outputLabel value="Fecha de Finalizacion de Publicación:" for="fechaFin" />
 
-								<p:calendar id="fechaFin"
+								<p:calendar id="fechaFin" styleClass="pcalendar"
 									binding="#{evaluacionView.dateFechaFinEvaluacion}"
-									placeholder="Fecha de Finalizacion de Publicación  " size="32"
+									placeholder="Fecha de Finalizacion de Publicación"
 									locale="es" navigator="true" pattern="yyyy-MM-dd" mask="true"
 									converterMessage="Fecha incorrecta">
 									<f:converter converterId="timestampConverter" />
 								</p:calendar>
 
 								<h:outputLabel value="Corte: " style="margin-top:0.3em;" />
-								<p:selectOneMenu id="somCorte" style="width:250px"
+								<h:selectOneMenu id="somCorte" styleClass="selectpicker"
 									value="#{evaluacionView.somCortesString}">
 									<f:selectItem itemLabel="Seleccione un Corte" itemValue="0" />
 									<f:selectItems value="#{evaluacionView.losCortes}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
 
 								<h:outputLabel value="Tipo de Documento: " />
-								<p:selectOneMenu id="somTipoEva" style="width:250px"
+								<h:selectOneMenu id="somTipoEva" styleClass="selectpicker"
 									value="#{evaluacionView.somTiposDeEvaluacionString}">
 									<f:selectItem itemLabel="Seleccione el Tipo de Documento"
 										itemValue="0" />
 									<f:selectItems value="#{evaluacionView.losTiposDeEvaluacion}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
 
 								<h:outputLabel value="Grupo/Asignatura: " />
-								<p:selectOneMenu id="somGrupoAsignatura" style="width:500px"
+								<h:selectOneMenu id="somGrupoAsignatura" styleClass="selectpicker"
 									value="#{evaluacionView.somGrupoAsignaturaString}">
 									<f:selectItem
 										itemLabel="Seleccione el grupo donde pertenece el documento"
 										itemValue="0" />
 									<f:selectItems value="#{evaluacionView.losGruposAsignaturas}" />
-								</p:selectOneMenu>
-
+								</h:selectOneMenu>
 
 							</h:panelGrid>
 						</p:panel>
 						<p:panel id="panelBotones" style="border:none;">
 							<div align="center">
 								<p:commandButton id="btnSave" value="Guardar Documento"
-									style="background:#428bca;font-family:'Futura Bk BT';text-shadow:none;color:white;padding:3px 1px;"
+									style="background:rgb(169, 191, 194);padding:3px 1px;"
 									action="#{evaluacionView.guardarNuevaEvalucion}"
 									icon="ui-icon-disk"
 									update="panelEvaluacion,msg,panelBotones,panelMisEvaluaciones" />
@@ -155,7 +152,7 @@
 					<p:fieldset legend="Mis documentos" toggleable="true"
 						collapsed="true" toggleSpeed="500">
 						<p:panel id="panelMisEvaluaciones"
-							header="Estos son tus Documentos guardados" style="width:99%">
+							header="MIS DOCUMENTOS GUARDADOS" style="width:100%">
 							<p:dataTable id="tablaEvaluacionesDocente"
 								emptyMessage="Actualmente no hay documentos"
 								value="#{evaluacionView.lasEvaluacionesDelDocente}"
@@ -176,7 +173,7 @@
 									<p:outputLabel value="#{evaluacion.asunto}" />
 								</p:column>
 
-								<p:column headerText="Corte" style="width:5%;text-align: center">
+								<p:column headerText="Corte" style="width:7%;text-align: center">
 									<p:outputLabel value="#{evaluacion.corte}" />
 								</p:column>
 

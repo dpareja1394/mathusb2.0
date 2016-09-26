@@ -10,38 +10,47 @@
 		<body>
 			<f:view>
 				<ui:composition>
+					<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Raleway:400,700,800' />
 					<style>
 						div .jumbotron{
 							background-repeat: no-repeat;
-    						background-image: linear-gradient(rgb(190, 185, 190), rgb(169, 191, 194));    						
-						    background-position: center;
+    						background-image: linear-gradient(rgb(190, 185, 190), rgb(169, 191, 194));    					    
+						    background-position: center;						
 						    -webkit-background-size: cover;
 						    -moz-background-size: cover;
-						    background-size: cover;
+						    background-size: cover;						  
 							text-align: center;
+							overflow: hidden;
+							padding-top: 45px;
+							padding-bottom: 45px;
+							
 						}
 						.jumbotron .container img{
-							width:100px;
-							height:100px;
+							width: 100px;
+							height: 100px;
 						}
 						.jumbotron .container h1{
-							padding-top:5px;
-							margin-top:5px;					
+						  	font-family: 'Raleway', sans-serif !important;						  
+						  	font-weight: 600;						  	
+						  	letter-spacing: 4px;
+						  	font-size: 60px;
 						}
 						.jumbotron .container p{
 							font-size:18px;	
 							font-style: italic;				
 						}
+						
 					</style>
 					<!-- Beging header -->
 						<div class="jumbotron">
-					      <div class="container">	 
-		                	<img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logo-azul-md.png" />  		               
-		                	<h1>MathUSB</h1>		              				      
-				        	<p>El proyecto busca privilegiar el aprendizaje colaborativo, permitiendo una comunicacion directa docente a estudiantes y entre estudiantes.</p>
+					      <div class="container">	   		               
+		                	<img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/logo-azul-md.png" alt="" />
+		                	<h1>MATHUSB</h1>		              				      
+				        	<p>Aprendizaje colaborativo, comunicacion directa y efectiva.</p>
 				        	<h2>&#161;Hola, #{usuarioView.nombreUsuarioString}!</h2>
 					      </div>
     					</div>
+    						            
 					<!-- end header -->
 				</ui:composition>
 			</f:view>
