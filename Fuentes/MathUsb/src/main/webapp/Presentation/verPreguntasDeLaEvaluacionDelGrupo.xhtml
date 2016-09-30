@@ -109,28 +109,32 @@
 						style="width:99%">
 						<p:dataTable id="dtPreguntasEvaluacion"
 							emptyMessage="Actualmente no hay preguntas"
-							value="#{evaluacionView.preguntasEvaluacionEstudiante}"
+							value="#{evaluacionView.imagenes}"
 							var="pregunta">
-							<p:column headerText="Tema" style="width:35%;text-align: center">
-								<p:outputLabel value="#{pregunta.temaString}" />
+							<p:column headerText="Tema" >							
+								<p:outputLabel value="#{pregunta.tema}" />
 							</p:column>
-
-							<p:column headerText="Contenido"
-								style="width:7%;text-align: center">
-								<p:commandButton 
-									actionListener="#{preguntaView.ponerEnSessionPreguntaDocumento}"
-									title="Ver la pregunta"
-									value="Mostrar pregunta"
-									icon="ui-icon-help"
-									update="@([id$=imagenPreguntaDocumento])"
-									oncomplete="window.open('#{facesContext.externalContext.request.contextPath}/Presentation/ampliarPreguntaDocumento.xhtml','','toolbar=yes, scrollbars=yes, resizable=yes, top=300, left=200, width=800, height=100');">
-									<f:attribute name="preguntaDocMostrar" value="#{pregunta}" />
-								</p:commandButton>
+							<p:column headerText="Pregunta" >							
+								<p:graphicImage value="#{pregunta.rutaPregunta}"/>
 							</p:column>
+							<p:column headerText="Tipo de pregunta">
+								<p:outputLabel value="#{pregunta.tipoRespuesta}" />
+								</p:column>								
+							<p:column headerText="Respuestas Correcta">
+								<p:graphicImage value="#{pregunta.rutaRespuestaCorrecta}"/>
+							</p:column>
+							<p:column headerText="Respuestas 1">
+								<p:graphicImage value="#{pregunta.rutaRespuesta1}"/>
+								</p:column>
+							<p:column headerText="Respuestas 2">
+								<p:graphicImage value="#{pregunta.rutaRespuesta2}"/>
+								</p:column>
+							<p:column headerText="Respuestas 3">
+								<p:graphicImage value="#{pregunta.rutaRespuesta3}"/>
+								</p:column>
 						</p:dataTable>
-
-					</p:panel>
-
+						
+					</p:panel>					
 				</h:form>
 
 
