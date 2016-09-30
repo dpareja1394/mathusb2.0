@@ -33,7 +33,7 @@ import co.edu.usbcali.mathusb.utilities.SessionVariables;
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura/
  * www.zathuracode.org
- *
+ * cambiado
  */
 @ManagedBean
 @ViewScoped
