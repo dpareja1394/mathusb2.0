@@ -56,7 +56,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura/
  *         www.zathuracode.org
- *
+ *			cambiada
  */
 @ManagedBean
 @ViewScoped
@@ -103,6 +103,7 @@ public class EvaluacionView implements Serializable {
 	private String asuntoEvaluacion, fechaInicioEvaluacion, fechaFinEvaluacion, corteEvaluacion;
 	
 	private List<PreguntaDTO> lasPreguntasDeLaEvaluacion, preguntasEvaluacionEstudiante;
+	//imagenes
 	private List<TabImages> imagenes;
 	@ManagedProperty(value = "#{BusinessDelegatorView}")
 	private IBusinessDelegatorView businessDelegatorView;

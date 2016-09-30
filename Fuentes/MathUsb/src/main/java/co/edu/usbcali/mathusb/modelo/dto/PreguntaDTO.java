@@ -16,6 +16,7 @@ import java.util.Date;
 * www.zathuracode.org
 *
 */
+//imagenes
 public class PreguntaDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(PreguntaDTO.class);

@@ -86,7 +86,7 @@ import java.util.Set;
 /**
 * @author Zathura Code Generator http://code.google.com/p/zathura/
 * www.zathuracode.org
-*
+*	cambiada
 */
 public interface IBusinessDelegatorView {
     public List<Asignatura> getAsignatura() throws Exception;

@@ -18,7 +18,7 @@ import org.primefaces.model.StreamedContent;
 /**
 * @author Zathura Code Generator http://code.google.com/p/zathura
 * www.zathuracode.org
-*
+*	cambiada
 */
 public interface IPreguntaLogic {
     public List<Pregunta> getPregunta() throws Exception;

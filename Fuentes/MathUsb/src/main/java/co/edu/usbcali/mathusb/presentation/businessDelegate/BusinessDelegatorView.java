@@ -126,7 +126,7 @@ import java.util.Set;
 *
 * @author Zathura Code Generator http://code.google.com/p/zathura/
 * www.zathuracode.org
-*
+*	cambiada
 */
 @Scope("singleton")
 @Service("BusinessDelegatorView")

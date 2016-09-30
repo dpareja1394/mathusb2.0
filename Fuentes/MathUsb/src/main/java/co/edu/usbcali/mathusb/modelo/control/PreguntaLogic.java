@@ -42,7 +42,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Zathura Code Generator http://code.google.com/p/zathura
  *         www.zathuracode.org
- *
+ *	cambiada
  */
 @Scope("singleton")
 @Service("PreguntaLogic")
@@ -504,7 +504,7 @@ public class PreguntaLogic implements IPreguntaLogic {
 		}
 		return null;
 	}
-	
+	//imagenes
 	@Override
 	public File getStreamedContents(PreguntaDTO preguntaDTO,String nombre) throws Exception {
 		try {
