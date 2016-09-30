@@ -21,9 +21,14 @@ public class PreguntaDTO implements Serializable {
     private static final Logger log = LoggerFactory.getLogger(PreguntaDTO.class);
     private String descripcionPregunta;
     private Long pregId;
-    private Long temaId_Tema;
-    
-    private String temaString, perteneceAEvaluacion;
+    private Long temaId_Tema;    
+    private String temaString;
+    private String perteneceAEvaluacion;
+    private String tipoRespuesta;    
+	private String descripcionRespuestaCorrecta;
+	private String descripcionRespuesta1;
+	private String descripcionRespuesta2;
+	private String descripcionRespuesta3;
     private boolean perteneceALaEvaluacion;
     
 
@@ -73,5 +78,45 @@ public class PreguntaDTO implements Serializable {
 
 	public void setPerteneceALaEvaluacion(boolean perteneceALaEvaluacion) {
 		this.perteneceALaEvaluacion = perteneceALaEvaluacion;
+	}
+
+	public String getTipoRespuesta() {
+		return tipoRespuesta;
+	}
+
+	public void setTipoRespuesta(String tipoRespuesta) {
+		this.tipoRespuesta = tipoRespuesta;
+	}
+
+	public String getDescripcionRespuestaCorrecta() {
+		return descripcionRespuestaCorrecta;
+	}
+
+	public void setDescripcionRespuestaCorrecta(String descripcionRespuestaCorrecta) {
+		this.descripcionRespuestaCorrecta = descripcionRespuestaCorrecta;
+	}
+
+	public String getDescripcionRespuesta1() {
+		return descripcionRespuesta1;
+	}
+
+	public void setDescripcionRespuesta1(String descripcionRespuesta1) {
+		this.descripcionRespuesta1 = descripcionRespuesta1;
+	}
+
+	public String getDescripcionRespuesta2() {
+		return descripcionRespuesta2;
+	}
+
+	public void setDescripcionRespuesta2(String descripcionRespuesta2) {
+		this.descripcionRespuesta2 = descripcionRespuesta2;
+	}
+
+	public String getDescripcionRespuesta3() {
+		return descripcionRespuesta3;
+	}
+
+	public void setDescripcionRespuesta3(String descripcionRespuesta3) {
+		this.descripcionRespuesta3 = descripcionRespuesta3;
 	}
 }

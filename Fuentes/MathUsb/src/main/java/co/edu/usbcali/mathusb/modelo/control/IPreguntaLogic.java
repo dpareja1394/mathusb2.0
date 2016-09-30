@@ -4,6 +4,7 @@ import co.edu.usbcali.mathusb.modelo.Pregunta;
 import co.edu.usbcali.mathusb.modelo.dto.ComentarioDTO;
 import co.edu.usbcali.mathusb.modelo.dto.PreguntaDTO;
 
+import java.io.File;
 import java.math.BigDecimal;
 
 import java.util.*;
@@ -60,6 +61,8 @@ public interface IPreguntaLogic {
     public List<PreguntaDTO> consultarPreguntaDadoIdEval(Long evalId) throws Exception;
     
     public StreamedContent getStreamedContent(PreguntaDTO preguntaDTO) throws Exception;
+    
+    public File getStreamedContents(PreguntaDTO preguntaDTO,String nombre) throws Exception;
     
     public List<PreguntaDTO> consultarPreguntasDadoIdTema(Long temaId) throws Exception;
 }

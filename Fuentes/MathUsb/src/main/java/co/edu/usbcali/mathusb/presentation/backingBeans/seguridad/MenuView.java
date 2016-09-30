@@ -141,13 +141,13 @@ public class MenuView implements Serializable {
 		}
 		
 		//Para cerrar sesion
-		DefaultMenuItem salir = new DefaultMenuItem();
+		/*DefaultMenuItem salir = new DefaultMenuItem();
 		salir.setId("salir");
 		salir.setValue("Cerrar Sesión");
 		salir.setIcon("ui-icon-close");
 		salir.setCommand("#{menuView.action_exit()}");
 		salir.setRendered(true);
-		model.addElement(salir);
+		model.addElement(salir); */
 		
 	}
 	
@@ -158,7 +158,7 @@ public class MenuView implements Serializable {
 			context.redirect(context.getRequestContextPath()
 					+ "/" + SessionVariables.urlSalidaSpringSecurity);
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			log.error(e.getMessage()+"se ha cerrado la secion");
 		}
 
 		

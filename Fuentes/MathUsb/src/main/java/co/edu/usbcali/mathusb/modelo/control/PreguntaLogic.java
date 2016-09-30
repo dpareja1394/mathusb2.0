@@ -443,11 +443,16 @@ public class PreguntaLogic implements IPreguntaLogic {
 		}
 		List<Pregunta> listaPreguntasDadoEval = preguntaDAO.consultarPreguntaDadoIdEval(evalId);
 		List<PreguntaDTO> listaPreguntaDTO = new ArrayList<>();
-		for (Pregunta pregunta : listaPreguntasDadoEval) {
+		for (Pregunta pregunta : listaPreguntasDadoEval) {			
 			PreguntaDTO preguntaDTO = new PreguntaDTO();
 			preguntaDTO.setDescripcionPregunta(pregunta.getDescripcionPregunta());
 			preguntaDTO.setPregId(pregunta.getPregId());
 			preguntaDTO.setTemaId_Tema(pregunta.getTema().getTemaId());
+			preguntaDTO.setTipoRespuesta(pregunta.getTipoRespuesta());
+			preguntaDTO.setDescripcionRespuestaCorrecta(pregunta.getDescripcionRespuestaCorrecta());
+			preguntaDTO.setDescripcionRespuesta1(pregunta.getDescripcionRespuesta1());
+			preguntaDTO.setDescripcionRespuesta2(pregunta.getDescripcionRespuesta2());
+			preguntaDTO.setDescripcionRespuesta3(pregunta.getDescripcionRespuesta3());
 			Tema tema = logicTema1.getTema(pregunta.getTema().getTemaId());
 			preguntaDTO.setTemaString(tema.getTituloTema());
 			listaPreguntaDTO.add(preguntaDTO);
@@ -489,10 +494,57 @@ public class PreguntaLogic implements IPreguntaLogic {
 			StreamedContent streamedContent = new DefaultStreamedContent(bais, "image/jpeg");
 			fInput.delete();
 			fOutput.delete();
+			
 			return streamedContent;
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			log.info("hubo una falla");
+			log.error(e.getMessage());
+		}
+		return null;
+	}
+	
+	@Override
+	public File getStreamedContents(PreguntaDTO preguntaDTO,String nombre) throws Exception {
+		try {
+			log.info("Obteniendo StreamedContent a las: " + new Date());
+			Parametro ruta = parametroLogic.getParametroPorDescripcion("rutaImagenPreguntaForo");
+			String rutaString = ruta.getValorParametro();
+			
+			//Aquí se debe poner la ruta en un string
+			
+			File fInput = new File(rutaString+nombre+".html");
+			FileWriter fw = new FileWriter(fInput);
+			fw.write(preguntaDTO.getDescripcionPregunta());
+			fw.close();
+
+			File fOutput = new File(rutaString+nombre+".png");
+		
+			Converter converter = Converter.getInstance();
+
+			MutableLayoutContext params = new LayoutContextImpl(LayoutContextImpl.getDefaultLayoutContext());
+			params.setParameter(Parameter.MATHSIZE, 35f);
+
+			converter.convert(fInput, fOutput, "image/png", params);
+			
+			FileInputStream fis = new FileInputStream(fOutput);
+			byte[] bytes = new byte[(int) fOutput.length()];
+			fis.read(bytes);
+			ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
+			fis.close();
+
+
+			
+			//StreamedContent streamedContent = new DefaultStreamedContent(bais, "image/jpeg");
+			fInput.delete();
+			//fOutput.delete();
+			//return fInput;
+			return fOutput;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			log.info("hubo una falla");
 			log.error(e.getMessage());
 		}
 		return null;

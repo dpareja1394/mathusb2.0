@@ -2,6 +2,7 @@ package co.edu.usbcali.mathusb.presentation.backingBeans;
 
 import co.edu.usbcali.mathusb.exceptions.*;
 import co.edu.usbcali.mathusb.modelo.*;
+import co.edu.usbcali.mathusb.modelo.control.IParametroLogic;
 import co.edu.usbcali.mathusb.modelo.dto.ComentarioDTO;
 import co.edu.usbcali.mathusb.modelo.dto.DetalleEvaluacionDTO;
 import co.edu.usbcali.mathusb.modelo.dto.EvaluacionDTO;
@@ -10,6 +11,10 @@ import co.edu.usbcali.mathusb.modelo.dto.HerramientaDTO;
 import co.edu.usbcali.mathusb.modelo.dto.PreguntaDTO;
 import co.edu.usbcali.mathusb.presentation.businessDelegate.*;
 import co.edu.usbcali.mathusb.utilities.*;
+import net.sourceforge.jeuclid.MutableLayoutContext;
+import net.sourceforge.jeuclid.context.LayoutContextImpl;
+import net.sourceforge.jeuclid.context.Parameter;
+import net.sourceforge.jeuclid.converter.Converter;
 
 import org.primefaces.component.calendar.*;
 import org.primefaces.component.commandbutton.CommandButton;
@@ -20,9 +25,14 @@ import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.Serializable;
+import java.net.URL;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,6 +50,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -92,15 +103,40 @@ public class EvaluacionView implements Serializable {
 	private String asuntoEvaluacion, fechaInicioEvaluacion, fechaFinEvaluacion, corteEvaluacion;
 	
 	private List<PreguntaDTO> lasPreguntasDeLaEvaluacion, preguntasEvaluacionEstudiante;
-
+	private List<TabImages> imagenes;
 	@ManagedProperty(value = "#{BusinessDelegatorView}")
 	private IBusinessDelegatorView businessDelegatorView;
 	
 	private StreamedContent fileReporteGenerado;
-
+	
+	
+	
+	
 	public EvaluacionView() {
 		super();
+		
 	}
+	
+	
+	
+	public File contenido(String math,String nombre) throws Exception {
+		try 
+		{
+			
+			PreguntaDTO preguntaDocMostrar = new PreguntaDTO();
+			preguntaDocMostrar.setDescripcionPregunta(math);						
+			return businessDelegatorView.getStreamedContents(preguntaDocMostrar,nombre);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+			
+
+			
+	}
+ 	
+	
 
 	public void rowEventListener(RowEditEvent e) {
 		try {
@@ -990,6 +1026,7 @@ public class EvaluacionView implements Serializable {
 				EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session.getAttribute("evaluacionMostrar");
 				Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
 				lasPreguntasDeLaEvaluacion = businessDelegatorView.consultarPreguntaDadoIdEval(evaluacion.getEvalId());
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1010,6 +1047,7 @@ public class EvaluacionView implements Serializable {
 				EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session.getAttribute("preguntaDeEvaluacion");
 				Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
 				preguntasEvaluacionEstudiante = businessDelegatorView.consultarPreguntaDadoIdEval(evaluacion.getEvalId());
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1053,6 +1091,44 @@ public class EvaluacionView implements Serializable {
 
 	public void setFileReporteGenerado(StreamedContent fileReporteGenerado) {
 		this.fileReporteGenerado = fileReporteGenerado;
+	}
+	
+	
+	public List<TabImages> getImagenes() {
+		try
+		{
+			 //contador
+			int n = 1;
+			imagenes = new ArrayList<>();
+			//cambio la ubicacion del servelt
+			ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+			servletContext.getRealPath("/");
+			for(PreguntaDTO a:getPreguntasEvaluacionEstudiante())
+			{
+				//guardo las rutas de las imagenes
+				TabImages aux = new TabImages();
+				aux.setTema(a.getTemaString());
+				aux.setRutaPregunta("/images/img/"+contenido(a.getDescripcionPregunta(),"pregunta"+n).getName());	
+				aux.setTipoRespuesta(a.getTipoRespuesta());
+				aux.setRutaRespuestaCorrecta("/images/img/"+contenido(a.getDescripcionRespuestaCorrecta(),"respuestaC"+n).getName());
+				aux.setRutaRespuesta1("/images/img/"+contenido(a.getDescripcionRespuesta1(),"respuesta1"+n).getName());
+				aux.setRutaRespuesta2("/images/img/"+contenido(a.getDescripcionRespuesta2(),"respuesta2"+n).getName());
+				aux.setRutaRespuesta3("/images/img/"+contenido(a.getDescripcionRespuesta3(),"respuesta3"+n).getName());
+				imagenes.add(aux);
+				n++;
+			}
+			return imagenes;
+		}
+		catch (Exception e) 
+		{
+			
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void setImagenes(List<TabImages> imagenes) {
+		this.imagenes = imagenes;
 	}
 
 }

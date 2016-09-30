@@ -115,6 +115,10 @@ public class Pregunta  implements java.io.Serializable {
 		this.descripcionRespuesta3 = descripcionRespuesta3;
 	}
     
+	public String toString()
+	{
+		return tipoRespuesta+" "+descripcionRespuestaCorrecta;
+	}
 }
 
 

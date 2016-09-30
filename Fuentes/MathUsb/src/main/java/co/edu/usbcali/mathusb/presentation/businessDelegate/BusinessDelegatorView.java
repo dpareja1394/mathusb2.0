@@ -79,6 +79,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.Date;
@@ -1171,6 +1172,11 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	@Override
 	public StreamedContent getStreamedContent(PreguntaDTO preguntaDTO) throws Exception {
 		return preguntaLogic.getStreamedContent(preguntaDTO);
+	}
+	
+	@Override
+	public File getStreamedContents(PreguntaDTO preguntaDTO,String nombre) throws Exception {
+		return preguntaLogic.getStreamedContents(preguntaDTO,nombre);
 	}
 
 	@Override

@@ -76,6 +76,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -527,6 +528,7 @@ public interface IBusinessDelegatorView {
 	
 	public StreamedContent getStreamedContent(ComentarioDTO comentarioDTO) throws Exception;
 	
+	
 	public void responderPregunta(Comentario respuesta) throws Exception;
 	
 	public List<ComentarioDTO> obtenerLasRespuestasAUnaPreguntaDelForo(Long idPregunta) throws Exception;
@@ -538,6 +540,8 @@ public interface IBusinessDelegatorView {
 	public List<PreguntaDTO> consultarPreguntaDadoIdEval(Long evalId) throws Exception;
 	
 	public StreamedContent getStreamedContent(PreguntaDTO preguntaDTO) throws Exception;
+	
+	public File getStreamedContents(PreguntaDTO preguntaDTO,String nombre) throws Exception;
 	
 	public List<EvaluacionDTO> obtenerEvaluacionesDelGrupo(Long idGrupo) throws Exception;
 
