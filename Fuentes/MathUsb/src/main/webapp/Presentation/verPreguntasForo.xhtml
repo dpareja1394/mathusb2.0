@@ -40,15 +40,13 @@
 				</p:dialog>
 
 
-				<h:form id="formDialog" style="padding:0em 2em;">
+				<h:form id="formDialog" style="padding:0em 2.5em;">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
 
-
-					<p:panel id="panelLasPreguntas" header="Preguntas del Foro"
+					<p:panel id="panelLasPreguntas" header="PREGUNTAS DEL FORO"
 						style="width:100%">
-
 
 						<p:dataTable id="preguntasForo"
 							emptyMessage="Actualmente no hay preguntas"
@@ -59,7 +57,7 @@
 							</p:column>
 
 							<p:column headerText="Usuario que pregunta"
-								style="width:35%;text-align: center">
+								style="width:34%;text-align: center">
 								<p:outputLabel value="#{comentario.nombreUsuarioQueComenta}" />
 							</p:column>
 
@@ -74,7 +72,7 @@
 							</p:column>
 							
 							<p:column headerText="Respuestas"
-								style="width:10%;text-align: center">
+								style="width:11%;text-align: center">
 								<p:outputLabel value="#{comentario.cantidadRespuestas}" />
 							
 							</p:column>

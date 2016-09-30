@@ -84,20 +84,17 @@
 					<p:messages id="msg" />
 					<p:growl id="men" />
 					
-					<p:panel id="panelEvaluacionGrupoMostrar" header="Informacion del Grupo">
-						
+					<p:panel id="panelEvaluacionGrupoMostrar" header="INFORMACIÓN DEL GRUPO"
+						style="margin-bottom:5px">
 						<h:panelGrid columns="2" id="panelGrid">
-
-							<h:outputLabel value="Descripcion del Grupo: " />
-							<p:outputLabel value="#{grupoView.descripcionGrupo}" />							
-
-						</h:panelGrid>
-						
+							<h:outputLabel value="Descripción del grupo:" />
+							<p:outputLabel value="#{grupoView.descripcionGrupo}" 
+							 style="margin-left:3px" />
+						</h:panelGrid>						
 					</p:panel>					
 
 					<p:panel id="panelEvaluacionGrupo"
-						header="Documentos que contiene el grupo"
-						style="width:99%">
+						header="DOCUMENTOS QUE CONTIENE EL GRUPO" >
 						<p:dataTable id="dtEvaluacionGrupo"
 							emptyMessage="Actualmente no hay documentos"
 							value="#{evaluacionView.lasEvaluacionesDelGrupo}"

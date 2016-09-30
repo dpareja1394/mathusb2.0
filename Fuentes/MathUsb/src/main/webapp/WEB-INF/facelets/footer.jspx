@@ -7,15 +7,30 @@
 	<html>
 		<body>
 			<f:view>
-				<ui:composition>		
+				<ui:composition>	
+					<style>
+					#footer .container{
+						font-weight: 600;
+						font-family: 'Raleway', sans-serif;
+					}
+					#footer .container hr{
+						height: 2px;
+						padding: 0px;
+						margin: 0px;
+					}
+					#footer .container img{
+						margin: 5px;
+					}
+					#footer .container a{
+						color:#555;
+					}
+					</style>	
 					<div id="footer">
 				        <div class="container">
-				        	<hr style="padding:0px;margin:4px;" ></hr>
-				        	<img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png" alt="" />       
-		                    <br></br>
-		                    <a href="http://www.usbcali.edu.co/">Modificado por: Cristian Restrepo, Camilo Delgado, Jhonny Sarria</a>
+				        	<hr></hr>
+				        	<img src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/images/icon.png" alt="" />
 	                	    <br></br>
-	                	    <a href="http://www.usbcali.edu.co/">Desarrollado por: Juan David Bonilla C, Daniel Pareja L, Andres Felipe Vargas L</a>
+	                	    <a href="http://www.usbcali.edu.co/">Plataforma MATH USB, Desarrollado por Group Math USB</a>
 		                    <br></br>
 		                    <a href="http://www.wiris.com/es/editor">Editor de texto, Desarrollado por WIRIS</a>
 		      	        </div>

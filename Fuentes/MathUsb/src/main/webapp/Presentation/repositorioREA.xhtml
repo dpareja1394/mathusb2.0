@@ -31,33 +31,33 @@
 				</p:dialog>
 
 
-				<h:form id="formDialog" style="padding:0em 2em;">
+				<h:form id="formDialog" style="padding:0em 2.5em;">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
 					
 					<p:panel id="panelLasHerramientas"
-						header="Repositorio Educativo Abierto">
+						header="REPOSITORIO EDUCATIVO ABIERTO">
 						<p:dataTable id="tablasMisHerramientas"
 							emptyMessage="Actualmente no has creado herramientas" value="#{herramientaView.herramientasOrdenadas}"
 							var="herramienta">
 							<p:column headerText="Fecha publicación"
-								style="width:150px;text-align: center">
+								style="width:22%;text-align: center">
 								<p:outputLabel value="#{herramienta.fechaPublicacionString}" />
 							</p:column>
 
 							<p:column headerText="Descripcion Herramienta"
-								style="width:300px;text-align: center">
+								style="width:44%;text-align: center">
 								<p:outputLabel value="#{herramienta.descripcionHerramienta}" />
 							</p:column>
 
 							<p:column headerText="Usuario que publica"
-								style="width:200px;text-align: center">
+								style="width:27%;text-align: center">
 								<p:outputLabel value="#{herramienta.usuarioQuePublico}" />
 							</p:column>
 
 							<p:column headerText="Link"
-								style="width:30px;text-align: center">
+								style="width:7%;text-align: center">
 								<p:link value="Abrir enlace" target="_blank" href="#{herramienta.valorHerramienta}"/>
 							</p:column>
 							

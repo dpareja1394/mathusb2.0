@@ -57,18 +57,16 @@
 					<p:growl id="men" />
 					<p:panel id="agregarPreguntaEvaluacion"
 						header="Configuración pregunta">
-						<h:panelGrid columns="2" id="panelGrid">
+						<h:panelGrid columns="2" id="panelGrid" style="width:100%">
 							<h:outputLabel value="Tema: " />
-							<p:selectOneMenu id="somTemasString" style="width:300px"
+							<h:selectOneMenu id="somTemasString" class="selectpicker"
 								value="#{preguntaView.somTemasString}">
 								<f:selectItem itemLabel="Seleccione el tema de la pregunta"
 									itemValue="0" />
 								<f:selectItems value="#{preguntaView.losTemas}" />
-							</p:selectOneMenu>
-						</h:panelGrid>
-						<h:panelGrid columns="2" id="panelRespuesta">
+							</h:selectOneMenu>						
 							<h:outputLabel value="Tipo de respuesta: " />
-							<p:selectOneMenu id="somTipoRespuestaString" style="width:300px"
+							<h:selectOneMenu id="somTipoRespuestaString" class="selectpicker"
 								value="#{preguntaView.somTipoRespuestaString}">
 								<f:selectItem itemLabel="Seleccione el tipo de respuesta"
 									itemValue="0" />
@@ -77,7 +75,7 @@
 									itemValue="2" />
 								<p:ajax listener="#{preguntaView.onTipoRespuestaChange}"
 									update="tabs" oncomplete="addOn()"/>
-							</p:selectOneMenu>
+							</h:selectOneMenu>
 						</h:panelGrid>
 					</p:panel>
 					<p:tabView id="tabs" value="#{preguntaView.losTabs}" var="tab">
@@ -91,13 +89,12 @@
 					<p:inputText id="txtRespuesta2" binding="#{preguntaView.txtRespuesta2}" style="display: none;"/>
 					<p:inputText id="txtRespuesta3" binding="#{preguntaView.txtRespuesta3}" style="display: none;"/>
 					
-					<p:panel id="panelBotones">		
-									
+					<p:panel id="panelBotones">										
 						<p:commandButton value="Agregar pregunta al documento"
 						icon="ui-icon-plus" 
 						onclick="doGet()"					
 						action="#{preguntaView.registrarPregunta()}"/>
-						</p:panel>
+					</p:panel>
 				</h:form>
 				
 			</f:view>

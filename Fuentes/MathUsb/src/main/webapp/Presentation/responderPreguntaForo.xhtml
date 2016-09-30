@@ -30,14 +30,12 @@
 						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
 				</p:dialog>
 
-
-				<h:form id="formDialog">
+				<h:form id="formDialog" style="margin: 0 7%;">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
-					<p:panel id="panelVerPregunta" header="Pregunta">
+					<p:panel id="panelVerPregunta" header="PREGUNTA" style="margin-bottom:5px;">
 						<h:panelGrid columns="2" id="panelGrid">
-
 							<h:outputText value="Usuario que pregunta:" />
 							<p:outputLabel value="#{preguntaForoView.txtUsuarioQuePregunta}"
 								style="font-weight: bold;" />
@@ -47,19 +45,18 @@
 							<h:outputText value="Contenido de la pregunta: " />
 							<p:graphicImage id="imagenFormula"
 								value="#{preguntaForoView.image}" stream="true" cache="false" />
-
 						</h:panelGrid>
 						<h:panelGrid columns="2" header="Responder">
 
 						</h:panelGrid>
 					</p:panel>
 
-					<p:panel id="panelRespuestasPreguntaForo"
-						header="Respuestas de otros usuarios">
+					<p:panel id="panelRespuestasPreguntaForo" style="margin-bottom:5px;"
+						header="RESPUESTAS DE OTROS USUARIOS">
 						<p:dataTable id="respuestasPreguntaForo"
 							emptyMessage="Actualmente no hay respuestas"
 							value="#{preguntaForoView.lasRespuestasDeLaPregunta}"
-							var="respuesta">
+							var="respuesta" >
 							<p:column headerText="Título"
 								style="width:20%;text-align: center">
 								<p:outputLabel value="#{respuesta.tituloComentario}" />
@@ -82,20 +79,20 @@
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>
-
 					</p:panel>
 
-					<p:panel id="panelResponder" header="Respuesta" >
-						<h:outputLabel value="Título respuesta: " />
-						<p:inputText id="txtTituloRespuestaForo"
-							style="width:54%"
-							binding="#{preguntaForoView.txtTituloRespuestaForo}" />
-						<p:commandButton id="btnPreguntar"
-							action="#{preguntaForoView.responderPregunta()}"
-							style="background:#428bca;font-family:'Futura Bk BT';text-shadow:none;color:white;padding:3px 1px;"
-							onclick="doGet()" value="Responder Pregunta" icon="ui-icon-check"
-							update="panelResponder, panelVerPregunta, txtContenidoRespuesta, panelRespuestasPreguntaForo, respuestasPreguntaForo, @([id$=editorRespuestaContainer])" />
-						<div style="height: 480px;" id="editorRespuestaContainer"></div>
+					<p:panel id="panelResponder" header="RESPUESTA">
+						<h:panelGrid columns="3">
+							<h:outputLabel value="Título respuesta:" />
+							<p:inputText id="txtTituloRespuestaForo"
+								binding="#{preguntaForoView.txtTituloRespuestaForo}" />
+							<p:commandButton id="btnPreguntar"
+								action="#{preguntaForoView.responderPregunta()}"
+								style="background:rgb(169, 191, 194);padding:3px 1px;"
+								onclick="doGet()" value="Responder Pregunta" icon="ui-icon-check"
+								update="panelResponder, panelVerPregunta, txtContenidoRespuesta, panelRespuestasPreguntaForo, respuestasPreguntaForo, @([id$=editorRespuestaContainer])" />
+						</h:panelGrid>						
+						<div style="height: 430px;" id="editorRespuestaContainer"></div>
 						<p:inputText id="txtContenidoRespuesta"
 							binding="#{preguntaForoView.txtContenidoRespuesta}"
 							style="width:100%" />
