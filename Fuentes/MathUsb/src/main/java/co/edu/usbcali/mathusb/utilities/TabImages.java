@@ -11,7 +11,7 @@ public class TabImages implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	///campos imagenes
 	private String tema;
 	private String rutaPregunta;
 	private String tipoRespuesta; 
