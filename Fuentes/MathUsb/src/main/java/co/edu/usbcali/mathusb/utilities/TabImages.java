@@ -2,6 +2,7 @@ package co.edu.usbcali.mathusb.utilities;
 
 import java.io.Serializable;
 
+import org.primefaces.component.panel.Panel;
 import org.primefaces.model.StreamedContent;
 
 public class TabImages implements Serializable {
@@ -15,12 +16,11 @@ public class TabImages implements Serializable {
 	private String tema;
 	private String rutaPregunta;
 	private String tipoRespuesta; 
-	private String rutaRespuestaCorrecta;
 	private String rutaRespuesta1;
     private String rutaRespuesta2;
 	private String rutaRespuesta3;
-    
-	
+	private String rutaRespuesta4;
+	private String titulo;
 	
 	public String getRutaPregunta() {
 		return rutaPregunta;
@@ -40,12 +40,6 @@ public class TabImages implements Serializable {
 	public void setTipoRespuesta(String tipoRespuesta) {
 		this.tipoRespuesta = tipoRespuesta;
 	}
-	public String getRutaRespuestaCorrecta() {
-		return rutaRespuestaCorrecta;
-	}
-	public void setRutaRespuestaCorrecta(String rutaRespuestaCorrecta) {
-		this.rutaRespuestaCorrecta = rutaRespuestaCorrecta;
-	}
 	public String getRutaRespuesta1() {
 		return rutaRespuesta1;
 	}
@@ -64,5 +58,16 @@ public class TabImages implements Serializable {
 	public void setRutaRespuesta3(String rutaRespuesta3) {
 		this.rutaRespuesta3 = rutaRespuesta3;
 	}
-	
+	public String getRutaRespuesta4() {
+		return rutaRespuesta4;
+	}
+	public void setRutaRespuesta4(String rutaRespuesta4) {
+		this.rutaRespuesta4 = rutaRespuesta4;
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 }

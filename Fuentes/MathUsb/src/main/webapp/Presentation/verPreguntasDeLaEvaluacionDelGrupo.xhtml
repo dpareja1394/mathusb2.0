@@ -61,7 +61,37 @@
 					function hideStatus() {
 						statusDialog.hide();
 					}
+				</script>	
+				<script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
+				<script>
+					var editor = [];
+					window.onload = function() {
+						var z = document.getElementsByClassName('ui-tabs-panels');
+						var x = z[0].getElementsByClassName('ui-tabs-panel');
+						var y = z[0].getElementsByClassName('ui-panel-content');
+						for(var i=0;i!=x.length;i++){
+							var tipoRespuesta = x[i].lastChild.innerHTML;
+							if(tipoRespuesta=="1"){
+								editor[i] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+							}
+						}
+						for(var i=0;i!=x.length;i++){
+							var tipoRespuesta = x[i].lastChild.innerHTML;
+							if(tipoRespuesta=="1"){
+								editor[i].insertInto(y[i]);
+							}
+						}
+					}
+					function doGet() {
+						document.getElementById('formDialog:txtPregunta').value = editor[0].getMathML();
+						document.getElementById('formDialog:txtRespuestaCorrecta').value = editor[1].getMathML();
+						document.getElementById('formDialog:txtRespuesta1').value = editor[2].getMathML();
+						document.getElementById('formDialog:txtRespuesta2').value = editor[3].getMathML();
+						document.getElementById('formDialog:txtRespuesta3').value = editor[4].getMathML();
+						//window.onload();
+					}
 				</script>
+				
 				<p:ajaxStatus onstart="PF('statusDialog').show()"
 					onsuccess="PF('statusDialog').hide()" />
 				<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
@@ -103,38 +133,33 @@
 
 						</h:panelGrid>
 					</p:panel>					
-
 					<p:panel id="panelPreguntasEvaluacion"
 						header="Preguntas que contiene la evaluacion"
-						style="width:98%">
-						<p:dataTable id="dtPreguntasEvaluacion"
-							emptyMessage="Actualmente no hay preguntas"
-							value="#{evaluacionView.imagenes}"
-							var="pregunta">
-							<p:column headerText="Tema" >							
-								<p:outputLabel value="#{pregunta.tema}" />
-							</p:column>
-							<p:column headerText="Pregunta" >							
-								<p:graphicImage value="#{pregunta.rutaPregunta}"/>
-							</p:column>
-							<p:column headerText="Tipo de pregunta">
-								<p:outputLabel value="#{pregunta.tipoRespuesta}" />
-								</p:column>								
-							<p:column headerText="Respuestas Correcta">
-								<p:graphicImage value="#{pregunta.rutaRespuestaCorrecta}"/>
-							</p:column>
-							<p:column headerText="Respuestas 1">
-								<p:graphicImage value="#{pregunta.rutaRespuesta1}"/>
-								</p:column>
-							<p:column headerText="Respuestas 2">
-								<p:graphicImage value="#{pregunta.rutaRespuesta2}"/>
-								</p:column>
-							<p:column headerText="Respuestas 3">
-								<p:graphicImage value="#{pregunta.rutaRespuesta3}"/>
-								</p:column>
-						</p:dataTable>
-						
-					</p:panel>					
+						style="width:99%">
+						<p:tabView id="tabs" value="#{evaluacionView.imagenes}" var="tab">
+							<p:tab title="#{tab.titulo}">
+								<p:inputText style="display:none"></p:inputText>
+								<h:outputLabel value="Tema: "/>
+								<p:outputLabel value="#{tab.tema}" /><br/>
+								<h:outputLabel value="Pregunta: "/>
+								<p:graphicImage value="#{tab.rutaPregunta}" stream="true" cache="false"/>
+								<p:panel>
+									<p:panelGrid columns="1">
+										<p:graphicImage value="#{tab.rutaRespuesta1}" stream="true" cache="false"/><br/>
+										<p:graphicImage value="#{tab.rutaRespuesta2}" stream="true" cache="false"/><br/>
+										<p:graphicImage value="#{tab.rutaRespuesta3}" stream="true" cache="false"/><br/>
+										<p:graphicImage value="#{tab.rutaRespuesta4}" stream="true" cache="false"/><br/>
+									</p:panelGrid>
+								</p:panel>
+								<p:outputLabel value="#{tab.tipoRespuesta}" style="display:none"/>
+							</p:tab>
+						</p:tabView>
+					</p:panel>
+					<p:panel id="panelBotones">		
+						<p:commandButton value="Guardar respuestas" icon="ui-icon-plus"  onclick="doGet()"
+						action="#{preguntaView.guardarRespuestas}"
+						/>
+					</p:panel>		
 				</h:form>
 
 

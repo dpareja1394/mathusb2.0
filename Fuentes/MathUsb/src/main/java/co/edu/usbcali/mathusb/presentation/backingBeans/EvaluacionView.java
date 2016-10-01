@@ -37,6 +37,8 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -1099,24 +1101,30 @@ public class EvaluacionView implements Serializable {
 		try
 		{
 			 //contador
-			int n = 1;
 			imagenes = new ArrayList<>();
 			//cambio la ubicacion del servelt
 			ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 			servletContext.getRealPath("/");
-			for(PreguntaDTO a:getPreguntasEvaluacionEstudiante())
+			for(int i=1;i<getPreguntasEvaluacionEstudiante().size()+1;i++)
 			{
+				PreguntaDTO a = getPreguntasEvaluacionEstudiante().get(i-1);
 				//guardo las rutas de las imagenes
 				TabImages aux = new TabImages();
+				aux.setTitulo("Pregunta " + (i));
 				aux.setTema(a.getTemaString());
-				aux.setRutaPregunta("/images/img/"+contenido(a.getDescripcionPregunta(),"pregunta"+n).getName());	
+				aux.setRutaPregunta("/images/img/"+contenido(a.getDescripcionPregunta(),"pregunta"+i).getName());	
 				aux.setTipoRespuesta(a.getTipoRespuesta());
-				aux.setRutaRespuestaCorrecta("/images/img/"+contenido(a.getDescripcionRespuestaCorrecta(),"respuestaC"+n).getName());
-				aux.setRutaRespuesta1("/images/img/"+contenido(a.getDescripcionRespuesta1(),"respuesta1"+n).getName());
-				aux.setRutaRespuesta2("/images/img/"+contenido(a.getDescripcionRespuesta2(),"respuesta2"+n).getName());
-				aux.setRutaRespuesta3("/images/img/"+contenido(a.getDescripcionRespuesta3(),"respuesta3"+n).getName());
+				List<String> respuestas = new ArrayList<>();
+				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuestaCorrecta(),"respuestaC"+i).getName());
+				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta1(),"respuesta1"+i).getName());
+				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta2(),"respuesta2"+i).getName());
+				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta3(),"respuesta3"+i).getName());
+				Collections.shuffle(respuestas);
+				aux.setRutaRespuesta1(respuestas.get(0));
+				aux.setRutaRespuesta2(respuestas.get(1));
+				aux.setRutaRespuesta3(respuestas.get(2));
+				aux.setRutaRespuesta4(respuestas.get(3));
 				imagenes.add(aux);
-				n++;
 			}
 			return imagenes;
 		}
