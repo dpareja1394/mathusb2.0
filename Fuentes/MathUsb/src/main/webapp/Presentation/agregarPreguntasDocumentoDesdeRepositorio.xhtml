@@ -36,20 +36,13 @@
 					<p:messages id="msg" />
 					<p:growl id="men" />
 
-					<p:layout style="min-width:1000px;min-height:400px;">					
-						<p:layoutUnit position="west" minSize="400">
-							<h:panelGrid columns="3" id="panelGrid">
-								<h:outputLabel value="Palabra clave: " />
-								<p:inputText binding="#{preguntaView.txtPalabraClave}" />
-								<p:commandButton value="Buscar" icon="ui-icon-search"
-									action="#{preguntaView.obtenerTemasPorPalabraClave}"
-									update="@([id$=temasRepositorioPreguntas]), @([id$=tablaTemas])" />
-							</h:panelGrid>
+						<div style="display:block;">
+						<p:panel style="width:35%;height:500px;float:left;">							
 							<p:dataTable id="tablaTemas"
 								emptyMessage="Actualmente no hay temas"
-								value="#{preguntaView.temasRepositorioPreguntas}" var="tema">
+								value="#{preguntaView.temasRepositorioPreguntas}" var="tema" scrollable="true" scrollHeight="400">
 								<p:column headerText="Título tema"
-									style="width:70%; text-align: center;">
+									style="width:70%; text-align: center;" filterBy="#{tema.tituloTema}" filterMatchMode="contains">
 									<p:outputLabel value="#{tema.tituloTema}" />
 								</p:column>
 								<p:column headerText="Acciones" style="width:30%;">
@@ -59,21 +52,24 @@
 										update="@([id$=dtPreguntasTema])">
 										<f:attribute name="temaPreguntas" value="#{tema}" />
 									</p:commandButton>
-								</p:column>
-							</p:dataTable>
-						</p:layoutUnit>
 
-						<p:layoutUnit position="center" >
+								</p:column>
+
+							</p:dataTable>
+						</p:panel>
+
+						<p:panel style="width:65%;height:500px;float:right;">
+						
 							<p:dataTable id="dtPreguntasTema"
 							emptyMessage="Actualmente no hay preguntas"
 							value="#{preguntaView.lasPreguntasDadoTema}"
-							var="pregunta">
-							<p:column headerText="Tema" style="width:35%;text-align: center">
+							var="pregunta" scrollable="true" scrollHeight="400">
+							<p:column headerText="Tema" style="width:35%;text-align: center" >
 								<p:outputLabel value="#{pregunta.temaString}" />
 							</p:column>
 
 							<p:column headerText="Contenido"
-								style="width:7%;text-align: center">
+								style="text-align: center">
 								<p:commandButton 
 									actionListener="#{preguntaView.ponerEnSessionPreguntaDocumento}"
 									title="Ver la pregunta"
@@ -84,7 +80,7 @@
 								</p:commandButton>
 							</p:column>
 							<p:column headerText="Pertenece al documento"
-								style="width:7%;text-align: center">
+								style="text-align: center">
 								<p:commandButton 
 									disabled="#{pregunta.perteneceALaEvaluacion}"
 									actionListener="#{preguntaView.agregarPreguntaEvaluacionDesdeRepositorio}"
@@ -96,10 +92,13 @@
 								</p:commandButton>
 							</p:column>
 						</p:dataTable>
-						</p:layoutUnit>
-					</p:layout>
-					
+						</p:panel>
+						</div>
+
+
+
 				</h:form>
+
 			</f:view>
 		</ui:define>
 	</ui:composition>

@@ -113,7 +113,7 @@
 				<h:form id="formDialog">
 					<p:messages id="msg" />
 					<p:growl id="men" />
-					<p:panel id="panelEvaluacionMostrar" header="Documento">
+					<p:panel id="panelEvaluacionMostrar" header="Documento" style="width:1000px">
 						
 						<h:panelGrid columns="2" id="panelGrid">
 
@@ -135,8 +135,8 @@
 					</p:panel>					
 					<p:panel id="panelPreguntasEvaluacion"
 						header="Preguntas que contiene la evaluacion"
-						style="width:99%">
-						<p:tabView id="tabs" value="#{evaluacionView.imagenes}" var="tab">
+						style="width:1000px">
+						<p:tabView id="tabs" value="#{evaluacionView.imagenes}" var="tab" scrollable="true">
 							<p:tab title="#{tab.titulo}">
 								<p:inputText style="display:none"></p:inputText>
 								<h:outputLabel value="Tema: "/>
@@ -144,11 +144,28 @@
 								<h:outputLabel value="Pregunta: "/>
 								<p:graphicImage value="#{tab.rutaPregunta}" stream="true" cache="false"/>
 								<p:panel>
-									<p:panelGrid columns="1">
-										<p:graphicImage value="#{tab.rutaRespuesta1}" stream="true" cache="false"/><br/>
-										<p:graphicImage value="#{tab.rutaRespuesta2}" stream="true" cache="false"/><br/>
-										<p:graphicImage value="#{tab.rutaRespuesta3}" stream="true" cache="false"/><br/>
-										<p:graphicImage value="#{tab.rutaRespuesta4}" stream="true" cache="false"/><br/>
+								<p:selectOneRadio id="customRadio" layout="custom">
+            						<f:selectItem itemLabel="A)" itemValue="0" />
+            						<f:selectItem itemLabel="B)" itemValue="1" />
+            						<f:selectItem itemLabel="C)" itemValue="2" />
+            						<f:selectItem itemLabel="D)" itemValue="3" />
+       							</p:selectOneRadio>
+									<p:panelGrid columns="3" cellpadding="5">
+										<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
+            							<h:outputLabel for="opt1" value="A)" />
+										<p:graphicImage value="#{tab.rutaRespuesta1}" stream="true" cache="false"/>
+										
+										<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
+            							<h:outputLabel for="opt2" value="B)" />
+										<p:graphicImage value="#{tab.rutaRespuesta2}" stream="true" cache="false"/>
+										
+										<p:radioButton id="opt3" for="customRadio" itemIndex="2" />
+            							<h:outputLabel for="opt3" value="C)" />
+										<p:graphicImage value="#{tab.rutaRespuesta3}" stream="true" cache="false"/>
+										
+										<p:radioButton id="opt4" for="customRadio" itemIndex="3" />
+            							<h:outputLabel for="opt4" value="D)" />
+										<p:graphicImage value="#{tab.rutaRespuesta4}" stream="true" cache="false"/>
 									</p:panelGrid>
 								</p:panel>
 								<p:outputLabel value="#{tab.tipoRespuesta}" style="display:none"/>
