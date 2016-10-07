@@ -89,11 +89,14 @@
 					<p:inputText id="txtRespuesta2" binding="#{preguntaView.txtRespuesta2}" style="display: none;"/>
 					<p:inputText id="txtRespuesta3" binding="#{preguntaView.txtRespuesta3}" style="display: none;"/>
 					
-					<p:panel id="panelBotones">										
+					<p:panel id="panelBotones" style="border:none;background:transparent">
+						<div align="center">										
 						<p:commandButton value="Agregar pregunta al documento"
 						icon="ui-icon-plus" 
+						style="padding: 3px 1px"
 						onclick="doGet()"					
 						action="#{preguntaView.registrarPregunta()}"/>
+						</div>
 					</p:panel>
 				</h:form>
 				

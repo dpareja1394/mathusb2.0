@@ -31,15 +31,16 @@
 				</p:dialog>
 
 
-				<h:form id="formDialog">
+				<h:form id="formDialog" class="formDialog">
 					<p:messages id="msg" autoUpdate="true" showDetail="false"
 						closable="true" />
 					<p:growl id="men" autoUpdate="true" showDetail="false" />
-					<p:panel id="panelModificarPregunta" header="Pregunta">
-						<h:panelGrid columns="2" id="panelGrid">
+					<p:panel id="panelModificarPregunta" header="PREGUNTA" style="margin-bottom:5px;">
+						<h:panelGrid columns="2" id="panelGrid" style="width:100%;">
 
 							<h:outputText value="Título de la pregunta: " />
-							<p:inputText binding="#{preguntaForoView.txtTituloPreguntaModificar}" style="width:300px;"/>
+							<p:inputText binding="#{preguntaForoView.txtTituloPreguntaModificar}"
+							 style="width:100%;"/>
 							
 							<h:outputText value="Contenido de la pregunta: " />
 							<p:graphicImage id="imagenFormula"
@@ -51,16 +52,18 @@
 						</h:panelGrid>
 					</p:panel>
 
-					<p:panel id="panelModificar" header="Respuesta"
+					<p:panel id="panelModificar" header="RESPUESTA"
 						style="height:600px">
+						<div align="center">
 						<p:commandButton id="btnModificar"
 							action="#{preguntaForoView.modificarPregunta()}"
 							onclick="doGet()" value="Modificar Pregunta" icon="ui-icon-check"
 							update="panelModificar, panelModificarPregunta, txtContenidoPreguntaModificar" />
+						</div>
 						<div style="height: 480px;" id="editorRespuestaContainer"></div>
 						<p:inputText id="txtContenidoPreguntaModificar"
 							binding="#{preguntaForoView.txtContenidoPreguntaModificar}"
-							style="width: 1000px" />
+							 style="width:100%" />
 						<script
 							src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
 						<script type="text/javascript">

@@ -61,7 +61,13 @@
 					function hideStatus() {
 						statusDialog.hide();
 					}
-				</script>
+				</script>	
+				<style>
+					.ui-panelgrid>*>tr,
+					.ui-panelgrid .ui-panelgrid-cell {					       
+					    font-size: 13px;     			
+					}
+				</style>		
 				<p:ajaxStatus onstart="PF('statusDialog').show()"
 					onsuccess="PF('statusDialog').hide()" />
 				<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
@@ -83,23 +89,21 @@
 				<h:form id="formDialog">
 					<p:messages id="msg" />
 					<p:growl id="men" />
-					<p:panel id="panelEvaluacionMostrar" header="Documento">
+					<p:panel id="panelEvaluacionMostrar" header="DOCUMENTO">
 						<p:commandButton value="Refrescar"
+							style="background:rgb(169, 191, 194); float:right"
 							action="#{evaluacionView.refrescarPantalla()}"
 							update="@([id$=panelPreguntasEvaluacion]), @([id$=dtPreguntasEvaluacion])"
-							icon="ui-icon-refresh" />
-						<h:panelGrid columns="2" id="panelGrid">
-
+							icon="ui-icon-refresh" />						
+						<p:panelGrid columns="2" id="panelGrid">
 							<h:outputLabel value="Asunto: " />
 							<p:outputLabel value="#{evaluacionView.asuntoString}" />
 
 							<h:outputLabel value="Fecha de Inicio de Publicación: " />
 							<p:outputLabel value="#{evaluacionView.fechaInicioString}" />
 
-
 							<h:outputLabel value="Fecha de Finalizacion de Publicación: " />
 							<p:outputLabel value="#{evaluacionView.fechaFinString}" />
-
 
 							<h:outputLabel value="Corte: " />
 							<p:outputLabel value="#{evaluacionView.corteString}" />
@@ -108,26 +112,25 @@
 							<p:outputLabel value="#{evaluacionView.tipoEvaluacionString}" />
 
 							<h:outputLabel value="Grupo/Asignatura: " />
-							<p:outputLabel value="#{evaluacionView.grupoAsignaturaString}" />
-
-
-
-						</h:panelGrid>
+							<p:outputLabel value="#{evaluacionView.grupoAsignaturaString}" />							
+						</p:panelGrid>
 					</p:panel>
-					<p:panel id="panelBotones">
+					<p:panel id="panelBotones" style="border:none;background:transparent">
 						<div align="center">
 							<p:commandButton id="btnAgregarPregunta" value="Agregar Pregunta"
+								style="padding:3px 0px;"
 								onclick="window.open('#{facesContext.externalContext.request.contextPath}/Presentation/agregarPreguntasEvaluacion.xhtml','','toolbar=yes, scrollbars=yes, resizable=yes, top=5, left=200, width=800, height=660');"
 								icon="ui-icon-plus" update="@([id$=panelPreguntasEvaluacion]), @([id$=dtPreguntasEvaluacion])" />
 							<p:commandButton id="btnAgregarPreguntaDesdeTemas" value="Buscar preguntas en el repositorio"
+								style="margin-left:6px;padding:3px 0px;"
 								onclick="window.open('#{facesContext.externalContext.request.contextPath}/Presentation/agregarPreguntasDocumentoDesdeRepositorio.xhtml','','toolbar=yes, scrollbars=yes, resizable=yes, top=5, left=50, width=1000, height=660');"
 								icon="ui-icon-plus" update="@([id$=panelPreguntasEvaluacion]), @([id$=dtPreguntasEvaluacion])" />
 						</div>
 					</p:panel>
 
 					<p:panel id="panelPreguntasEvaluacion"
-						header="Estas son las preguntas que contiene el documento"
-						style="width:99%">
+						header="PREGUNTAS QUE CONTIENE EL DOCUMENTO"
+						style="width:100%">
 						<p:dataTable id="dtPreguntasEvaluacion"
 							emptyMessage="Actualmente no hay preguntas"
 							value="#{evaluacionView.lasPreguntasDeLaEvaluacion}"
