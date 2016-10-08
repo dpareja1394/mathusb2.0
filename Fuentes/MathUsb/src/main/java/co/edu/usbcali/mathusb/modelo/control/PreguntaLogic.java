@@ -453,6 +453,7 @@ public class PreguntaLogic implements IPreguntaLogic {
 			preguntaDTO.setDescripcionRespuesta1(pregunta.getDescripcionRespuesta1());
 			preguntaDTO.setDescripcionRespuesta2(pregunta.getDescripcionRespuesta2());
 			preguntaDTO.setDescripcionRespuesta3(pregunta.getDescripcionRespuesta3());
+			preguntaDTO.setDescripcionRespuesta4(pregunta.getDescripcionRespuesta4());
 			Tema tema = logicTema1.getTema(pregunta.getTema().getTemaId());
 			preguntaDTO.setTemaString(tema.getTituloTema());
 			listaPreguntaDTO.add(preguntaDTO);
@@ -537,7 +538,7 @@ public class PreguntaLogic implements IPreguntaLogic {
 
 			
 			//StreamedContent streamedContent = new DefaultStreamedContent(bais, "image/jpeg");
-			fInput.delete();
+			//fInput.delete();
 			//fOutput.delete();
 			//return fInput;
 			return fOutput;

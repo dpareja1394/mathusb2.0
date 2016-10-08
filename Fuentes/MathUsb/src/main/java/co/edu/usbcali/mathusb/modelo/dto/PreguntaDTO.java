@@ -30,6 +30,7 @@ public class PreguntaDTO implements Serializable {
 	private String descripcionRespuesta1;
 	private String descripcionRespuesta2;
 	private String descripcionRespuesta3;
+	private String descripcionRespuesta4;
     private boolean perteneceALaEvaluacion;
     
 
@@ -119,5 +120,13 @@ public class PreguntaDTO implements Serializable {
 
 	public void setDescripcionRespuesta3(String descripcionRespuesta3) {
 		this.descripcionRespuesta3 = descripcionRespuesta3;
+	}
+
+	public String getDescripcionRespuesta4() {
+		return descripcionRespuesta4;
+	}
+
+	public void setDescripcionRespuesta4(String descripcionRespuesta4) {
+		this.descripcionRespuesta4 = descripcionRespuesta4;
 	}
 }

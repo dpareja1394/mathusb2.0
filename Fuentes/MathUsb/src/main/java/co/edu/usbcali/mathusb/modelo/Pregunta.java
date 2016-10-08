@@ -18,13 +18,14 @@ public class Pregunta  implements java.io.Serializable {
 	 private String descripcionRespuesta1;
 	 private String descripcionRespuesta2;
 	 private String descripcionRespuesta3;
+	 private String descripcionRespuesta4;
      private String tipoRespuesta;
      private Set<EvaPregRes> evaPregReses = new HashSet<EvaPregRes>(0);
      
    public Pregunta(){} 
    
     public Pregunta(Tema tema, String descripcionPregunta, String descripcionRespuestaCorrecta,
-			String descripcionRespuesta1, String descripcionRespuesta2, String descripcionRespuesta3,
+			String descripcionRespuesta1, String descripcionRespuesta2, String descripcionRespuesta3,String descripcionRespuesta4,
 			String tipoRespuesta) {
 		this.tema = tema;
 		this.descripcionPregunta = descripcionPregunta;
@@ -32,6 +33,7 @@ public class Pregunta  implements java.io.Serializable {
 		this.descripcionRespuesta1 = descripcionRespuesta1;
 		this.descripcionRespuesta2 = descripcionRespuesta2;
 		this.descripcionRespuesta3 = descripcionRespuesta3;
+		this.descripcionRespuesta4 = descripcionRespuesta4;
 		this.tipoRespuesta = tipoRespuesta;
 	}
 
@@ -118,6 +120,14 @@ public class Pregunta  implements java.io.Serializable {
 	public String toString()
 	{
 		return tipoRespuesta+" "+descripcionRespuestaCorrecta;
+	}
+
+	public String getDescripcionRespuesta4() {
+		return descripcionRespuesta4;
+	}
+
+	public void setDescripcionRespuesta4(String descripcionRespuesta4) {
+		this.descripcionRespuesta4 = descripcionRespuesta4;
 	}
 }
 

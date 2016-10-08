@@ -67,7 +67,7 @@ public class PreguntaView implements Serializable {
 	private PreguntaDTO selectedPregunta;
 	private Pregunta entity;
 	private boolean showDialog;
-	private InputText txtPregunta, txtRespuestaCorrecta, txtRespuesta1, txtRespuesta2, txtRespuesta3;
+	private InputText txtPregunta, txtRespuestaCorrecta, txtRespuesta1, txtRespuesta2,txtRespuesta3,txtRespuesta4;
 	private String puta = "perra";
 	private InputText txtPalabraClave;
 	@ManagedProperty(value = "#{BusinessDelegatorView}")
@@ -93,6 +93,7 @@ public class PreguntaView implements Serializable {
 		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta1"));
 		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta2"));
 		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta3"));
+		respuestaMultiple.add(new Tab("Respuesta errada", "panelRespuesta4"));
 		
 	}
 
@@ -558,6 +559,7 @@ public class PreguntaView implements Serializable {
 			pregunta.setDescripcionRespuesta1(FacesUtils.checkString(txtRespuesta1));
 			pregunta.setDescripcionRespuesta2(FacesUtils.checkString(txtRespuesta2));
 			pregunta.setDescripcionRespuesta3(FacesUtils.checkString(txtRespuesta3));
+			pregunta.setDescripcionRespuesta4(FacesUtils.checkString(txtRespuesta4));
 			pregunta.setTipoRespuesta(somTipoRespuestaString);
 			pregunta.setTema(businessDelegatorView.getTema(Long.parseLong(somTemasString)));
 			log.info("Pregunta creada");
@@ -606,6 +608,7 @@ public class PreguntaView implements Serializable {
 			pregunta.setDescripcionRespuesta1(FacesUtils.checkString(txtRespuesta1));
 			pregunta.setDescripcionRespuesta2(FacesUtils.checkString(txtRespuesta2));
 			pregunta.setDescripcionRespuesta3(FacesUtils.checkString(txtRespuesta3));
+			pregunta.setDescripcionRespuesta4(FacesUtils.checkString(txtRespuesta4));
 			pregunta.setTipoRespuesta(somTipoRespuestaString);
 			log.info("Pregunta creada");
 			businessDelegatorView.savePregunta(pregunta);
@@ -719,6 +722,14 @@ public class PreguntaView implements Serializable {
 
 	public void setPuta(String puta) {
 		this.puta = puta;
+	}
+
+	public InputText getTxtRespuesta4() {
+		return txtRespuesta4;
+	}
+
+	public void setTxtRespuesta4(InputText txtRespuesta4) {
+		this.txtRespuesta4 = txtRespuesta4;
 	}
 
 	

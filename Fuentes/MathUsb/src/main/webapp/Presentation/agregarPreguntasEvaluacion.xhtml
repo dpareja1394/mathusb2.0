@@ -28,6 +28,7 @@
 		editor[2] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
 		editor[3] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
 		editor[4] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
+		editor[5] = com.wiris.jsEditor.JsEditor.newInstance({'language' : 'es'});
 	}
 		function addOn(){
 			var x = document.getElementsByClassName('ui-tabs-panel');
@@ -41,6 +42,7 @@
 			document.getElementById('formDialog:txtRespuesta1').value = editor[2].getMathML();
 			document.getElementById('formDialog:txtRespuesta2').value = editor[3].getMathML();
 			document.getElementById('formDialog:txtRespuesta3').value = editor[4].getMathML();
+			document.getElementById('formDialog:txtRespuesta4').value = editor[5].getMathML();
 			//window.onload();
 		}
 	</script>
@@ -78,7 +80,7 @@
 							</h:selectOneMenu>
 						</h:panelGrid>
 					</p:panel>
-					<p:tabView id="tabs" value="#{preguntaView.losTabs}" var="tab">
+					<p:tabView id="tabs" value="#{preguntaView.losTabs}" var="tab" style="height: 250px;">
 						<p:tab title="#{tab.titulo}">
 							<p:panel name="editor"></p:panel>
 						</p:tab>
@@ -88,14 +90,16 @@
 					<p:inputText id="txtRespuesta1" binding="#{preguntaView.txtRespuesta1}" style="display: none;"/>
 					<p:inputText id="txtRespuesta2" binding="#{preguntaView.txtRespuesta2}" style="display: none;"/>
 					<p:inputText id="txtRespuesta3" binding="#{preguntaView.txtRespuesta3}" style="display: none;"/>
+					<p:inputText id="txtRespuesta4" binding="#{preguntaView.txtRespuesta4}" style="display: none;"/>
 					
-					<p:panel id="panelBotones" style="border:none;background:transparent">
+					<p:panel id="panelBotones" style="border:none;background:transparent; margin-top:50px;">
 						<div align="center">										
 						<p:commandButton value="Agregar pregunta al documento"
 						icon="ui-icon-plus" 
 						style="padding: 3px 1px"
 						onclick="doGet()"					
-						action="#{preguntaView.registrarPregunta()}"/>
+						action="#{preguntaView.registrarPregunta()}"
+						oncomplete="window.close()"/>
 						</div>
 					</p:panel>
 				</h:form>

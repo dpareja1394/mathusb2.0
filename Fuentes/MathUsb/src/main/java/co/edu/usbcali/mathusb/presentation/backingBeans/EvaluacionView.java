@@ -1119,11 +1119,13 @@ public class EvaluacionView implements Serializable {
 				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta1(),"respuesta1"+i).getName());
 				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta2(),"respuesta2"+i).getName());
 				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta3(),"respuesta3"+i).getName());
+				respuestas.add("/images/img/"+contenido(a.getDescripcionRespuesta4(),"respuesta4"+i).getName());
 				Collections.shuffle(respuestas);
 				aux.setRutaRespuesta1(respuestas.get(0));
 				aux.setRutaRespuesta2(respuestas.get(1));
 				aux.setRutaRespuesta3(respuestas.get(2));
 				aux.setRutaRespuesta4(respuestas.get(3));
+				aux.setRutaRespuesta5(respuestas.get(4));
 				imagenes.add(aux);
 			}
 			return imagenes;
@@ -1138,6 +1140,11 @@ public class EvaluacionView implements Serializable {
 
 	public void setImagenes(List<TabImages> imagenes) {
 		this.imagenes = imagenes;
+	}
+	
+	public void guardarRespuestas()
+	{
+		
 	}
 
 }

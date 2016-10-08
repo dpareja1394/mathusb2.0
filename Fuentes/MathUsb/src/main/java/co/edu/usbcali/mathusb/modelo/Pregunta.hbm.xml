@@ -36,6 +36,9 @@
         <property name="descripcionRespuesta3" type="java.lang.String">
             <column name="descripcion_respuesta3" length="10485760" not-null="false" />
         </property>
+        <property name="descripcionRespuesta4" type="java.lang.String">
+            <column name="descripcion_respuesta4" length="10485760" not-null="false" />
+        </property>
         
         <property name="tipoRespuesta" type="java.lang.String">
             <column name="tipo_respuesta" length="1" not-null="false" />
