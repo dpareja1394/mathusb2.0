@@ -52,6 +52,14 @@ background: rgba(226,226,226,1);
 	height: 225px;	
 	margin: 0 auto;	
 }
+.ch-img-6 { 
+	background-image: url(../images/team/magana.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 220px;
+	height: 225px;	
+	margin: 0 auto;
+}
 .ch-info {
 	position: absolute;
 	width: 100%;
