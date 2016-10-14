@@ -2,8 +2,9 @@
 background: rgba(226,226,226,1);
 }
 .ch-item {
-	width: 100%;
-	height: 100%;	
+	width: 220px;
+	height: 225px;	
+	margin: 0 auto;
 	border-radius: 50%;
 	position: relative;
 	cursor: default;
@@ -20,46 +21,29 @@ background: rgba(226,226,226,1);
 }
 
 .ch-img-1 { 
-	background-image: url(../images/team/team1.jpg);
-	width: 220px;
-	height: 225px;	
-	margin: 0 auto;
+	background-image: url(../images/team/team1.jpg);	
 }
-
 .ch-img-2 { 
-	background-image: url(../images/team/team2.jpg);
-	width: 220px;
-	height: 225px;	
-	margin: 0 auto;
+	background-image: url(../images/team/team2.jpg);	
 }
-
 .ch-img-3 { 
-	background-image: url(../images/team/team3.jpg);
-	width: 220px;
-	height: 225px;	
-	margin: 0 auto;
+	background-image: url(../images/team/team3.jpg);	
 }
-
 .ch-img-4 { 
 	background-image: url(../images/team/team4.jpg);
-	width: 220px;
-	height: 225px;	
-	margin: 0 auto;	
 }
 .ch-img-5 { 
-	background-image: url('http://placehold.it/220x220');
-	width: 220px;
-	height: 225px;	
-	margin: 0 auto;	
+	background-image: url('http://placehold.it/220x220');		
 }
 .ch-img-6 { 
-	background-image: url(../images/team/magana.png);
+	background-image: url(../images/team/magana.jpg);
 	background-repeat: no-repeat;
-	background-size: cover;
-	width: 220px;
-	height: 225px;	
-	margin: 0 auto;
+	background-size: cover;	
 }
+.ch-img-7 { 
+	background-image: url(../images/team/team5.JPG);		
+}
+
 .ch-info {
 	position: absolute;
 	width: 100%;

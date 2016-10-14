@@ -91,7 +91,12 @@
 						//window.onload();
 					}
 				</script>
-				
+				<style>
+					.ui-panelgrid>*>tr,
+					.ui-panelgrid .ui-panelgrid-cell {					       
+					    font-size: 13px;     			
+					}
+				</style>
 				<p:ajaxStatus onstart="PF('statusDialog').show()"
 					onsuccess="PF('statusDialog').hide()" />
 				<p:dialog modal="true" widgetVar="statusDialog" header="Loading"
@@ -110,32 +115,28 @@
 						onclick="window.location='#{facesContext.externalContext.requestContextPath}/index.jsp';" />
 				</p:dialog>
 
-				<h:form id="formDialog">
+				<h:form id="formDialog" class="formDialog" >
 					<p:messages id="msg" />
 					<p:growl id="men" />
-					<p:panel id="panelEvaluacionMostrar" header="Documento" style="width:1000px">
-						
-						<h:panelGrid columns="2" id="panelGrid">
-
+					<p:panel id="panelEvaluacionMostrar" header="DOCUMENTO"
+						style="margin-bottom:6px">						
+						<p:panelGrid columns="2" id="panelGrid">
 							<h:outputLabel value="Asunto: " />
 							<p:outputLabel value="#{evaluacionView.asuntoEvaluacion}" />
 
 							<h:outputLabel value="Fecha de Inicio de Publicación: " />
 							<p:outputLabel value="#{evaluacionView.fechaInicioEvaluacion}" />
 
-
 							<h:outputLabel value="Fecha de Finalizacion de Publicación: " />
 							<p:outputLabel value="#{evaluacionView.fechaFinEvaluacion}" />
 
-
 							<h:outputLabel value="Corte: " />
 							<p:outputLabel value="#{evaluacionView.corteEvaluacion}" />
-
-						</h:panelGrid>
+						</p:panelGrid>
 					</p:panel>					
 					<p:panel id="panelPreguntasEvaluacion"
-						header="Preguntas que contiene la evaluacion"
-						style="width:1000px">
+						header="PREGUNTAS QUE CONTIENE LA EVALUACIÓN"
+						style="width:900px;margin-bottom:6px">
 						<p:tabView id="tabs" value="#{evaluacionView.imagenes}" var="tab" scrollable="true">
 							<p:tab title="#{tab.titulo}">
 								<p:inputText style="display:none"></p:inputText>
@@ -177,10 +178,12 @@
 							</p:tab>
 						</p:tabView>
 					</p:panel>
-					<p:panel id="panelBotones">		
-						<p:commandButton value="Guardar respuestas" icon="ui-icon-plus"  onclick="doGet()"
-						action="#{preguntaView.guardarRespuestas}"
-						/>
+					<p:panel id="panelBotones" style="background:transparent;border:none">		
+						<div align="center">
+						<p:commandButton value="Guardar respuestas" icon="ui-icon-plus" onclick="doGet()"
+						  style="background:rgb(169, 191, 194);padding:3px 0px;"
+						  action="#{preguntaView.guardarRespuestas}" />
+						</div>
 					</p:panel>		
 				</h:form>
 
