@@ -179,7 +179,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(http://i.imgur.com/I917c2U.png?1); /*! http://i.imgur.com/yYcB2RJ.jpg*/
+    background-image: url(../images/bg-header.png);
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;

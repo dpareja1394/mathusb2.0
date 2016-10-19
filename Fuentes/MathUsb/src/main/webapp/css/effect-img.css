@@ -18,6 +18,7 @@ background: rgba(226,226,226,1);
 	-o-transition: all 0.4s ease-in-out;
 	-ms-transition: all 0.4s ease-in-out;
 	transition: all 0.4s ease-in-out;
+	
 }
 
 .ch-img-1 { 
@@ -33,7 +34,7 @@ background: rgba(226,226,226,1);
 	background-image: url(../images/team/team4.jpg);
 }
 .ch-img-5 { 
-	background-image: url('http://placehold.it/220x220');		
+	background-image: url(../images/team/team6.jpg);		
 }
 .ch-img-6 { 
 	background-image: url(../images/team/magana.jpg);
