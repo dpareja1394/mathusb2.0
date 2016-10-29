@@ -16,6 +16,7 @@ import net.sourceforge.jeuclid.context.LayoutContextImpl;
 import net.sourceforge.jeuclid.context.Parameter;
 import net.sourceforge.jeuclid.converter.Converter;
 
+import org.jfree.util.Log;
 import org.primefaces.component.calendar.*;
 import org.primefaces.component.commandbutton.CommandButton;
 import org.primefaces.component.inputtext.InputText;
@@ -48,6 +49,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIInput;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -107,6 +109,8 @@ public class EvaluacionView implements Serializable {
 	private List<PreguntaDTO> lasPreguntasDeLaEvaluacion, preguntasEvaluacionEstudiante;
 	//imagenes
 	private List<TabImages> imagenes;
+	private InputText txtRespuesta;
+	
 	@ManagedProperty(value = "#{BusinessDelegatorView}")
 	private IBusinessDelegatorView businessDelegatorView;
 	
@@ -1100,11 +1104,12 @@ public class EvaluacionView implements Serializable {
 	public List<TabImages> getImagenes() {
 		try
 		{
-			 //contador
+			//contador
 			imagenes = new ArrayList<>();
 			//cambio la ubicacion del servelt
 			ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 			servletContext.getRealPath("/");
+			
 			for(int i=1;i<getPreguntasEvaluacionEstudiante().size()+1;i++)
 			{
 				PreguntaDTO a = getPreguntasEvaluacionEstudiante().get(i-1);
@@ -1132,7 +1137,6 @@ public class EvaluacionView implements Serializable {
 		}
 		catch (Exception e) 
 		{
-			
 			e.printStackTrace();
 			return null;
 		}
@@ -1144,7 +1148,30 @@ public class EvaluacionView implements Serializable {
 	
 	public void guardarRespuestas()
 	{
-		
+		log.info("entra");
+		String[] respuestas = FacesUtils.checkString(txtRespuesta).split("//.-.//");
+		for(int i=0;i<imagenes.size();i++)
+		{
+			if(imagenes.get(i).getTipoRespuesta().equals("2"))
+				if(imagenes.get(i).getEscoger().contains("respuestaC"))
+					log.info("Le pegó");
+				else
+					log.info("No le pegó");
+			else{
+				log.info(respuestas[i]);
+			}
+		}
+
+	}
+
+	public InputText getTxtRespuesta() {
+		if(txtRespuesta==null)
+			txtRespuesta= new InputText();
+		return txtRespuesta;
+	}
+
+	public void setTxtRespuesta(InputText txtRespuesta) {
+		this.txtRespuesta = txtRespuesta;
 	}
 
 }

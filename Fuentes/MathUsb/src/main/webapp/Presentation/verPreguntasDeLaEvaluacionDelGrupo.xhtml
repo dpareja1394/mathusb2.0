@@ -65,6 +65,7 @@
 				<script src="#{facesContext.externalContext.request.scheme}://#{facesContext.externalContext.request.serverName}:#{facesContext.externalContext.request.serverPort}#{facesContext.externalContext.request.contextPath}/js/wirisEditor.js"></script>
 				<script>
 					var editor = [];
+					var x;
 					window.onload = function() {
 						var z = document.getElementsByClassName('ui-tabs-panels');
 						var x = z[0].getElementsByClassName('ui-tabs-panel');
@@ -81,13 +82,19 @@
 								editor[i].insertInto(y[i]);
 							}
 						}
+						console.log(document.getElementsByClassName('ui-tabs-panels')[1]);
 					}
 					function doGet() {
-						document.getElementById('formDialog:txtPregunta').value = editor[0].getMathML();
-						document.getElementById('formDialog:txtRespuestaCorrecta').value = editor[1].getMathML();
-						document.getElementById('formDialog:txtRespuesta1').value = editor[2].getMathML();
-						document.getElementById('formDialog:txtRespuesta2').value = editor[3].getMathML();
-						document.getElementById('formDialog:txtRespuesta3').value = editor[4].getMathML();
+						var z = document.getElementsByClassName('ui-tabs-panels');
+						var x = z[0].getElementsByClassName('ui-tabs-panel');
+						for(var i=0;i!=x.length;i++){
+							var tipoRespuesta = x[i].lastChild.innerHTML;
+							if(tipoRespuesta=="1"){
+								document.getElementById('formDialog:txtRespuesta').value += editor[i].getMathML();
+							}
+							if(i!=x.length-1)
+								document.getElementById('formDialog:txtRespuesta').value += "//.-.//";
+						}
 						//window.onload();
 					}
 				</script>
@@ -145,16 +152,16 @@
 								<h:outputLabel value="Pregunta: "/>
 								<p:graphicImage value="#{tab.rutaPregunta}" stream="true" cache="false"/>
 								<p:panel>
-								<p:selectOneRadio id="customRadio" layout="custom">
-            						<f:selectItem itemLabel="A)" itemValue="0" />
-            						<f:selectItem itemLabel="B)" itemValue="1" />
-            						<f:selectItem itemLabel="C)" itemValue="2" />
-            						<f:selectItem itemLabel="D)" itemValue="3" />
-            						<f:selectItem itemLabel="E)" itemValue="4" />
+								<p:selectOneRadio id="customRadio" value="#{tab.escoger}" layout="custom">
+            						<f:selectItem itemLabel="A)" itemValue="#{tab.rutaRespuesta1}" />
+            						<f:selectItem itemLabel="B)" itemValue="#{tab.rutaRespuesta2}" />
+            						<f:selectItem itemLabel="C)" itemValue="#{tab.rutaRespuesta3}" />
+            						<f:selectItem itemLabel="D)" itemValue="#{tab.rutaRespuesta4}" />
+            						<f:selectItem itemLabel="E)" itemValue="#{tab.rutaRespuesta5}" />
        							</p:selectOneRadio>
 									<p:panelGrid columns="3" cellpadding="5">
 										<p:radioButton id="opt1" for="customRadio" itemIndex="0" />
-            							<h:outputLabel for="opt1" value="A)" />
+            							<h:outputLabel for="opt1" value="A)"/>
 										<p:graphicImage value="#{tab.rutaRespuesta1}" stream="true" cache="false"/>
 										
 										<p:radioButton id="opt2" for="customRadio" itemIndex="1" />
@@ -178,16 +185,13 @@
 							</p:tab>
 						</p:tabView>
 					</p:panel>
-					<p:panel id="panelBotones" style="background:transparent;border:none">		
-						<div align="center">
-						<p:commandButton value="Guardar respuestas" icon="ui-icon-plus" onclick="doGet()"
-						  style="background:rgb(169, 191, 194);padding:3px 0px;"
-						  action="#{preguntaView.guardarRespuestas}" />
-						</div>
-					</p:panel>		
+					<p:inputText id="txtRespuesta" binding="#{evaluacionView.txtRespuesta}" style="display: none;" />
+					<p:commandButton value="Guardar respuestas"
+					icon="ui-icon-plus" 
+					style="padding: 3px 1px"
+					onclick="doGet()"
+					action="#{evaluacionView.guardarRespuestas()}"/>
 				</h:form>
-
-
 			</f:view>
 		</ui:define>
 	</ui:composition>

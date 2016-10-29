@@ -22,6 +22,7 @@ public class TabImages implements Serializable {
 	private String rutaRespuesta4;
 	private String rutaRespuesta5;
 	private String titulo;
+	private String escoger;
 	
 	public String getRutaPregunta() {
 		return rutaPregunta;
@@ -76,5 +77,11 @@ public class TabImages implements Serializable {
 	}
 	public void setRutaRespuesta5(String rutaRespuesta5) {
 		this.rutaRespuesta5 = rutaRespuesta5;
+	}
+	public String getEscoger() {
+		return escoger;
+	}
+	public void setEscoger(String escoger) {
+		this.escoger = escoger;
 	}
 }

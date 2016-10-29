@@ -1,6 +1,6 @@
 CREATE TABLE tipo_respuesta
 (
-  tire_id BIGSERIAL NOT NULL,
+  tire_id character varying(1) NOT NULL,
   descripcion_tipo_respuesta character varying(2500) NOT NULL,
   CONSTRAINT tipo_respuesta_pk PRIMARY KEY (tire_id)
 )
@@ -16,5 +16,5 @@ ALTER TABLE public.pregunta ADD CONSTRAINT resp__fk FOREIGN KEY (tipo_respuesta)
       REFERENCES public.tipo_respuesta (tire_id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION;
 
---Agregar columna de otra respuesta 
-ALTER TABLE public.pregunta ADD COLUMN descripcion_respuesta4 character varying(10485760);
+INSERT INTO tipo_respuesta(tired_id, descripcion_tipo_respuesta) VALUES ('1', 'Respuesta abierta');
+INSERT INTO tipo_respuesta(tired_id, descripcion_tipo_respuesta) VALUES ('2', 'Respuesta Multiple con unica solucion');
