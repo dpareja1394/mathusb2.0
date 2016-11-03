@@ -1209,5 +1209,15 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	public ByteArrayInputStream generarReporteEvaluacion(REPORT_OUTPUT_TYPE reportOutputTye, Long eval_Id) throws Exception {
 		return evaluacionLogic.generarReporteEvaluacion(reportOutputTye, eval_Id);
 	}
+
+	@Override
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval) throws Exception {
+		return evaPregResLogic.obtenerEvaPregResDadoIdEval(idEval);
+	}
+
+	@Override
+	public EvaPregRes obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(Long idEval, Long idPreg, Long idUsuario)throws Exception {
+		return evaPregResLogic.obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(idEval, idPreg, idUsuario);
+	}
 	
 }

@@ -461,4 +461,28 @@ public class EvaPregResLogic implements IEvaPregResLogic {
 
         return list;
     }
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval) throws Exception {
+		if(idEval == null || idEval.equals(0L)){
+			throw new Exception("No ha llegado el valor del Id de Evaluación");
+		}
+		return evaPregResDAO.obtenerEvaPregResDadoIdEval(idEval);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public EvaPregRes obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(Long idEval, Long idPreg, Long idUsuario) throws Exception {
+		if(idEval == null || idEval.equals(0L)){
+			throw new Exception("No ha llegado el valor del Id de Evaluación");
+		}
+		if(idPreg == null || idPreg.equals(0L)){
+			throw new Exception("No ha llegado el valor del Id de Pregunta");
+		}
+		if(idUsuario == null || idUsuario.equals(0L)){
+			throw new Exception("No ha llegado el valor del Id de Usuario");
+		}
+		return evaPregResDAO.obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(idEval, idPreg,idUsuario);
+	}
 }

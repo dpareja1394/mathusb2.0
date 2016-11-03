@@ -6,7 +6,7 @@
     <class name="co.edu.usbcali.mathusb.modelo.Respuesta" table="respuesta" schema="public">
         <id name="respId" type="java.lang.Long">
             <column name="resp_id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="descripcionRespuesta" type="java.lang.String">
             <column name="descripcion_respuesta" length="10485760" not-null="true" />

@@ -20,5 +20,8 @@
         <property name="indicePregunta" type="java.lang.Long">
             <column name="indice_pregunta" not-null="true" />
         </property>
+        <many-to-one name="usuario" class="co.edu.usbcali.mathusb.modelo.Usuario" fetch="select">
+            <column name="usua_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

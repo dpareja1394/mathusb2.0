@@ -554,4 +554,8 @@ public interface IBusinessDelegatorView {
 	public List<EvaluacionDTO> obtenerEvaluacionesDelGrupoDisponiblesEnFechaHoy(Long idGrupo) throws Exception;
 	
 	public ByteArrayInputStream generarReporteEvaluacion(REPORT_OUTPUT_TYPE reportOutputTye, Long eval_Id) throws Exception;
+	
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval) throws Exception;
+	
+	public EvaPregRes obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(Long idEval, Long idPreg, Long idUsuario) throws Exception;
 }

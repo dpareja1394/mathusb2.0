@@ -14,6 +14,7 @@ public class EvaPregRes  implements java.io.Serializable {
      private Pregunta pregunta;
      private Evaluacion evaluacion;
      private Long indicePregunta;
+     private Usuario usuario;
 
     public EvaPregRes() {
     }
@@ -67,6 +68,15 @@ public class EvaPregRes  implements java.io.Serializable {
         this.indicePregunta = indicePregunta;
     }
 
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 
 

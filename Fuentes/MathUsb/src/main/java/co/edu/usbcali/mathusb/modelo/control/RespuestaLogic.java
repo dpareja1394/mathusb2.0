@@ -85,14 +85,6 @@ public class RespuestaLogic implements IRespuestaLogic {
                     "descripcionRespuesta");
             }
 
-            if (entity.getRespId() == null) {
-                throw new ZMessManager().new EmptyFieldException("respId");
-            }
-
-            if (getRespuesta(entity.getRespId()) != null) {
-                throw new ZMessManager(ZMessManager.ENTITY_WITHSAMEKEY);
-            }
-
             respuestaDAO.save(entity);
 
             log.debug("save Respuesta successful");
