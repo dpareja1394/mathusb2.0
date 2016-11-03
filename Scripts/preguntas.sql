@@ -10,3 +10,10 @@ ALTER TABLE public.pregunta ADD COLUMN tipo_respuesta character varying(1);
 ALTER TABLE public.pregunta DROP COLUMN tipo_respuesta;
 ALTER TABLE public.pregunta ADD COLUMN descripcion_respuesta4 character varying(10485760);
 ALTER TABLE public.pregunta ADD COLUMN tipo_respuesta character varying(1);
+
+
+
+
+--nuevo
+
+ALTER TABLE public.eva_preg_res ADD COLUMN usua_id bigint;
