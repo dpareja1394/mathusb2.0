@@ -1176,7 +1176,8 @@ public class EvaluacionView implements Serializable {
 			for(int i=0;i<imagenes.size();i++)
 			{
 				Respuesta respuesta = new Respuesta();
-				respuesta.setRespId(null);
+				Long idRespuesta = businessDelegatorView.getConsecutivoRespuesta();
+				respuesta.setRespId(idRespuesta);
 			if(imagenes.get(i).getTipoRespuesta().equals("2"))
 			{
 				if(imagenes.get(i).getEscoger().contains("respuestaC"))

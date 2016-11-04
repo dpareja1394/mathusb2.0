@@ -51,4 +51,20 @@ public class RespuestaDAO extends HibernateDaoImpl<Respuesta, Long>
         ApplicationContext ctx) {
         return (IRespuestaDAO) ctx.getBean("RespuestaDAO");
     }
+    
+    @Override
+	public Long getConsecutivo() {  Long consecutivo = null;
+    List qlist = null;
+    try {
+        
+        Query query = sessionFactory.getCurrentSession().getNamedQuery("RESPUESTA_RESP_ID_SEQ");
+        qlist = query.list();
+        for (java.util.Iterator iter = qlist.iterator(); iter.hasNext();) {
+            consecutivo = (Long) iter.next();
+        }
+    } catch (org.hibernate.HibernateException e) {
+        consecutivo = new Long(0);
+    }
+    return consecutivo;
+    }
 }

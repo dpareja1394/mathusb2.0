@@ -1,0 +1,6 @@
+1. MathUSB.sql
+2. 0.SEG_TABLAS.sql
+3. inserts_tipos.sql
+4. 1.INSERT_SEGURIDAD.sql
+5. permisos_mathusb_user.sql
+6. permisos_secuencias_mathusb_user.sql

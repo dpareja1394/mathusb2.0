@@ -9,4 +9,6 @@ import co.edu.usbcali.mathusb.modelo.Respuesta;
 *
 */
 public interface IRespuestaDAO extends Dao<Respuesta, Long> {
+	
+	public Long getConsecutivo();
 }

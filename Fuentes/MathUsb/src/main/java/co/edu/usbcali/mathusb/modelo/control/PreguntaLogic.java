@@ -583,4 +583,6 @@ public class PreguntaLogic implements IPreguntaLogic {
 		}
 		return listaPreguntaDTO;
 	}
+
+	
 }

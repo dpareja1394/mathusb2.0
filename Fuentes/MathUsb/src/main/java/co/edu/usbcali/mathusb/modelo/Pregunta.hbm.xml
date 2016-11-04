@@ -43,5 +43,13 @@
         <property name="tipoRespuesta" type="java.lang.String">
             <column name="tipo_respuesta" length="1" not-null="false" />
         </property>
+        
+        
     </class>
+    <sql-query name="PREGUNTA_PREG_ID_SEQ">
+		<return-scalar column="nextval" type="java.lang.Long" />
+	  <![CDATA[
+	    SELECT nextval('PREGUNTA_PREG_ID_SEQ');
+	  ]]>
+    </sql-query>
 </hibernate-mapping>

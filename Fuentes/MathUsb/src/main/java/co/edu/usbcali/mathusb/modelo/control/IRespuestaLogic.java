@@ -53,4 +53,6 @@ public interface IRespuestaLogic {
     public Long findTotalNumberRespuesta() throws Exception;
 
     public List<RespuestaDTO> getDataRespuesta() throws Exception;
+    
+    public Long getConsecutivo() throws Exception;
 }

@@ -398,4 +398,11 @@ public class RespuestaLogic implements IRespuestaLogic {
 
         return list;
     }
+    
+    
+    @Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED)
+	public Long getConsecutivo() throws Exception {
+		return respuestaDAO.getConsecutivo();
+	}
 }

@@ -72,4 +72,6 @@ public class PreguntaDAO extends HibernateDaoImpl<Pregunta, Long>
 		
 		return query.list();
 	}
+
+	
 }

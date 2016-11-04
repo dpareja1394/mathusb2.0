@@ -29,3 +29,4 @@ GRANT ALL ON seg_sistema_cia_sic_codigo_seq TO mathusb_user;
 GRANT ALL ON seg_sistema_sis_codigo_seq TO mathusb_user;
 GRANT ALL ON seg_sucursal_suc_codigo_seq TO mathusb_user;
 GRANT ALL ON seg_usuario_usu_codigo_seq TO mathusb_user;
+GRANT ALL ON tipo_evaluacion_tiev_id_seq TO mathusb_user;

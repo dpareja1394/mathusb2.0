@@ -15,4 +15,5 @@ public interface IPreguntaDAO extends Dao<Pregunta, Long> {
 	public List<Pregunta> consultarPreguntaDadoIdEval(Long evalId);
 	
 	public List<Pregunta> consultarPreguntasDadoIdTema(Long temaId);
+	
 }

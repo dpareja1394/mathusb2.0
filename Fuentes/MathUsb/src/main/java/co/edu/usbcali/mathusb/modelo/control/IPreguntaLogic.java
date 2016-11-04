@@ -65,4 +65,6 @@ public interface IPreguntaLogic {
     public File getStreamedContents(PreguntaDTO preguntaDTO,String nombre) throws Exception;
     
     public List<PreguntaDTO> consultarPreguntasDadoIdTema(Long temaId) throws Exception;
+    
+	
 }
