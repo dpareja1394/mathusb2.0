@@ -56,7 +56,7 @@ public class PreguntaDAO extends HibernateDaoImpl<Pregunta, Long>
 		String hql = "SELECT p "
 				+ "FROM Pregunta p, EvaPregRes epr "
 				+ "WHERE p.pregId = epr.pregunta.pregId AND "
-				+ "epr.evaluacion.evalId = '"+evalId+"' ";
+				+ "epr.evaluacion.evalId = '"+evalId+"' AND epr.usuario.usuaId is null";
 		
 		Query query = createQuery(hql);
 		return query.list();

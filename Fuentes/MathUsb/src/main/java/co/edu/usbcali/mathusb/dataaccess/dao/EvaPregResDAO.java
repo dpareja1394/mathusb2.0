@@ -78,9 +78,30 @@ public class EvaPregResDAO extends HibernateDaoImpl<EvaPregRes, Long>
 		try {
 			String hql = "SELECT epr FROM EvaPregRes epr "
 					+ "WHERE epr.evaluacion.evalId = '"+idEval+"'";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			return query.list();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
+		
 	}
+	
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEvalUsuario(Long idEval,Long idUsuario) {
+		try {
+			String hql = "SELECT epr FROM EvaPregRes epr "
+					+ "WHERE epr.evaluacion.evalId = '"+idEval+"' "+
+					"And epr.usuario.usuaId = '"+idUsuario+"' ";
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			return query.list();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	
 }

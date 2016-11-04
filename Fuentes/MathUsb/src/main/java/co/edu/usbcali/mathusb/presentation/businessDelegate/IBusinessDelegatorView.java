@@ -557,6 +557,8 @@ public interface IBusinessDelegatorView {
 	
 	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval) throws Exception;
 	
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEvalUsuario(Long idEval,Long idUsuario) throws Exception;
+	
 	public EvaPregRes obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(Long idEval, Long idPreg, Long idUsuario) throws Exception;
 
 	public Long getConsecutivoRespuesta() throws Exception;

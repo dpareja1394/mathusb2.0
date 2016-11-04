@@ -55,4 +55,6 @@ public interface IEvaPregResLogic {
 	public List<EvaPregResDTO> getDataEvaPregRes() throws Exception;
 
 	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval) throws Exception;
+	
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEvalUsuario(Long idEval,Long idUsuario) throws Exception;
 }

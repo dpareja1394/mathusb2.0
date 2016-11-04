@@ -1141,6 +1141,8 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval) throws Exception {
 		return evaPregResLogic.obtenerEvaPregResDadoIdEval(idEval);
 	}
+	
+	
 
 	@Override
 	public EvaPregRes obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(Long idEval, Long idPreg, Long idUsuario)
@@ -1151,6 +1153,11 @@ public class BusinessDelegatorView implements IBusinessDelegatorView {
 	@Override
 	public Long getConsecutivoRespuesta() throws Exception {
 		return respuestaLogic.getConsecutivo();
+	}
+
+	@Override
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEvalUsuario(Long idEval, Long idUsuario) throws Exception {
+			return evaPregResLogic.obtenerEvaPregResDadoIdEvalUsuario(idEval, idUsuario);
 	}
 
 }

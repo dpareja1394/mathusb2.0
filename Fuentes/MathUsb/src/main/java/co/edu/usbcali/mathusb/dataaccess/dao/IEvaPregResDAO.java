@@ -17,4 +17,6 @@ public interface IEvaPregResDAO extends Dao<EvaPregRes, Long> {
 	public EvaPregRes obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(Long idEval, Long idPreg, Long idUsuario);
 	
 	public List<EvaPregRes> obtenerEvaPregResDadoIdEval(Long idEval);
+	
+	public List<EvaPregRes> obtenerEvaPregResDadoIdEvalUsuario(Long idEval,Long idUsuario);
 }
