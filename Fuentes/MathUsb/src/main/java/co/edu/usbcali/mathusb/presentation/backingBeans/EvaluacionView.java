@@ -1068,21 +1068,47 @@ public class EvaluacionView implements Serializable {
 
 	public String abrirPantallaPreguntaEvaluacionGrupo(ActionEvent evt) {
 		try {
-
+			
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			EvaluacionDTO evaluacionGrupo = (EvaluacionDTO) (evt.getComponent().getAttributes()
 					.get("preguntaDeEvaluacion"));
 
-			session.setAttribute("preguntaDeEvaluacion", evaluacionGrupo);
-
-			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-			context.redirect(
-					context.getRequestContextPath() + "/Presentation/verPreguntasDeLaEvaluacionDelGrupo.xhtml");
+			session.setAttribute("preguntaDeEvaluacion", evaluacionGrupo);			
+			
+			EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session.getAttribute("preguntaDeEvaluacion");
+			
+			Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
+			
+			HttpSession session2 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+			com.vortexbird.seguridad.modelo.dto.UsuarioDTO loginUsuario = (com.vortexbird.seguridad.modelo.dto.UsuarioDTO) session2
+					.getAttribute("usuarioDTO");
+			
+			Usuario usuario = businessDelegatorView.obtenerUsuarioPorEmail(loginUsuario.getUsu_login());	
+			
+			
+						
+			if(businessDelegatorView.obtenerEvaPregResDadoIdEvalUsuario(evaluacion.getEvalId(),usuario.getUsuaId()).isEmpty())
+			{
 				
+
+				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+				context.redirect(
+						context.getRequestContextPath() + "/Presentation/verPreguntasDeLaEvaluacionDelGrupo.xhtml");
+			}
+			
+			else
+			{
+				log.info("tampa");
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El usuarios "+usuario.getNombreUsuario()+" ya a realizado esta prueba"));
+			}
+
+			
+		
 		    
 			
 		
 		} catch (Exception e) {
+			e.printStackTrace();
 			log.error(e.getMessage());
 		}
 
@@ -1161,9 +1187,7 @@ public class EvaluacionView implements Serializable {
 			
 			List<EvaPregRes> lista = businessDelegatorView.obtenerEvaPregResDadoIdEval(evaluacion.getEvalId());
 			
-			if(businessDelegatorView.obtenerEvaPregResDadoIdEvalUsuario(evaluacion.getEvalId(),usuario.getUsuaId()).isEmpty())
-			{
-				log.info("realiza su prueba");
+			
 				
 				for (EvaPregRes evaPregRes : lista) {
 					evaPregRes.setEvprId(null);
@@ -1187,7 +1211,10 @@ public class EvaluacionView implements Serializable {
 						if(!imagenes.get(i).getEscoger().equals(""))
 						{
 							respondio = true;
-							respuesta.setDescripcionRespuesta(imagenes.get(i).getEscoger());
+							if(imagenes.get(i).getEscoger().contains("respuestaC"))
+								respuesta.setDescripcionRespuesta("Correcta");
+							else
+								respuesta.setDescripcionRespuesta("Incorrecta");
 						}
 					}
 					else
@@ -1216,11 +1243,8 @@ public class EvaluacionView implements Serializable {
 				context.redirect(
 						context.getRequestContextPath() + "/Presentation/verEvaluacionesDelGrupo.xhtml");
 				
-			}
-			else
-			{
-				log.info("usted ya respondio");
-			}
+			
+			
 			
 			
 			

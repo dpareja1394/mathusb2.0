@@ -93,6 +93,11 @@
 						</h:panelGrid>						
 					</p:panel>					
 
+					
+					<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />					
+					
+					
+    				
 					<p:panel id="panelEvaluacionGrupo"
 						header="DOCUMENTOS QUE CONTIENE EL GRUPO" >
 						<p:dataTable id="dtEvaluacionGrupo"
@@ -119,7 +124,7 @@
 								style="width:25%;text-align: center">
 								<p:commandButton id="btnIrAPreguntasEvaluacion" 									
 									title="Realizar prueba"
-									value="Ver el Documento"
+									value="Realizar prueba"
 									icon="ui-icon-document"
 									actionListener="#{evaluacionView.abrirPantallaPreguntaEvaluacionGrupo}">
 									<f:attribute name="preguntaDeEvaluacion" value="#{evaluacion}" />
@@ -137,7 +142,8 @@
 						</p:dataTable>
 
 					</p:panel>
-
+					
+					
 				</h:form>
 
 
