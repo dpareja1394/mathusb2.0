@@ -1068,45 +1068,38 @@ public class EvaluacionView implements Serializable {
 
 	public String abrirPantallaPreguntaEvaluacionGrupo(ActionEvent evt) {
 		try {
-			
+
 			HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 			EvaluacionDTO evaluacionGrupo = (EvaluacionDTO) (evt.getComponent().getAttributes()
 					.get("preguntaDeEvaluacion"));
 
-			session.setAttribute("preguntaDeEvaluacion", evaluacionGrupo);			
-			
+			session.setAttribute("preguntaDeEvaluacion", evaluacionGrupo);
+
 			EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session.getAttribute("preguntaDeEvaluacion");
-			
+
 			Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
-			
-			HttpSession session2 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+			HttpSession session2 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+					.getSession(true);
 			com.vortexbird.seguridad.modelo.dto.UsuarioDTO loginUsuario = (com.vortexbird.seguridad.modelo.dto.UsuarioDTO) session2
 					.getAttribute("usuarioDTO");
-			
-			Usuario usuario = businessDelegatorView.obtenerUsuarioPorEmail(loginUsuario.getUsu_login());	
-			
-			
-						
-			if(businessDelegatorView.obtenerEvaPregResDadoIdEvalUsuario(evaluacion.getEvalId(),usuario.getUsuaId()).isEmpty())
-			{
-				
+
+			Usuario usuario = businessDelegatorView.obtenerUsuarioPorEmail(loginUsuario.getUsu_login());
+
+			if (businessDelegatorView.obtenerEvaPregResDadoIdEvalUsuario(evaluacion.getEvalId(), usuario.getUsuaId())
+					.isEmpty()) {
 
 				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 				context.redirect(
 						context.getRequestContextPath() + "/Presentation/verPreguntasDeLaEvaluacionDelGrupo.xhtml");
 			}
-			
-			else
-			{
+
+			else {
 				log.info("tampa");
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "", "El usuarios "+usuario.getNombreUsuario()+" ya a realizado esta prueba"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
+						"El usuario " + usuario.getNombreUsuario() + " ya ha realizado esta prueba"));
 			}
 
-			
-		
-		    
-			
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
@@ -1166,94 +1159,76 @@ public class EvaluacionView implements Serializable {
 		this.imagenes = imagenes;
 	}
 
-	public void guardarRespuestas()
-	{
+	public void guardarRespuestas() {
 		try {
-		 
-			
-		    
-			HttpSession session1 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+			HttpSession session1 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+					.getSession(true);
 			EvaluacionDTO evaluacionMostrar = (EvaluacionDTO) session1.getAttribute("preguntaDeEvaluacion");
-			
+
 			Evaluacion evaluacion = businessDelegatorView.getEvaluacion(evaluacionMostrar.getEvalId());
-			
-			HttpSession session2 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+
+			HttpSession session2 = (HttpSession) FacesContext.getCurrentInstance().getExternalContext()
+					.getSession(true);
 			com.vortexbird.seguridad.modelo.dto.UsuarioDTO loginUsuario = (com.vortexbird.seguridad.modelo.dto.UsuarioDTO) session2
 					.getAttribute("usuarioDTO");
-			
-			Usuario usuario = businessDelegatorView.obtenerUsuarioPorEmail(loginUsuario.getUsu_login());	
-			
-			
-			
+
+			Usuario usuario = businessDelegatorView.obtenerUsuarioPorEmail(loginUsuario.getUsu_login());
+
 			List<EvaPregRes> lista = businessDelegatorView.obtenerEvaPregResDadoIdEval(evaluacion.getEvalId());
-			
-			
-				
-				for (EvaPregRes evaPregRes : lista) {
-					evaPregRes.setEvprId(null);
-					evaPregRes.setUsuario(usuario);
-					businessDelegatorView.saveEvaPregRes(evaPregRes);
-				}
-							
-				List<PreguntaDTO> preguntas = businessDelegatorView.consultarPreguntaDadoIdEval(evaluacion.getEvalId());
-			
-				String[] respuestas = FacesUtils.checkString(txtRespuesta).split("//.-.//");
-				for(int i=0;i<imagenes.size();i++)
-				{
-					boolean respondio = false;
-					Respuesta respuesta = new Respuesta();
-					Long idRespuesta = businessDelegatorView.getConsecutivoRespuesta();
-					respuesta.setRespId(idRespuesta);
-					
-					if(imagenes.get(i).getTipoRespuesta().equals("2"))
-					{
-						respuesta.setDescripcionRespuesta(imagenes.get(i).getEscoger());
-						if(!imagenes.get(i).getEscoger().equals(""))
-						{
-							respondio = true;
-							if(imagenes.get(i).getEscoger().contains("respuestaC"))
-								respuesta.setDescripcionRespuesta("Correcta");
-							else
-								respuesta.setDescripcionRespuesta("Incorrecta");
-						}
+
+			for (EvaPregRes evaPregRes : lista) {
+				evaPregRes.setEvprId(null);
+				evaPregRes.setUsuario(usuario);
+				businessDelegatorView.saveEvaPregRes(evaPregRes);
+			}
+
+			List<PreguntaDTO> preguntas = businessDelegatorView.consultarPreguntaDadoIdEval(evaluacion.getEvalId());
+
+			String[] respuestas = FacesUtils.checkString(txtRespuesta).split("//.-.//");
+			for (int i = 0; i < imagenes.size(); i++) {
+				boolean respondio = false;
+				Respuesta respuesta = new Respuesta();
+				Long idRespuesta = businessDelegatorView.getConsecutivoRespuesta();
+				respuesta.setRespId(idRespuesta);
+
+				if (imagenes.get(i).getTipoRespuesta().equals("2")) {
+					respuesta.setDescripcionRespuesta(imagenes.get(i).getEscoger());
+					if (!imagenes.get(i).getEscoger().equals("")) {
+						respondio = true;
+						if (imagenes.get(i).getEscoger().contains("respuestaC"))
+							respuesta.setDescripcionRespuesta("Correcta");
+						else
+							respuesta.setDescripcionRespuesta("Incorrecta");
 					}
-					else
-					{
-						if(!respuestas[i].equals("<math xmlns=\"http://www.w3.org/1998/Math/MathML\"/>"))
-						{
+				} else {
+					if (!respuestas[i].equals("<math xmlns=\"http://www.w3.org/1998/Math/MathML\"/>")) {
 						respondio = true;
 						respuesta.setDescripcionRespuesta(respuestas[i]);
-						}
-					
-					
 					}
-				
-					if(respondio)
-					{
-						//TODO Buscar EvaPregRes por los siguientes parámetros: idEval, idUsuario, idPregunta
-						businessDelegatorView.saveRespuesta(respuesta);						
-						EvaPregRes evaPregRes = businessDelegatorView.obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(evaluacion.getEvalId(),preguntas.get(i).getPregId(),usuario.getUsuaId());
-						evaPregRes.setRespuesta(respuesta);
-						businessDelegatorView.updateEvaPregRes(evaPregRes);
-					}
-					
-				} 
-				
-				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-				context.redirect(
-						context.getRequestContextPath() + "/Presentation/verEvaluacionesDelGrupo.xhtml");
-				
-			
-			
-			
-			
-			
-		}
-		catch (Exception e) {
+
+				}
+
+				if (respondio) {
+					// TODO Buscar EvaPregRes por los siguientes parámetros:
+					// idEval, idUsuario, idPregunta
+					businessDelegatorView.saveRespuesta(respuesta);
+					EvaPregRes evaPregRes = businessDelegatorView.obtenerEvaPregResDadoIdEvalYIdPregYIdUsuario(
+							evaluacion.getEvalId(), preguntas.get(i).getPregId(), usuario.getUsuaId());
+					evaPregRes.setRespuesta(respuesta);
+					businessDelegatorView.updateEvaPregRes(evaPregRes);
+				}
+
+			}
+
+			ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+			context.redirect(context.getRequestContextPath() + "/Presentation/verEvaluacionesDelGrupo.xhtml");
+
+		} catch (Exception e) {
 			log.error(e.getMessage());
 			e.printStackTrace();
 		}
-		}
+	}
 
 	public InputText getTxtRespuesta() {
 		if (txtRespuesta == null)
