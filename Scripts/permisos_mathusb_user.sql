@@ -31,4 +31,4 @@ GRANT ALL ON seg_sistema_cia to mathusb_user;
 GRANT ALL ON seg_compania to mathusb_user;
 GRANT ALL ON seg_sucursal to mathusb_user;
 GRANT ALL ON seg_usuario to mathusb_user;
-GRANT ALL ON tipo_evaluacion TO mathusb_user;
+GRANT ALL ON tipo_respuesta TO mathusb_user;

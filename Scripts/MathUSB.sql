@@ -143,7 +143,7 @@ CREATE TABLE PREGUNTA(
  descripcion_respuesta2 character varying(10485760),
  descripcion_respuesta3 character varying(10485760),
  descripcion_respuesta4 character varying(10485760),
- tipo_respuesta bigint
+ tipo_respuesta tipo_respuesta character varying(1);
 )
 ;
 
@@ -270,7 +270,8 @@ CREATE TABLE EVA_PREG_RES(
  PREG_ID BIGINT,
  RESP_ID BIGINT,
  EVAL_ID BIGINT,
- INDICE_PREGUNTA BIGINT NOT NULL
+ INDICE_PREGUNTA BIGINT NOT NULL,
+ USUA_ID bigint;
 )
 ;
 
@@ -328,10 +329,10 @@ CREATE TABLE PARAMETRO(
 
 CREATE TABLE tipo_respuesta
 (
-  tire_id BIGSERIAL NOT NULL,
+  tire_id character varying(1) NOT NULL,
   descripcion_tipo_respuesta character varying(2500) NOT NULL,
   CONSTRAINT tipo_respuesta_pk PRIMARY KEY (tire_id)
-);
+)
 
 
 

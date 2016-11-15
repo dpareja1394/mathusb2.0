@@ -105,3 +105,6 @@ INSERT INTO tema (titulo_tema, palabras_clave, descripcion_tema) VALUES ('TRANSF
 create or replace function sinacentos (text) returns text AS $$
 select translate($1,'áéíóúÁÉÍÓÚäëïöüÄËÏÖÜ','aeiouAEIOUaeiouAEIOU');
 $$ language sql;
+
+INSERT INTO tipo_respuesta(tired_id, descripcion_tipo_respuesta) VALUES ('1', 'Respuesta abierta');
+INSERT INTO tipo_respuesta(tired_id, descripcion_tipo_respuesta) VALUES ('2', 'Respuesta Multiple con unica solucion');
