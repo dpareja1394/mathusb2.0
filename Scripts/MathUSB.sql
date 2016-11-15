@@ -143,7 +143,7 @@ CREATE TABLE PREGUNTA(
  descripcion_respuesta2 character varying(10485760),
  descripcion_respuesta3 character varying(10485760),
  descripcion_respuesta4 character varying(10485760),
- tipo_respuesta character varying(1);
+ tipo_respuesta character varying(1)
 )
 ;
 
@@ -271,7 +271,7 @@ CREATE TABLE EVA_PREG_RES(
  RESP_ID BIGINT,
  EVAL_ID BIGINT,
  INDICE_PREGUNTA BIGINT NOT NULL,
- USUA_ID bigint;
+ USUA_ID bigint
 )
 ;
 
@@ -333,7 +333,7 @@ CREATE TABLE tipo_respuesta
   descripcion_tipo_respuesta character varying(2500) NOT NULL,
   CONSTRAINT tipo_respuesta_pk PRIMARY KEY (tire_id)
 )
-
+;
 
 
 -- ADD KEYS FOR TABLE PARAMETRO

@@ -7,9 +7,9 @@ INSERT INTO tipo_herramienta (descripcion_herramienta,nombre_corto)VALUES('Libro
 INSERT INTO tipo_herramienta (descripcion_herramienta,nombre_corto)VALUES('Enlaces de Intereś','ENI');
 INSERT INTO tipo_herramienta (descripcion_herramienta,nombre_corto)VALUES('Lecturas','LEC');
 
-INSERT INTO tipo_usuario (descripcion_tipo_de_usuario,nombre_corto)VALUES('Docente','DOC');
-INSERT INTO tipo_usuario (descripcion_tipo_de_usuario,nombre_corto)VALUES('Estudiante','EST');
-INSERT INTO tipo_usuario (descripcion_tipo_de_usuario,nombre_corto)VALUES('Secretario Académico','SEC');
+INSERT INTO tipo_usuario (tius_id, descripcion_tipo_de_usuario,nombre_corto)VALUES('1','Docente','DOC');
+INSERT INTO tipo_usuario (tius_id, descripcion_tipo_de_usuario,nombre_corto)VALUES('2','Estudiante','EST');
+INSERT INTO tipo_usuario (tius_id, descripcion_tipo_de_usuario,nombre_corto)VALUES('3','Secretario Académico','SEC');
 
 INSERT INTO parametro (descripcion_parametros, valor_parametro, estado_registro) VALUES ('urlServiciosRest', 'http://127.0.0.1:8080/seguridad_system/controller/loginRestService/', 'A');
 INSERT INTO parametro (descripcion_parametros, valor_parametro, estado_registro) VALUES ('urlCorreoRecuperacion', 'http://127.0.0.1:8080/MathUsb/recuperarClave.xhtml', 'A');
@@ -106,5 +106,5 @@ create or replace function sinacentos (text) returns text AS $$
 select translate($1,'áéíóúÁÉÍÓÚäëïöüÄËÏÖÜ','aeiouAEIOUaeiouAEIOU');
 $$ language sql;
 
-INSERT INTO tipo_respuesta(tired_id, descripcion_tipo_respuesta) VALUES ('1', 'Respuesta abierta');
-INSERT INTO tipo_respuesta(tired_id, descripcion_tipo_respuesta) VALUES ('2', 'Respuesta Multiple con unica solucion');
+INSERT INTO tipo_respuesta(tire_id, descripcion_tipo_respuesta) VALUES ('1', 'Respuesta abierta');
+INSERT INTO tipo_respuesta(tire_id, descripcion_tipo_respuesta) VALUES ('2', 'Respuesta Multiple con unica solucion');
