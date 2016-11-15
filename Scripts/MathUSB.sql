@@ -143,7 +143,7 @@ CREATE TABLE PREGUNTA(
  descripcion_respuesta2 character varying(10485760),
  descripcion_respuesta3 character varying(10485760),
  descripcion_respuesta4 character varying(10485760),
- tipo_respuesta tipo_respuesta character varying(1);
+ tipo_respuesta character varying(1);
 )
 ;
 
